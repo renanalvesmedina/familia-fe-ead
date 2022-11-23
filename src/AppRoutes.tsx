@@ -7,9 +7,9 @@ import { PainelAluno } from './pages/PainelAluno'
 export function AppRoutes() {
   return (
     <Routes>
-      <Route index element={<App />} />
+      <Route path="/curso" element={<App />} />
       <Route path='login' element={<Login />} />
-      <Route path="painel" element={<PainelAluno />} />
+      <Route index element={<PainelAluno />} />
     </Routes>
   )
 }
