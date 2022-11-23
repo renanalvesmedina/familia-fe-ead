@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+ @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-[#1C2328] overflow-y-scroll transition;
+}
+
+body {
+  @apply bg-[#1C2328] text-zinc-100;
+}
