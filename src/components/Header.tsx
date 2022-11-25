@@ -4,9 +4,8 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Button,
 } from "@material-tailwind/react";
-import { SignOut, UserGear } from 'phosphor-react';
+import { BookOpen, SignOut, UserGear } from 'phosphor-react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,7 +21,19 @@ export function Header() {
             <img className="h-16" src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_4688718/WHITE%20YELLOW%20HORIZONTAL.png" alt="Igreja Familia" />
           </div>
         </a>
-        <div className="flex items-center pt-4 pr-2 gap-5 w-full h-full" />
+        <div className="flex items-center pt-4 pr-2 gap-5 w-full h-full">
+          <a href="/" className="rounded-full p-2 hover:bg-brand-500 hover:text-aux-500 transition">Painel do Aluno</a>
+          <Menu placement="bottom-start">
+            <MenuHandler>
+              <a className="cursor-pointer rounded-full p-2 hover:bg-brand-500 hover:text-aux-500 transition">Cursos</a>
+            </MenuHandler>
+            <MenuList className="bg-aux-500 border-none text-zinc-100">
+              <MenuItem onClick={() => _navigate('/perfil')} className='flex items-center gap-2 rounded-full hover:bg-brand-500 hover:text-aux-500 transition'><BookOpen size={20} /> Comprometidos com a Membresia</MenuItem>
+              <MenuItem onClick={() => _navigate('/login')} className='flex items-center gap-2 rounded-full hover:bg-brand-500 hover:text-aux-500 transition'><BookOpen size={20} /> Comprometidos com a Maturidade</MenuItem>
+              <MenuItem onClick={() => _navigate('/login')} className='flex items-center gap-2 rounded-full hover:bg-brand-500 hover:text-aux-500 transition'><BookOpen size={20} /> Comprometidos com a Adoração</MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
         <div className="flex justify-end items-center gap-5 min-w-[380px]">
           <Menu placement="bottom-end">
             <MenuHandler>
