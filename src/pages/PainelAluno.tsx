@@ -4,6 +4,7 @@ import { Header } from '../components/Header'
 
 const Cursos = [
   {
+    id: 1,
     title: 'Seus Cursos',
     Cards: [
       {
@@ -24,40 +25,42 @@ const Cursos = [
     ]
   },
   {
+    id: 2,
     title: 'Lançamentos',
     Cards: [
       {
-        id: 1,
+        id: 4,
         route: '/curso',
         image: 'https://redeinspire.com/img/thumb2022.jpg',
       },
       {
-        id: 2,
+        id: 5,
         route: '/curso',
         image: 'https://i.ytimg.com/vi/jnWSSjUQXU8/maxresdefault.jpg',
       },
       {
-        id: 3,
+        id: 6,
         route: '/curso',
         image: 'https://img.freepik.com/psd-gratuitas/modelo-de-logotipo-3d-da-copa-do-mundo-do-brasil_220664-3637.jpg?w=2000',
       }
     ]
   },
   {
+    id: 3,
     title: 'Recomendados',
     Cards: [
       {
-        id: 1,
+        id: 7,
         route: '/curso',
         image: 'https://i.ytimg.com/vi/5doA18s_2f0/maxresdefault.jpg',
       },
       {
-        id: 2,
+        id: 8,
         route: '/curso',
         image: 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg',
       },
       {
-        id: 3,
+        id: 9,
         route: '/curso',
         image: 'https://i.ytimg.com/vi/HXmTSJjD7LA/maxresdefault.jpg',
       }
@@ -72,7 +75,7 @@ export function PainelAluno() {
         <Header />
         <div className="flex flex-col gap-20 pb-60 w-full max-w-[1180px] mt-8">
           {Cursos.map(item => (
-            <ListCards cardData={item.Cards} title={item.title} />
+            <ListCards key={item.id} cardData={item.Cards} title={item.title} />
           ))}
         </div>
       </div>
