@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
- @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-[#1C2328] overflow-y-scroll transition;
+ @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-aux-500 overflow-y-scroll;
 }
 
 body {
-  @apply bg-[#1C2328] text-zinc-100;
+  @apply bg-aux-500 text-gray-100;
 }

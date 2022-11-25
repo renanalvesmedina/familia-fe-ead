@@ -39,7 +39,7 @@ const Cursos = [
       {
         id: 3,
         route: '/curso',
-        image: 'https://i.ytimg.com/vi/jP2N8l31D-c/hqdefault.jpg',
+        image: 'https://img.freepik.com/psd-gratuitas/modelo-de-logotipo-3d-da-copa-do-mundo-do-brasil_220664-3637.jpg?w=2000',
       }
     ]
   },
@@ -70,7 +70,6 @@ export function PainelAluno() {
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
-
         <div className="flex flex-col gap-20 pb-60 w-full max-w-[1180px] mt-8">
           {Cursos.map(item => (
             <ListCards cardData={item.Cards} title={item.title} />
