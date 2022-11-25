@@ -72,7 +72,7 @@ export function Curso() {
         <div className="flex flex-col gap-10 pb-20 w-full max-w-[1180px] h-full mt-8">
           <div className="flex w-full h-[439px] gap-5">
             <div className="flex w-full h-full relative">
-              <Player style={{ '--vm-player-theme': '#faba16', width: '100%', height: '100%'  }} >
+              <Player style={{ width: '100%', height: '100%'  }} >
                 <Video poster={listAulas[0].thumb}>
                   <source
                     data-src={listAulas[0].videoUri}
