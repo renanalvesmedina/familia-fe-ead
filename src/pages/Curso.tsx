@@ -69,9 +69,9 @@ export function Curso() {
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
-        <div className="flex flex-col gap-10 pb-20 w-full max-w-[1180px] h-full mt-8">
+        <div className="flex flex-col gap-10 w-full max-w-[1180px] h-full mt-8">
           <div className="flex w-full h-[439px] gap-5">
-            <div className="flex w-full h-full relative">
+            <div className="flex flex-col w-full h-full relative">
               <Player style={{ width: '100%', height: '100%'  }} >
                 <Video poster={listAulas[0].thumb}>
                   <source
@@ -105,8 +105,41 @@ export function Curso() {
                 </div>
               </div>
             </div>
+
           </div>
-          <h1 className="text-xl">1.0 - Comprometidos com a Membresia</h1>
+        </div>
+
+        <div className="flex h-full w-full justify-end max-w-[1180px]">
+          <div className="flex w-full h-full gap-5">
+            <div className="flex flex-col w-full mt-10">
+              <h1 className="text-xl">1.0 - Como ser uma membro da familia</h1>
+              
+              <div className="mt-7 w-full border-b-[1px] rounded border-[#2E3A42]"></div>
+
+              <div className="flex flex-col w-full h-fit mt-7 gap-8">
+                <p className="text-sm font-light">Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et</p>
+                <p className="text-sm font-thin">Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a></p>
+              </div>
+            </div>
+
+            <div className="w-full max-w-[380px] h-full mt-10 rounded bg-[#1F282D]">
+              <div className="w-full h-full p-5">
+                <div className="flex w-full items-center gap-4">
+                  <img src="https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA01.png" width={55} className="rounded-full aspect-square" alt="" />
+                  <div className="flex flex-col gap-1">
+                    <a href="" className="text-sm font-medium">Comprometidos com a Membresia</a>
+                    <span className="text-xs font-thin text-zinc-400">4 de 10 aulas concluídas</span>
+                  </div>
+                </div>
+                
+                <div className="flex my-6 w-full border-b-[1px] rounded border-[#2E3A42]"></div>
+                
+                <div className="flex items-center w-full">
+                  <button className="bg-brand-500 p-2 rounded w-full text-aux-500">Baixar Materiais</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

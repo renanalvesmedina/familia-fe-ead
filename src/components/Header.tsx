@@ -22,7 +22,7 @@ export function Header() {
           </div>
         </a>
         <div className="flex items-center pt-4 pr-2 gap-5 w-full h-full">
-          <a href="/" className="rounded-full p-2 hover:bg-brand-500 hover:text-aux-500 transition">Painel do Aluno</a>
+          {/* <a href="/" className="rounded-full p-2 hover:bg-brand-500 hover:text-aux-500 transition">Painel do Aluno</a>
           <Menu placement="bottom-start">
             <MenuHandler>
               <a className="cursor-pointer rounded-full p-2 hover:bg-brand-500 hover:text-aux-500 transition">Cursos</a>
@@ -32,7 +32,7 @@ export function Header() {
               <MenuItem onClick={() => _navigate('/login')} className='flex items-center gap-2 rounded-full hover:bg-brand-500 hover:text-aux-500 transition'><BookOpen size={20} /> Comprometidos com a Maturidade</MenuItem>
               <MenuItem onClick={() => _navigate('/login')} className='flex items-center gap-2 rounded-full hover:bg-brand-500 hover:text-aux-500 transition'><BookOpen size={20} /> Comprometidos com a Adoração</MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
         </div>
         <div className="flex justify-end items-center gap-5 min-w-[380px]">
           <Menu placement="bottom-end">
