@@ -4,6 +4,8 @@ import { Ui, Player, Video, DefaultControls, ClickToPlay } from '@vime/react'
 import '@vime/core/themes/default.css';
 import { Books } from "phosphor-react";
 import { Lesson } from '../components/Lesson';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
+import * as Separator from '@radix-ui/react-separator';
 
 const listAulas = [
   {
@@ -86,8 +88,30 @@ export function Curso() {
               </Player>
             </div>
 
-            <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-zinc-900 overflow-y-auto relative">
-              <div className="flex flex-col">
+            {/* <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-zinc-900 overflow-y-auto relative"> */}
+            <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] relative">
+              <div className="flex">
+                <div className="flex grow items-center gap-2 ">
+                  <Books size={24} />
+                  <span className="font-medium text-2xl text-white">Aulas</span>
+                </div>
+              </div>
+              <ScrollArea.Root className="w-full h-full overflow-hidden">
+                <ScrollArea.Viewport className="w-full h-full overflow-scroll">
+                  {listAulas.map(aula => (
+                    <Lesson
+                      key={aula.id}
+                      title={aula.title}
+                      isPending={aula.isPending}
+                      thumb={aula.thumb}
+                    />
+                  ))}
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar className="flex w-[6px] select-none rounded-full p-[2px] bg-zinc-900/30" orientation='vertical'>
+                  <ScrollArea.Thumb className="flex flex-1 bg-brand-500 rounded-full before:absolute min-w-[2px] min-h-[2px]" />
+                </ScrollArea.Scrollbar>
+              </ScrollArea.Root>
+              {/* <div className="flex flex-col">
                 <div className="flex bg-aux-500 fixed w-full max-w-[370px] h-12 grow gap-2 items-center drop-shadow-xl">
                   <Books size={24} />
                   <span className="font-semibold text-2xl">Aulas</span>
@@ -103,9 +127,8 @@ export function Curso() {
                     />
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
-
           </div>
         </div>
 
@@ -114,7 +137,7 @@ export function Curso() {
             <div className="flex flex-col w-full mt-10">
               <h1 className="text-xl">1.0 - Como ser uma membro da familia</h1>
               
-              <div className="mt-7 w-full border-b-[1px] rounded border-[#2E3A42]"></div>
+              <Separator.Root className="mt-7 w-full h-[1px] bg-[#2E3A42]"/>
 
               <div className="flex flex-col w-full h-fit mt-7 gap-8">
                 <p className="text-sm font-light">Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et</p>
@@ -132,7 +155,7 @@ export function Curso() {
                   </div>
                 </div>
                 
-                <div className="flex my-6 w-full border-b-[1px] rounded border-[#2E3A42]"></div>
+                <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
                 
                 <div className="flex items-center w-full">
                   <button className="bg-brand-500 p-2 rounded w-full text-aux-500">Baixar Materiais</button>

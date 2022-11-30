@@ -1,4 +1,4 @@
-import { CheckCircle, Lock, RadioButton } from 'phosphor-react'
+import { RadioButton } from 'phosphor-react'
 
 interface LessonProps {
   title: string;
@@ -9,7 +9,7 @@ interface LessonProps {
 export function Lesson(props: LessonProps) {
   return (
     <a href="" className="group">
-      <div className="rounded p-3 group-hover:bg-gradient-to-r from-gray-900">
+      <div className="rounded-lg p-3 group-hover:bg-gradient-to-r from-zinc-900">
         <div className="flex items-center">
           <img src={props.thumb} width='80px' className="mr-2 rounded aspect-video" />
 
