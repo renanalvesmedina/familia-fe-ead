@@ -1,4 +1,4 @@
-import React from 'react'
+import { BookBookmark } from 'phosphor-react';
 import { CardDataModel } from '../models/CardDataModel';
 import { Card } from './Card'
 
@@ -14,7 +14,7 @@ export function ListCards({
   return (
     <div className="flex flex-col gap-5">
       <div className="flex w-full items-center gap-2">
-        <h4 className="text-xl m-0">{title}</h4>
+        <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> {title}</h4>
       </div>
       
       <div className="flex">

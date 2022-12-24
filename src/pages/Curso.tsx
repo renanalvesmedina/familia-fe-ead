@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
 import { Ui, Player, Video, DefaultControls, ClickToPlay } from '@vime/react'
 import '@vime/core/themes/default.css';
@@ -66,7 +66,32 @@ const listAulas = [
   },
 ]
 
+class AulaAtivaData {
+  aulaId: string;
+  titulo: string;
+  descricao: string;
+  thumb: string;
+  videoUrl: string;
+  videoType: string;
+}
+
 export function Curso() {
+
+  const [aulaAtiva, setAulaAtiva] = useState<AulaAtivaData>(new AulaAtivaData());
+
+  useEffect(() => {
+    var _aula = new AulaAtivaData()
+
+    _aula.aulaId = '08de4df2-96cf-4e4d-9d43-66e7f5b6a4bb';
+    _aula.titulo = '1.0 - Como ser uma membro da familia',
+    _aula.descricao = 'Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et'
+    _aula.thumb = 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg';
+    _aula.videoUrl = 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4';
+    _aula.videoType = 'video/mp4';
+
+    setAulaAtiva(_aula)
+  }, [])
+
   return (
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
@@ -75,10 +100,10 @@ export function Curso() {
           <div className="flex w-full h-[439px] gap-5">
             <div className="flex flex-col w-full h-full relative">
               <Player style={{ width: '100%', height: '100%'  }} >
-                <Video poster={listAulas[0].thumb}>
+                <Video poster={aulaAtiva.thumb}>
                   <source
-                    data-src={listAulas[0].videoUri}
-                    type={listAulas[0].videoType}
+                    data-src={aulaAtiva.videoUrl}
+                    type={aulaAtiva.videoType}
                   />
                 </Video>
                 <Ui>
@@ -88,7 +113,6 @@ export function Curso() {
               </Player>
             </div>
 
-            {/* <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-zinc-900 overflow-y-auto relative"> */}
             <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] relative">
               <div className="flex">
                 <div className="flex grow items-center gap-2 ">
@@ -111,23 +135,6 @@ export function Curso() {
                   <ScrollArea.Thumb className="flex flex-1 bg-brand-500 rounded-full before:absolute min-w-[2px] min-h-[2px]" />
                 </ScrollArea.Scrollbar>
               </ScrollArea.Root>
-              {/* <div className="flex flex-col">
-                <div className="flex bg-aux-500 fixed w-full max-w-[370px] h-12 grow gap-2 items-center drop-shadow-xl">
-                  <Books size={24} />
-                  <span className="font-semibold text-2xl">Aulas</span>
-                </div>
-
-                <div className="flex flex-col mt-14 max-w-full">
-                  {listAulas.map(aula => (
-                    <Lesson
-                      key={aula.id}
-                      title={aula.title}
-                      isPending={aula.isPending}
-                      thumb={aula.thumb}
-                    />
-                  ))}
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -135,12 +142,12 @@ export function Curso() {
         <div className="flex h-full w-full justify-end max-w-[1180px]">
           <div className="flex w-full h-full gap-5">
             <div className="flex flex-col w-full mt-10">
-              <h1 className="text-xl">1.0 - Como ser uma membro da familia</h1>
+              <h1 className="text-xl">{aulaAtiva.titulo}</h1>
               
               <Separator.Root className="mt-7 w-full h-[1px] bg-[#2E3A42]"/>
 
               <div className="flex flex-col w-full h-fit mt-7 gap-8">
-                <p className="text-sm font-light">Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et</p>
+                <p className="text-sm font-light">{aulaAtiva.descricao}</p>
                 <p className="text-sm font-thin">Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a></p>
               </div>
             </div>
