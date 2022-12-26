@@ -8,7 +8,7 @@
 .DropdownMenuContent,
 .DropdownMenuSubContent {
   min-width: 220px;
-  background-color: white;
+  background-color: var(--bg-aux);
   border-radius: 6px;
   padding: 8px;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
@@ -16,6 +16,11 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
+
+polygon {
+  fill: #252b2f;
+}
+
 .DropdownMenuContent[data-side='top'],
 .DropdownMenuSubContent[data-side='top'] {
   animation-name: slideDownAndFade;
@@ -40,7 +45,7 @@
   font-family: 'Poppins';
   font-size: 14px;
   line-height: 1;
-  color: black;
+  color: gray;
   border-radius: 30px;
   display: flex;
   align-items: center;

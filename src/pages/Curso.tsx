@@ -96,8 +96,8 @@ export function Curso() {
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
-        <div className="flex flex-col gap-10 w-full max-w-[1180px] h-full mt-8">
-          <div className="flex w-full h-[439px] gap-5">
+        <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
+          <div className="flex w-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
             <div className="flex flex-col w-full h-full relative">
               <Player style={{ width: '100%', height: '100%'  }} >
                 <Video poster={aulaAtiva.thumb}>
@@ -139,8 +139,8 @@ export function Curso() {
           </div>
         </div>
 
-        <div className="flex h-full w-full justify-end max-w-[1180px]">
-          <div className="flex w-full h-full gap-5">
+        <div className="flex h-full w-full justify-end p-2 max-w-[1180px]">
+          <div className="flex flex-wrap md:flex-nowrap w-full h-full gap-5">
             <div className="flex flex-col w-full mt-10">
               <h1 className="text-xl">{aulaAtiva.titulo}</h1>
               

@@ -16,7 +16,7 @@ export function Card({
   return (
     <div className="relative w-full">
       <div className="relative overflow-hidden w-full hover:scale-105 transition">
-        <div className="flex gap-5 min-h-[212px] transform ">
+        <div className="flex justify-center gap-5 min-h-[212px] transform ">
           <div className="min-h-[212px] min-w-[380px] relative rounded overflow-hidden">
             <div aria-haspopup="dialog" aria-expanded="false" className='pointer-events-none'>
               <div onClick={() => _navigate(route)} className="cursor-pointer relative w-full h-full flex items-center justify-center pointer-events-auto hover:opacity-80 transition">

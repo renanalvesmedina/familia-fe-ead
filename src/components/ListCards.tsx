@@ -17,7 +17,7 @@ export function ListCards({
         <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> {title}</h4>
       </div>
       
-      <div className="flex">
+      <div className="flex flex-wrap gap-4 lg:flex-nowrap">
         {cardData.map(card => (
           <Card key={card.id} route={card.route} image={card.image} />
         ))}
