@@ -4,7 +4,6 @@
       "exclude": ["/static/images/*.{png,jpg,gif}", "/static/css/*"]
   },
   "mimeTypes": {
-    ".json": "text/json",
-    ".css": "text/css"
+      ".json": "text/json"
   }
 }
