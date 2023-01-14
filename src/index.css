@@ -7,5 +7,9 @@
 }
 
 body {
-  @apply bg-aux-500 text-gray-100;
+  @apply bg-zinc-900 text-gray-100;
+}
+
+vm-player {
+  --vm-player-theme: #faba16;
 }

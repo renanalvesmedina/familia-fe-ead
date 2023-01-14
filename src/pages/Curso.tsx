@@ -1,96 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
-import { Ui, Player, Video, DefaultControls, ClickToPlay } from '@vime/react'
+import { Ui, Player, DefaultControls, ClickToPlay, Youtube } from '@vime/react'
 import '@vime/core/themes/default.css';
 import { Books } from "phosphor-react";
 import { Lesson } from '../components/Lesson';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as Separator from '@radix-ui/react-separator';
-
-const listAulas = [
-  {
-    id: 1,
-    title: '1 - Comprometidos com a Membresia',
-    isPending: false,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/thumb_aula01.png',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 2,
-    title: '2 - Comprometidos com a Membresia',
-    isPending: false,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA01.png',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 3,
-    title: '3 - Comprometidos com a Membresia',
-    isPending: true,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA02.png',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 4,
-    title: '4 - Comprometidos com a Membresia',
-    isPending: false,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://redeinspire.com/img/thumb2022.jpg',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 5,
-    title: '5 - Comprometidos com a Membresia',
-    isPending: true,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://i.ytimg.com/vi/jnWSSjUQXU8/maxresdefault.jpg',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 6,
-    title: '4 - Comprometidos com a Membresia',
-    isPending: false,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://i.ytimg.com/vi/5doA18s_2f0/maxresdefault.jpg',
-    videoType: 'video/mp4'
-  },
-  {
-    id: 7,
-    title: '5 - Comprometidos com a Membresia',
-    isPending: true,
-    videoUri: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4',
-    thumb: 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg',
-    videoType: 'video/mp4'
-  },
-]
-
-class AulaAtivaData {
-  aulaId: string;
-  titulo: string;
-  descricao: string;
-  thumb: string;
-  videoUrl: string;
-  videoType: string;
-}
+import { useParams } from 'react-router-dom';
+import { ActiveClassModel } from '../models/ActiveClassModel';
+import { api } from '../services/api';
+import { ClassModel } from '../models/ClassModel';
 
 export function Curso() {
+  let { courseId, aulaId } = useParams();
 
-  const [aulaAtiva, setAulaAtiva] = useState<AulaAtivaData>(new AulaAtivaData());
+  const [aulas, setAulas] = useState<ClassModel[]>([]);
+  const [activeClass, setActiveClass] = useState<ActiveClassModel>(new ActiveClassModel());
 
   useEffect(() => {
-    var _aula = new AulaAtivaData()
+    var _aula = new ActiveClassModel()
+
+    // Get all classes of course
+    api.get(`/v1/Me/classes?courseId=${courseId}`).then((response) => {
+      setAulas(response.data);
+    });
 
     _aula.aulaId = '08de4df2-96cf-4e4d-9d43-66e7f5b6a4bb';
     _aula.titulo = '1.0 - Como ser uma membro da familia',
     _aula.descricao = 'Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et'
     _aula.thumb = 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg';
-    _aula.videoUrl = 'https://luminifirekeeper01.blob.core.windows.net/familiaead/GrupoWhatsApp_1.mp4';
+    _aula.video = '3vHuKVcBMYM';
     _aula.videoType = 'video/mp4';
 
-    setAulaAtiva(_aula)
-  }, [])
+    setActiveClass(_aula);
+  }, []);
+
+  async function handleActiveClass(aulaId: string) {
+    
+  }
 
   return (
     <main className="w-full h-full">
@@ -99,18 +46,26 @@ export function Curso() {
         <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
           <div className="flex w-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
             <div className="flex flex-col w-full h-full relative">
-              <Player style={{ width: '100%', height: '100%'  }} >
-                <Video poster={aulaAtiva.thumb}>
-                  <source
-                    data-src={aulaAtiva.videoUrl}
-                    type={aulaAtiva.videoType}
-                  />
-                </Video>
+              <h1 className="text-xl mb-6">{activeClass.titulo}</h1>
+              <Player>
+                <Youtube videoId={activeClass.video} />
                 <Ui>
                   <ClickToPlay />
                   <DefaultControls activeDuration={2000} />
                 </Ui>
               </Player>
+
+              <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full h-fit mt-6 gap-4">
+                  <p className="text-sm font-light">{activeClass.descricao}</p>
+
+                  <Separator.Root className="w-full h-[1px] bg-[#2E3A42]"/>
+
+                  <p className="text-sm font-thin">
+                    Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a>
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] relative">
@@ -122,10 +77,10 @@ export function Curso() {
               </div>
               <ScrollArea.Root className="w-full h-full overflow-hidden">
                 <ScrollArea.Viewport className="w-full h-full overflow-scroll">
-                  {listAulas.map(aula => (
+                  {aulas.map(aula => (
                     <Lesson
-                      key={aula.id}
-                      title={aula.title}
+                      key={aula.classId}
+                      title={aula.className}
                       isPending={aula.isPending}
                       thumb={aula.thumb}
                     />
@@ -139,20 +94,9 @@ export function Curso() {
           </div>
         </div>
 
-        <div className="flex h-full w-full justify-end p-2 max-w-[1180px]">
-          <div className="flex flex-wrap md:flex-nowrap w-full h-full gap-5">
-            <div className="flex flex-col w-full mt-10">
-              <h1 className="text-xl">{aulaAtiva.titulo}</h1>
-              
-              <Separator.Root className="mt-7 w-full h-[1px] bg-[#2E3A42]"/>
-
-              <div className="flex flex-col w-full h-fit mt-7 gap-8">
-                <p className="text-sm font-light">{aulaAtiva.descricao}</p>
-                <p className="text-sm font-thin">Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a></p>
-              </div>
-            </div>
-
-            <div className="w-full max-w-[380px] h-full mt-10 rounded bg-[#1F282D]">
+        <div className="flex h-full p-2 w-full max-w-[1180px]">
+          <div className="flex justify-center md:justify-end flex-wrap md:flex-nowrap w-full h-full gap-5">
+            <div className="w-full max-w-[380px] h-full mt-10 rounded bg-zinc-800">
               <div className="w-full h-full p-5">
                 <div className="flex w-full items-center gap-4">
                   <img src="https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA01.png" width={55} className="rounded-full aspect-square" alt="" />
@@ -165,7 +109,7 @@ export function Curso() {
                 <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
                 
                 <div className="flex items-center w-full">
-                  <button className="bg-brand-500 p-2 rounded w-full text-aux-500">Baixar Materiais</button>
+                  <button className="bg-brand-500 p-2 rounded w-full text-zinc-900">Baixar Materiais</button>
                 </div>
               </div>
             </div>

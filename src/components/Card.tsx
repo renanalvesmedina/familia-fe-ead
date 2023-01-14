@@ -3,23 +3,25 @@ import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
   image: string;
-  route: string;
+  courseId: number;
+  classId: number;
 }
 
 export function Card({
   image,
-  route 
+  courseId,
+  classId 
 }: CardProps) {
 
   const _navigate = useNavigate();
 
   return (
-    <div className="relative w-full">
+    <div className="relative">
       <div className="relative overflow-hidden w-full hover:scale-105 transition">
-        <div className="flex justify-center gap-5 min-h-[212px] transform ">
+        <div className="flex gap-5 min-h-[212px] transform ">
           <div className="min-h-[212px] min-w-[380px] relative rounded overflow-hidden">
             <div aria-haspopup="dialog" aria-expanded="false" className='pointer-events-none'>
-              <div onClick={() => _navigate(route)} className="cursor-pointer relative w-full h-full flex items-center justify-center pointer-events-auto hover:opacity-80 transition">
+              <div onClick={() => _navigate(`/curso/${courseId}/aula/${classId}`)} className="cursor-pointer relative w-full h-full flex items-center justify-center pointer-events-auto hover:opacity-80 transition">
                 <div className="relative pointer-events-auto w-full h-full">
                   <div className="aspect-video relative w-full pb-[56%]" >
                     <div className="absolute inset-0">

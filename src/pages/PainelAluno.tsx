@@ -1,81 +1,44 @@
-import { ListCards } from '../components/ListCards'
 import { Header } from '../components/Header'
-
-const Cursos = [
-  {
-    id: 1,
-    title: 'Seus Cursos',
-    Cards: [
-      {
-        id: 1,
-        route: '/curso',
-        image: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA01.png',
-      },
-      {
-        id: 2,
-        route: '/curso',
-        image: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA02.png',
-      },
-      {
-        id: 3,
-        route: '/curso',
-        image: 'https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA03.png',
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Lançamentos',
-    Cards: [
-      {
-        id: 4,
-        route: '/curso',
-        image: 'https://redeinspire.com/img/thumb2022.jpg',
-      },
-      {
-        id: 5,
-        route: '/curso',
-        image: 'https://i.ytimg.com/vi/jnWSSjUQXU8/maxresdefault.jpg',
-      },
-      {
-        id: 6,
-        route: '/curso',
-        image: 'https://img.freepik.com/psd-gratuitas/modelo-de-logotipo-3d-da-copa-do-mundo-do-brasil_220664-3637.jpg?w=2000',
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Recomendados',
-    Cards: [
-      {
-        id: 7,
-        route: '/curso',
-        image: 'https://i.ytimg.com/vi/5doA18s_2f0/maxresdefault.jpg',
-      },
-      {
-        id: 8,
-        route: '/curso',
-        image: 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg',
-      },
-      {
-        id: 9,
-        route: '/curso',
-        image: 'https://i.ytimg.com/vi/HXmTSJjD7LA/maxresdefault.jpg',
-      }
-    ]
-  }
-]
+import { BookBookmark } from 'phosphor-react'
+import { useEffect, useState } from 'react';
+import { api } from '../services/api'
+import { Card } from '../components/Card';
+import { CardCourseModel } from '../models/CardCourseModel';
+import illustrationImg from '../assets/rafiki.svg'
 
 export function PainelAluno() {
+  const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
+
+  useEffect(() => {
+    api.get('/v1/Me/courses').then((response) => {
+      setCardCourses(response.data);
+    });
+  }, []);
+
   return (
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
-        <div className="flex flex-col justify-center items-center gap-20 pb-60 w-full md:max-w-[1180px] mt-8">
-          {Cursos.map(item => (
-            <ListCards key={item.id} cardData={item.Cards} title={item.title} />
-          ))}
+        <div className="flex flex-col gap-20 pb-60 w-full md:max-w-[1180px] mt-8">
+          <div className="flex flex-col gap-5">
+            <div className="flex w-full items-center gap-2">
+              <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> Meus Cursos</h4>
+            </div>
+
+            { cardCourses.length > 0 ? (
+              <div className="flex w-full justify-center md:justify-start flex-wrap gap-4 ">
+                {cardCourses.map(card => (
+                  <Card key={card.courseId} courseId={card.courseId} classId={card.lastClassAttendedId}  image={card.courseCardUri} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center pt-6 h-full">
+                <img src={illustrationImg} className="w-96" alt="" />
+                <h2 className="font-semibold text-xl text-center">Você ainda não foi matriculado em um curso!</h2>
+              </div>
+            )}
+
+          </div>
         </div>
       </div>
     </main>
