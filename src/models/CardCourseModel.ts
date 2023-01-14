@@ -1,6 +1,6 @@
-export class CardCourseModel {
-  courseId!: number
-  courseName!: string
-  courseCardUri!: string
-  lastClassAttendedId!: number
+export interface CardCourseModel {
+  courseId: number
+  courseName: string
+  courseCardUri: string
+  lastClassAttendedId: number
 }

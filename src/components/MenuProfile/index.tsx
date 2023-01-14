@@ -20,7 +20,7 @@ export function MenuProfile() {
             <Avatar.Image className="w-full h-full object-cover"
               src={profilePicture} />
             <Avatar.Fallback className="flex items-center justify-center w-full h-full bg-gray-900 text-brand-700 font-medium text-base" delayMs={600}>
-              {getAvatarLetters(userName)}
+              {getAvatarLetters(userName == null ? '' : userName)}
             </Avatar.Fallback>
           </Avatar.Root>
         </button>

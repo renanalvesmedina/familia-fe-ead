@@ -48,7 +48,7 @@ export function Curso() {
             <div className="flex flex-col w-full h-full relative">
               <h1 className="text-xl mb-6">{activeClass.titulo}</h1>
               <Player>
-                <Youtube videoId={activeClass.video} />
+                <Youtube videoId={activeClass.video != undefined ? activeClass.video : '' } />
                 <Ui>
                   <ClickToPlay />
                   <DefaultControls activeDuration={2000} />

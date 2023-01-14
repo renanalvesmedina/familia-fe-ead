@@ -10,7 +10,7 @@ export const auth = async (email: string, password: string): Promise<Authenticat
     }
 
     return new Error('Falha no Login!');
-  } catch (error) {
+  } catch (error: any) {
     toast.error(`${error.response.data.errors[0].message} :(`);
     return new Error((error as { message: string }).message || 'Falha no Login!');
   }

@@ -1,4 +1,4 @@
-export class ClassModel {
+export interface ClassModel {
   classId: string;
   className: string;
   thumb: string;

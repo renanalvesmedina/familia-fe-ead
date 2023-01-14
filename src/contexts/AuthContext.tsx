@@ -16,7 +16,7 @@ interface IAuthProviderProps {
 }
 
 export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
-  const [authData, setAuthData] = useState<AuthenticationModel | null>();
+  const [authData, setAuthData] = useState<AuthenticationModel>();
 
   useEffect(() => {
     const accessData = getAuthLocalStorage();
