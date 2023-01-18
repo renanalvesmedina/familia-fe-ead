@@ -20,6 +20,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const accessData = getAuthLocalStorage();
+    
     if(accessData) {
       setAuthData(accessData);
     } else {

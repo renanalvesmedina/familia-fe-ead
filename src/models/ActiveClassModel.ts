@@ -1,8 +1,7 @@
 export class ActiveClassModel {
-  aulaId?: string;
-  titulo?: string;
-  descricao?: string;
-  thumb?: string;
+  classId?: string;
+  className?: string;
+  orderId?: number;
+  description?: string;
   video?: string;
-  videoType?: string;
 }

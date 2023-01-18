@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
-import { Ui, Player, DefaultControls, ClickToPlay, Youtube } from '@vime/react'
-import '@vime/core/themes/default.css';
+import ReactPlayer from 'react-player/youtube'
 import { Books } from "phosphor-react";
 import { Lesson } from '../components/Lesson';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
@@ -10,33 +9,46 @@ import { useParams } from 'react-router-dom';
 import { ActiveClassModel } from '../models/ActiveClassModel';
 import { api } from '../services/api';
 import { ClassModel } from '../models/ClassModel';
+import { CourseModel } from '../models/CourseModel';
 
 export function Curso() {
   let { courseId, aulaId } = useParams();
 
   const [aulas, setAulas] = useState<ClassModel[]>([]);
+  const [curso, setCurso] = useState<CourseModel>();
   const [activeClass, setActiveClass] = useState<ActiveClassModel>(new ActiveClassModel());
 
   useEffect(() => {
-    var _aula = new ActiveClassModel()
-
     // Get all classes of course
     api.get(`/v1/Me/classes?courseId=${courseId}`).then((response) => {
       setAulas(response.data);
     });
 
-    _aula.aulaId = '08de4df2-96cf-4e4d-9d43-66e7f5b6a4bb';
-    _aula.titulo = '1.0 - Como ser uma membro da familia',
-    _aula.descricao = 'Descrição sobre a aula: Lorem Ipsum et lorem Ipsum et orem Ipsum et'
-    _aula.thumb = 'https://i.pinimg.com/originals/f9/27/a8/f927a8d6d6017c44e1d2ef8f3d604b51.jpg';
-    _aula.video = '3vHuKVcBMYM';
-    _aula.videoType = 'video/mp4';
+    // Get course details
+    api.get(`/v1/Course/details?courseId=${courseId}`).then((response) => {
+      setCurso(response.data);
+    });
 
-    setActiveClass(_aula);
+    handleActiveClass(aulaId);
   }, []);
 
-  async function handleActiveClass(aulaId: string) {
-    
+  async function handleActiveClass(classId?: string) {
+    api.get(`/v1/Class/details?classId=${classId}`).then((res) => {
+      
+      var activeClass = { 
+        classId: classId, 
+        className: res.data.className, 
+        orderId: res.data.orderId, 
+        description: res.data.description, 
+        video: res.data.video 
+      };
+
+      setActiveClass(activeClass);
+    });
+  }
+
+  async function handleRegisterHistory(classId?: string, courseId?: string) {
+    await api.post(`v1/Me/history/register`, {classId, courseId});
   }
 
   return (
@@ -44,20 +56,24 @@ export function Curso() {
       <div className="flex items-center flex-col">
         <Header />
         <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
-          <div className="flex w-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
+          <div className="flex w-full h-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
             <div className="flex flex-col w-full h-full relative">
-              <h1 className="text-xl mb-6">{activeClass.titulo}</h1>
-              <Player>
-                <Youtube videoId={activeClass.video != undefined ? activeClass.video : '' } />
-                <Ui>
-                  <ClickToPlay />
-                  <DefaultControls activeDuration={2000} />
-                </Ui>
-              </Player>
+              <h1 className="text-xl mb-6">{activeClass.orderId + ' - ' + activeClass.className}</h1>
+              <div className="player-wrapper">
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${activeClass.video}`}
+                  className="react-player"
+                  playing
+                  width="100%"
+                  height="100%"
+                  controls={true}
+                  onEnded={() => handleRegisterHistory(activeClass.classId, courseId)}
+                />
+              </div>
 
               <div className="flex flex-col w-full">
                 <div className="flex flex-col w-full h-fit mt-6 gap-4">
-                  <p className="text-sm font-light">{activeClass.descricao}</p>
+                  <p className="text-sm font-light">{activeClass.description}</p>
 
                   <Separator.Root className="w-full h-[1px] bg-[#2E3A42]"/>
 
@@ -80,9 +96,10 @@ export function Curso() {
                   {aulas.map(aula => (
                     <Lesson
                       key={aula.classId}
-                      title={aula.className}
+                      title={aula.orderId + ' - ' + aula.className}
                       isPending={aula.isPending}
                       thumb={aula.thumb}
+                      handleClick={() => handleActiveClass(aula.classId)}
                     />
                   ))}
                 </ScrollArea.Viewport>
@@ -99,10 +116,10 @@ export function Curso() {
             <div className="w-full max-w-[380px] h-full mt-10 rounded bg-zinc-800">
               <div className="w-full h-full p-5">
                 <div className="flex w-full items-center gap-4">
-                  <img src="https://luminifirekeeper01.blob.core.windows.net/familiaead/CAPA01.png" width={55} className="rounded-full aspect-square" alt="" />
+                  <img src={curso?.courseCardUri} width={60} className="rounded-full aspect-square" alt="" />
                   <div className="flex flex-col gap-1">
-                    <a href="" className="text-sm font-medium">Comprometidos com a Membresia</a>
-                    <span className="text-xs font-thin text-zinc-400">4 de 10 aulas concluídas</span>
+                    <a href="" className="text-sm font-medium">{curso?.courseName}</a>
+                    <span className="text-xs font-thin text-zinc-400">Carga Horária: {curso?.workload} Aulas</span>
                   </div>
                 </div>
                 

@@ -1,6 +1,6 @@
 import { SignIn } from 'phosphor-react';
 import React, { FormEvent, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import illustration from '../assets/webinar-amico.svg'
 import { useAuthContext } from '../contexts';
 
@@ -125,8 +125,6 @@ export function Login({ children } : ILoginProps) {
           </div>
         </form>
       </div>
-
-      <Toaster position="top-right" />
     </div>
   )
 }

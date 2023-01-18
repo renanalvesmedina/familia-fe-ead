@@ -10,7 +10,7 @@ export function PainelAluno() {
   const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
 
   useEffect(() => {
-    api.get('/v1/Me/courses').then((response) => {
+    api.get('/v1/me/courses').then((response) => {
       setCardCourses(response.data);
     });
   }, []);

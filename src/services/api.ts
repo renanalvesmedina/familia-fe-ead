@@ -4,7 +4,7 @@ import { responseInterceptor } from './ResponseInterceptor';
 import { getToken } from './utils';
 
 const api = axios.create({
-  baseURL: 'https://localhost:7238',
+  baseURL: 'https://familiaeadapi.azurewebsites.net',
   headers: {
     'Authorization': 'Bearer ' + getToken(),
     'Accept' : 'application/json',

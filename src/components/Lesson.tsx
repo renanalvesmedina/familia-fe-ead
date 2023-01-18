@@ -4,11 +4,12 @@ interface LessonProps {
   title: string;
   isPending: Boolean;
   thumb: string;
+  handleClick: () => void;
 }
 
 export function Lesson(props: LessonProps) {
   return (
-    <a href="" className="group">
+    <a onClick={props.handleClick} className="group cursor-pointer">
       <div className="rounded-lg p-3 group-hover:bg-gradient-to-r from-aux-500">
         <div className="flex">
           <div className="flex items-center w-full">
