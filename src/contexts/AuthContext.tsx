@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { AuthenticationModel } from '../models/AuthenticationModel';
+import { api } from '../services/api';
 import { AuthService } from '../services/AuthService';
 import { getAuthLocalStorage, removeAuthLocalStorage, setAuthLocalStorage } from '../services/utils';
 
@@ -23,6 +24,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
     
     if(accessData) {
       setAuthData(accessData);
+      api.defaults.headers.common['Authorization'] = `Bearer ${accessData.token}`;
     } else {
       handleLogout();
     }
@@ -36,9 +38,22 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
       return result.message;
     }
 
+    api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`;
     setAuthLocalStorage(result);
     setAuthData(result);
   }, []);
+
+  // async function handleLogin(email: string, password: string) {
+  //   const result = await AuthService.auth(email, password);
+
+  //   if(result instanceof Error) {
+  //     return result.message;
+  //   }
+    
+  //   api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`;
+  //   setAuthLocalStorage(result);
+  //   setAuthData(result);
+  // }
   // <= Login //
 
   // <= Logout //

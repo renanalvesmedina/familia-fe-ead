@@ -13,6 +13,7 @@ export function PainelAluno() {
     api.get('/v1/me/courses').then((response) => {
       setCardCourses(response.data);
     });
+    
   }, []);
 
   return (
