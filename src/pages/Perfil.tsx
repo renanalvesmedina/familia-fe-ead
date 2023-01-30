@@ -5,7 +5,7 @@ import avatar from '../assets/avatarDefault.png'
 import { api } from '../services/api';
 import { UserProfileModel } from '../models/UserProfileModel';
 import * as Tabs from '@radix-ui/react-tabs';
-import '../components/TabProfile/style.css';
+// import '../components/TabProfile/style.css';
 import { Key, UserCircleGear } from 'phosphor-react';
 
 export function Perfil() {
@@ -51,7 +51,7 @@ export function Perfil() {
             </span>
           </span>
 
-          <Tabs.Root className="TabsRoot" defaultValue="tab1">
+          {/* <Tabs.Root className="TabsRoot" defaultValue="tab1">
             <Tabs.List className="TabsList" aria-label="Manage your account">
               <Tabs.Trigger className="TabsTrigger gap-2" value="tab1">
                 <UserCircleGear size={28} /> Perfil
@@ -103,7 +103,7 @@ export function Perfil() {
 
             <Tabs.Content className="TabsContent" value="tab2">
               <p className="Text">Logo poderá redefinir sua senha por aqui...</p>
-              {/* <fieldset className="Fieldset">
+              <fieldset className="Fieldset">
                 <label className="Label" htmlFor="currentPassword">
                   Current password
                 </label>
@@ -120,12 +120,12 @@ export function Perfil() {
                   Confirm password
                 </label>
                 <input className="Input" id="confirmPassword" type="password" />
-              </fieldset> */}
+              </fieldset>
               <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
                 <button className="Button green">Alterar Senha</button>
               </div>
             </Tabs.Content>
-          </Tabs.Root>
+          </Tabs.Root> */}
         </div>
       </div>
     </main>
