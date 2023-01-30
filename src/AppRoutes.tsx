@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 
 import { Curso } from './pages/Curso'
-import { PageNotFound } from './pages/PageNotFound'
 import { PainelAluno } from './pages/PainelAluno'
 import { Perfil } from './pages/Perfil'
 

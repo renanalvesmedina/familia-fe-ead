@@ -10,10 +10,6 @@ body {
   @apply bg-zinc-900 text-gray-100 m-2;
 }
 
-vm-player {
-  --vm-player-theme: #faba16;
-}
-
 .player-wrapper {
   position: relative;
   padding-top: 56.25%; /* 720 / 1280 = 0.5625 */
