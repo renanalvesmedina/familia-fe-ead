@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './AppRoutes'
 import { AuthProvider } from './contexts'
 import './index.css'
+import './components/TabProfile/style.css'
+import './components/MenuProfile/style.css'
 import { Login } from './pages/Login'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
