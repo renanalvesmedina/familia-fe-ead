@@ -12,7 +12,7 @@ export function Header() {
         <div className="flex items-center pt-4 pr-2 md:gap-5 w-full h-full">
         </div>
         <div className="flex justify-end items-center gap-5 mt-2 md:min-w-[380px]">
-          {/* <MenuProfile /> */}
+          <MenuProfile />
         </div>
       </div>
     </header>

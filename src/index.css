@@ -4,6 +4,10 @@
 
 :root {
  @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-aux-500 overflow-y-scroll;
+  --bg-brand: #FABA16;
+  --bg-brand1: #FFE500;
+  --bg-brand2: #E9D404;
+  --bg-aux: #1C2328;
 }
 
 body {
@@ -20,4 +24,288 @@ body {
   top: 0;
   left: 0;
   border-radius: 40px;
+}
+
+.DropdownMenuContent,
+.DropdownMenuSubContent {
+  min-width: 220px;
+  background-color: var(--bg-aux);
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+polygon {
+  fill: #252b2f;
+}
+
+.DropdownMenuContent[data-side='top'],
+.DropdownMenuSubContent[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+.DropdownMenuContent[data-side='right'],
+.DropdownMenuSubContent[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+.DropdownMenuContent[data-side='bottom'],
+.DropdownMenuSubContent[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+.DropdownMenuContent[data-side='left'],
+.DropdownMenuSubContent[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.DropdownMenuItem,
+.DropdownMenuCheckboxItem,
+.DropdownMenuRadioItem,
+.DropdownMenuSubTrigger {
+  font-family: 'Poppins';
+  font-size: 14px;
+  line-height: 1;
+  color: gray;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 15px;
+  position: relative;
+  padding-left: 25px;
+  user-select: none;
+  outline: none;
+}
+.DropdownMenuSubTrigger[data-state='open'] {
+  background-color: var(--bg-brand);
+  color: black;
+}
+.DropdownMenuItem[data-disabled],
+.DropdownMenuCheckboxItem[data-disabled],
+.DropdownMenuRadioItem[data-disabled],
+.DropdownMenuSubTrigger[data-disabled] {
+  color: darkgray;
+  pointer-events: none;
+}
+.DropdownMenuItem[data-highlighted],
+.DropdownMenuCheckboxItem[data-highlighted],
+.DropdownMenuRadioItem[data-highlighted],
+.DropdownMenuSubTrigger[data-highlighted] {
+  cursor: pointer;
+  background-color: var(--bg-brand);
+  color: white;
+}
+
+.Sair[data-highlighted] {
+  background-color: lightcoral;
+}
+
+.DropdownMenuLabel {
+  padding-left: 25px;
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 600;
+  color: var(--bg-brand);
+}
+
+.DropdownMenuSeparator {
+  height: 1px;
+  background-color: gray;
+  margin: 5px;
+}
+
+.DropdownMenuItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DropdownMenuArrow {
+  fill: white;
+}
+
+.RightSlot {
+  margin-left: auto;
+  padding-left: 20px;
+  color: gray;
+}
+[data-highlighted] > .RightSlot {
+  color: white;
+}
+[data-disabled] .RightSlot {
+  color: gray;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.TabsRoot {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  box-shadow: 0 2px 10px var(--bg-aux);
+}
+
+.TabsList {
+  flex-shrink: 0;
+  display: flex;
+  border-bottom: 1px solid var(--bg-brand);
+}
+
+.TabsTrigger {
+  font-family: inherit;
+  background-color: var(--bg-aux);
+  padding: 0 20px;
+  height: 45px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  color: white;
+  user-select: none;
+}
+.TabsTrigger:first-child {
+  border-top-left-radius: 6px;
+}
+.TabsTrigger:last-child {
+  border-top-right-radius: 6px;
+}
+/* .TabsTrigger:hover {
+  color: var(--bg-brand);
+} */
+.TabsTrigger[data-state='active'] {
+  color: var(--bg-brand);
+  box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
+}
+/* .TabsTrigger:focus {
+  position: relative;
+  box-shadow: 0 0 0 2px black;
+} */
+
+.TabsContent {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: white;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  outline: none;
+}
+/* .TabsContent:focus {
+  box-shadow: 0 0 0 2px black;
+} */
+
+.Text {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: black;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+.Fieldset {
+  margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.Label {
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: black;
+  display: block;
+}
+
+.Input {
+  flex: 1 0 auto;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--bg-aux);
+  box-shadow: 0 0 0 1px gray;
+  height: 35px;
+}
+.Input:focus {
+  box-shadow: 0 0 0 2px var(--bg-brand);
+}
+.Input:disabled {
+  background-color: lightgrey;
+  color: var(--bg-aux);
+}
+
+.Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
+  height: 35px;
+}
+.Button.success {
+  background-color: var(--bg-brand);
+  color: white;
+}
+.Button.success:hover {
+  @apply bg-gradient-to-bl from-brand-600;
+}
+.Button.success:focus {
+  box-shadow: 0 0 0 2px var(--bg-brand);
+}
+.Button:disabled {
+  background-color: lightgrey;
+  color: var(--bg-aux);
 }

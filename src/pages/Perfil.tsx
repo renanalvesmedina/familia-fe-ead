@@ -5,7 +5,6 @@ import avatar from '../assets/avatarDefault.png'
 import { api } from '../services/api';
 import { UserProfileModel } from '../models/UserProfileModel';
 import * as Tabs from '@radix-ui/react-tabs';
-// import '../components/TabProfile/style.css';
 import { Key, UserCircleGear } from 'phosphor-react';
 
 export function Perfil() {
@@ -51,7 +50,7 @@ export function Perfil() {
             </span>
           </span>
 
-          {/* <Tabs.Root className="TabsRoot" defaultValue="tab1">
+          <Tabs.Root className="TabsRoot" defaultValue="tab1">
             <Tabs.List className="TabsList" aria-label="Manage your account">
               <Tabs.Trigger className="TabsTrigger gap-2" value="tab1">
                 <UserCircleGear size={28} /> Perfil
@@ -97,7 +96,7 @@ export function Perfil() {
                 </div>
               </div>
               <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
-                <button disabled className="Button success">Salvar</button>
+                <button className="Button success">Salvar</button>
               </div>
             </Tabs.Content>
 
@@ -105,27 +104,27 @@ export function Perfil() {
               <p className="Text">Logo poderá redefinir sua senha por aqui...</p>
               <fieldset className="Fieldset">
                 <label className="Label" htmlFor="currentPassword">
-                  Current password
+                  Senha atual:
                 </label>
-                <input className="Input" id="currentPassword" type="password" />
+                <input disabled className="Input" id="currentPassword" type="password" />
               </fieldset>
               <fieldset className="Fieldset">
                 <label className="Label" htmlFor="newPassword">
-                  New password
+                  Nova senha:
                 </label>
-                <input className="Input" id="newPassword" type="password" />
+                <input disabled className="Input" id="newPassword" type="password" />
               </fieldset>
               <fieldset className="Fieldset">
                 <label className="Label" htmlFor="confirmPassword">
-                  Confirm password
+                  Confirme nova senha:
                 </label>
-                <input className="Input" id="confirmPassword" type="password" />
+                <input disabled className="Input" id="confirmPassword" type="password" />
               </fieldset>
               <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
-                <button className="Button green">Alterar Senha</button>
+                <button className="Button success">Alterar Senha</button>
               </div>
             </Tabs.Content>
-          </Tabs.Root> */}
+          </Tabs.Root>
         </div>
       </div>
     </main>

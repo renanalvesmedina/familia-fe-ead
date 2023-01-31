@@ -4,7 +4,6 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Info, SignOut, UserCircleGear } from 'phosphor-react';
 
-// import './style.css';
 import { useAuthContext } from '../../contexts';
 import { getAvatarLetters } from '../../services/utils';
 

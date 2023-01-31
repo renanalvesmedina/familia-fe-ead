@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs';
-import './style.css';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { Key, UserCircleGear } from 'phosphor-react';
 
