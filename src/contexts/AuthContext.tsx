@@ -21,8 +21,15 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const accessData = getAuthLocalStorage();
-    
+
     if(accessData) {
+      console.log(Date.parse(accessData.expiration));
+      console.log(Date.now());
+
+      if(Date.parse(accessData.expiration) <= Date.now()) {
+        handleLogout();
+      }
+
       setAuthData(accessData);
       api.defaults.headers.common['Authorization'] = `Bearer ${accessData.token}`;
     } else {
@@ -42,18 +49,6 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
     setAuthLocalStorage(result);
     setAuthData(result);
   }, []);
-
-  // async function handleLogin(email: string, password: string) {
-  //   const result = await AuthService.auth(email, password);
-
-  //   if(result instanceof Error) {
-  //     return result.message;
-  //   }
-    
-  //   api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`;
-  //   setAuthLocalStorage(result);
-  //   setAuthData(result);
-  // }
   // <= Login //
 
   // <= Logout //
