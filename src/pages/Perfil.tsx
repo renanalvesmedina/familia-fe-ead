@@ -15,7 +15,7 @@ export function Perfil() {
   useEffect(() => {
     api.get('/v1/Me/profile').then(response => {
       setUser(response.data);
-      setUserSexo(user?.sexo);
+      setUserSexo(response.data.sexo);
     });
   }, []);
 

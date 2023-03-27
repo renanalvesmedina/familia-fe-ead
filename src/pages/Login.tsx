@@ -31,12 +31,6 @@ export function Login({ children } : ILoginProps) {
     }
 
     login(email, password);
-
-    // loginSchema
-    // .validate({email, password}, { abortEarly: false })
-    // .then(dadosValiados => {
-    //   login(dadosValiados.email, dadosValiados.password)
-    // });
   }
 
   return (

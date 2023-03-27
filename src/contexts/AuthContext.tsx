@@ -23,9 +23,6 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
     const accessData = getAuthLocalStorage();
 
     if(accessData) {
-      console.log(Date.parse(accessData.expiration));
-      console.log(Date.now());
-
       if(Date.parse(accessData.expiration) <= Date.now()) {
         handleLogout();
       }
