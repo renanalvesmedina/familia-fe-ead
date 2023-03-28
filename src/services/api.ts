@@ -3,7 +3,7 @@ import { errorInterceptor } from './ErrorInterceptor';
 import { responseInterceptor } from './ResponseInterceptor';
 
 const api = axios.create({
-  baseURL: 'https://familiaeadapi.azurewebsites.net',
+  baseURL: 'https://familia-ms-ead.azurewebsites.net',
   // baseURL: 'https://localhost:32768',
 });
 
