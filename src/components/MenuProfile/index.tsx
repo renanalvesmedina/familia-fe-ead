@@ -11,6 +11,11 @@ export function MenuProfile() {
   const _navigate = useNavigate();
   const { logout, profilePicture, userName } = useAuthContext();
 
+  async function handleLogout() {
+    _navigate('/');
+    logout();
+  }
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -36,7 +41,7 @@ export function MenuProfile() {
 
           <DropdownMenu.Separator className="DropdownMenuSeparator" />
 
-          <DropdownMenu.Item onClick={() => logout()} className="DropdownMenuItem Sair">
+          <DropdownMenu.Item onClick={() => handleLogout()} className="DropdownMenuItem Sair">
             Sair <div className="RightSlot"><SignOut size={24} /></div>
           </DropdownMenu.Item>
 
