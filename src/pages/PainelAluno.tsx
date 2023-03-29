@@ -5,13 +5,23 @@ import { api } from '../services/api'
 import { Card } from '../components/Card';
 import { CardCourseModel } from '../models/CardCourseModel';
 import illustrationImg from '../assets/rafiki.svg'
+import { Loading } from '../components/Loading';
 
 export function PainelAluno() {
   const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
+  const [inLoading, setInLoading] = useState(true);
+  const [isEnrollment, setIsEnrollment] = useState(true);
 
   useEffect(() => {
     api.get('/v1/me/courses').then((response) => {
       setCardCourses(response.data);
+      setInLoading(false);
+    })
+    .catch ((err) => {
+      if(err.response.data.errors[0].errorCode === 'FAMILY-ENROLLMENT-01') {
+        setIsEnrollment(false);
+        setInLoading(false);
+      }
     });
     
   }, []);
@@ -26,18 +36,22 @@ export function PainelAluno() {
               <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> Meus Cursos</h4>
             </div>
 
-            { cardCourses.length > 0 ? (
+            { cardCourses.length > 0 && (
               <div className="flex w-full justify-center md:justify-start flex-wrap gap-4 ">
-                {cardCourses.map(card => (
+                { cardCourses.map(card => (
                   <Card key={card.courseId} courseId={card.courseId} classId={card.lastClassAttendedId}  image={card.courseCardUri} />
-                ))}
+                )) }
               </div>
-            ) : (
+            ) }
+            
+            { inLoading && <div className="flex w-full justify-center"><Loading /></div> }
+            
+            { !isEnrollment && (
               <div className="flex flex-col justify-center items-center pt-6 h-full">
                 <img src={illustrationImg} className="w-96" alt="" />
                 <h2 className="font-semibold text-xl text-center">Você ainda não foi matriculado em um curso!</h2>
               </div>
-            )}
+            ) }
 
           </div>
         </div>

@@ -10,13 +10,15 @@ import { ActiveClassModel } from '../models/ActiveClassModel';
 import { api } from '../services/api';
 import { ClassModel } from '../models/ClassModel';
 import { CourseModel } from '../models/CourseModel';
+import { Loading } from '../components/Loading';
 
 export function Curso() {
   let { courseId, aulaId } = useParams();
 
+  const [inLoading, setInLoading] = useState(true);
   const [aulas, setAulas] = useState<ClassModel[]>([]);
   const [curso, setCurso] = useState<CourseModel>();
-  const [activeClass, setActiveClass] = useState<ActiveClassModel>(new ActiveClassModel());
+  const [activeClass, setActiveClass] = useState<ActiveClassModel>();
 
   useEffect(() => {
     // Get all classes of course
@@ -33,6 +35,7 @@ export function Curso() {
   }, []);
 
   async function handleActiveClass(classId?: string) {
+    
     api.get(`/v1/Class/details?classId=${classId}`).then((res) => {
       
       var activeClass = { 
@@ -44,6 +47,7 @@ export function Curso() {
       };
 
       setActiveClass(activeClass);
+      setInLoading(false);
     });
   }
 
@@ -55,83 +59,90 @@ export function Curso() {
     <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
-        <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
-          <div className="flex w-full h-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
-            <div className="flex flex-col w-full h-full relative">
-              <h1 className="text-xl mb-6">{activeClass.orderId + ' - ' + activeClass.className}</h1>
-              <div className="player-wrapper">
-                <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${activeClass.video}`}
-                  className="react-player"
-                  playing={false}
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  onEnded={() => handleRegisterHistory(activeClass.classId, courseId)}
-                />
-              </div>
-
-              <div className="flex flex-col w-full">
-                <div className="flex flex-col w-full h-fit mt-6 gap-4">
-                  <p className="text-sm font-light">{activeClass.description}</p>
-
-                  <Separator.Root className="w-full h-[1px] bg-[#2E3A42]"/>
-
-                  <p className="text-sm font-thin">
-                    Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] relative">
-              <div className="flex">
-                <div className="flex grow items-center gap-2 ">
-                  <Books size={24} />
-                  <span className="font-medium text-2xl text-white">Aulas</span>
-                </div>
-              </div>
-              <ScrollArea.Root className="w-full h-full overflow-hidden">
-                <ScrollArea.Viewport className="w-full h-full overflow-scroll">
-                  {aulas.map(aula => (
-                    <Lesson
-                      key={aula.classId}
-                      title={aula.orderId + ' - ' + aula.className}
-                      isPending={aula.isPending}
-                      thumb={aula.thumb}
-                      handleClick={() => handleActiveClass(aula.classId)}
+        { activeClass && (
+          <>
+            <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
+              <div className="flex w-full h-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
+                <div className="flex flex-col w-full h-full relative">
+                  <h1 className="text-xl mb-6">{activeClass.orderId + ' - ' + activeClass.className}</h1>
+                  <div className="player-wrapper">
+                    <ReactPlayer
+                      url={`https://www.youtube.com/watch?v=${activeClass.video}`}
+                      className="react-player"
+                      playing={false}
+                      width="100%"
+                      height="100%"
+                      controls={true}
+                      onEnded={() => handleRegisterHistory(activeClass.classId, courseId)}
                     />
-                  ))}
-                </ScrollArea.Viewport>
-                <ScrollArea.Scrollbar className="flex w-[6px] select-none rounded-full p-[2px] bg-zinc-900/30" orientation='vertical'>
-                  <ScrollArea.Thumb className="flex flex-1 bg-brand-500 rounded-full before:absolute min-w-[2px] min-h-[2px]" />
-                </ScrollArea.Scrollbar>
-              </ScrollArea.Root>
-            </div>
-          </div>
-        </div>
+                  </div>
 
-        <div className="flex h-full p-2 w-full max-w-[1180px]">
-          <div className="flex justify-center md:justify-end flex-wrap md:flex-nowrap w-full h-full gap-5">
-            <div className="w-full max-w-[380px] h-full mt-10 rounded bg-zinc-800">
-              <div className="w-full h-full p-5">
-                <div className="flex w-full items-center gap-4">
-                  <img src={curso?.courseCardUri} width={60} className="rounded-full aspect-square" alt="" />
-                  <div className="flex flex-col gap-1">
-                    <a href="" className="text-sm font-medium">{curso?.courseName}</a>
-                    <span className="text-xs font-thin text-zinc-400">Carga Horária: {curso?.workload} Aulas</span>
+                  <div className="flex flex-col w-full">
+                    <div className="flex flex-col w-full h-fit mt-6 gap-4">
+                      <p className="text-sm font-light">{activeClass.description}</p>
+
+                      <Separator.Root className="w-full h-[1px] bg-[#2E3A42]"/>
+
+                      <p className="text-sm font-thin">
+                        Se tiver qualquer dúvida, lembre-se que a estamos aqui para ajudar! Ou entre em contato com o nosso suporte pelo email <a href='mailto:suporte@igrejafamilia.net' className="text-brand-500">suporte@igrejafamilia.net ✉️</a>
+                      </p>
+                    </div>
                   </div>
                 </div>
-                
-                <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
-                
-                <div className="flex items-center w-full">
-                  <button className="bg-brand-500 p-2 rounded w-full text-zinc-900">Baixar Materiais</button>
+
+                <div className="flex flex-col rounded-md items-stretch gap-3 h-full max-h-[780px] w-full max-w-[380px] relative">
+                  <div className="flex">
+                    <div className="flex grow items-center gap-2 ">
+                      <Books size={24} />
+                      <span className="font-medium text-2xl text-white">Aulas</span>
+                    </div>
+                  </div>
+                  <ScrollArea.Root className="w-full h-full overflow-hidden">
+                    <ScrollArea.Viewport className="w-full h-full overflow-scroll">
+                      {aulas.map(aula => (
+                        <Lesson
+                          key={aula.classId}
+                          title={aula.orderId + ' - ' + aula.className}
+                          isPending={aula.isPending}
+                          thumb={aula.thumb}
+                          handleClick={() => handleActiveClass(aula.classId)}
+                        />
+                      ))}
+                    </ScrollArea.Viewport>
+                    <ScrollArea.Scrollbar className="flex w-[6px] select-none rounded-full p-[2px] bg-zinc-900/30" orientation='vertical'>
+                      <ScrollArea.Thumb className="flex flex-1 bg-brand-500 rounded-full before:absolute min-w-[2px] min-h-[2px]" />
+                    </ScrollArea.Scrollbar>
+                  </ScrollArea.Root>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
+            <div className="flex h-full p-2 w-full max-w-[1180px]">
+              <div className="flex justify-center md:justify-end flex-wrap md:flex-nowrap w-full h-full gap-5">
+                <div className="w-full max-w-[380px] h-full mt-10 rounded bg-zinc-800">
+                  <div className="w-full h-full p-5">
+                    <div className="flex w-full items-center gap-4">
+                      <img src={curso?.courseCardUri} width={60} className="rounded-full aspect-square" alt="" />
+                      <div className="flex flex-col gap-1">
+                        <a href="" className="text-sm font-medium">{curso?.courseName}</a>
+                        <span className="text-xs font-thin text-zinc-400">Carga Horária: {curso?.workload} Aulas</span>
+                      </div>
+                    </div>
+                    
+                    <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
+                    
+                    <div className="flex items-center w-full">
+                      <button className="bg-brand-500 p-2 rounded w-full text-zinc-900">Baixar Materiais</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        { inLoading && <div className="flex items-center justify-center"><Loading /></div> }  
+
       </div>
     </main>
   )
