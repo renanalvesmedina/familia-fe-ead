@@ -63,7 +63,7 @@ export function Curso() {
                 <ReactPlayer
                   url={`https://www.youtube.com/watch?v=${activeClass.video}`}
                   className="react-player"
-                  playing
+                  playing={false}
                   width="100%"
                   height="100%"
                   controls={true}
