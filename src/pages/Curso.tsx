@@ -129,11 +129,11 @@ export function Curso() {
                       </div>
                     </div>
                     
-                    <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
+                    {/* <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
                     
                     <div className="flex items-center w-full">
                       <button className="bg-brand-500 p-2 rounded w-full text-zinc-900">Baixar Materiais</button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
