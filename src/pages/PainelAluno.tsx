@@ -6,6 +6,7 @@ import { Card } from '../components/Card';
 import { CardCourseModel } from '../models/CardCourseModel';
 import illustrationImg from '../assets/rafiki.svg'
 import { Loading } from '../components/Loading';
+import { Footer } from '../components/Footer';
 
 export function PainelAluno() {
   const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
@@ -27,9 +28,10 @@ export function PainelAluno() {
   }, []);
 
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-full ">
       <div className="flex items-center flex-col">
         <Header />
+
         <div className="flex flex-col gap-20 pb-60 w-full md:max-w-[1180px] mt-8">
           <div className="flex flex-col gap-5">
             <div className="flex w-full items-center gap-2">
@@ -44,7 +46,11 @@ export function PainelAluno() {
               </div>
             ) }
             
-            { inLoading && <div className="flex w-full justify-center"><Loading /></div> }
+            { inLoading && 
+              <div className="flex w-full h-full items-center justify-center">
+                <Loading />
+              </div> 
+            }
             
             { !isEnrollment && (
               <div className="flex flex-col justify-center items-center pt-6 h-full">
@@ -55,6 +61,10 @@ export function PainelAluno() {
 
           </div>
         </div>
+
+        {/* <div className="flex items-end justify-center w-full h-14">
+          <Footer></Footer>
+        </div> */}
       </div>
     </main>
   )

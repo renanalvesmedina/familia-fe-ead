@@ -141,7 +141,7 @@ export function Curso() {
           </>
         )}
 
-        { inLoading && <div className="flex items-center justify-center"><Loading /></div> }  
+        { inLoading && <div className="w-full h-full flex items-center justify-center"><Loading /></div> }  
 
       </div>
     </main>
