@@ -18,10 +18,8 @@ export function PainelAluno() {
       setInLoading(false);
     })
     .catch ((err) => {
-      if(err.response.data.errors[0].errorCode === 'FAMILY-ENROLLMENT-01') {
-        setIsEnrollment(false);
-        setInLoading(false);
-      }
+      setIsEnrollment(false);
+      setInLoading(false);
     });
     
   }, []);

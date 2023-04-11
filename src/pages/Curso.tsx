@@ -124,16 +124,16 @@ export function Curso() {
                     <div className="flex w-full items-center gap-4">
                       <img src={curso?.courseCardUri} width={60} className="rounded-full aspect-square" alt="" />
                       <div className="flex flex-col gap-1">
-                        <a href="" className="text-sm font-medium">{curso?.courseName}</a>
+                        <h1 className="text-sm font-medium">{curso?.courseName}</h1>
                         <span className="text-xs font-thin text-zinc-400">Carga Horária: {curso?.workload} Aulas</span>
                       </div>
                     </div>
                     
-                    <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
+                    {/* <Separator.Root className="my-7 w-full h-[1px] bg-[#2E3A42]"/>
                     
                     <div className="flex items-center w-full">
                       <button className="bg-brand-500 p-2 rounded w-full text-zinc-900">Baixar Materiais</button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export function Curso() {
           </>
         )}
 
-        { inLoading && <div className="flex items-center justify-center"><Loading /></div> }  
+        { inLoading && <div className="flex items-center justify-center"><Loading /></div> }
 
       </div>
     </main>
