@@ -1,5 +1,6 @@
 export interface UserProfileModel {
-  email?: string;
+  fullName: string;
+  email: string;
   telefone?: string;
   sexo: string;
   profilePicture: string;

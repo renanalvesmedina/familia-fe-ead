@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react';
 import { Header } from '../components/Header'
-import { useAuthContext } from '../contexts';
 import avatar from '../assets/avatarDefault.png'
 import { api } from '../services/api';
 import { UserProfileModel } from '../models/UserProfileModel';
@@ -8,11 +7,8 @@ import * as Tabs from '@radix-ui/react-tabs';
 import { Key, UserCircleGear } from 'phosphor-react';
 import toast from 'react-hot-toast';
 import { Modal } from '../components/Modal';
-import { useNavigate } from 'react-router-dom';
 
 export function Perfil() {
-  const { userName } = useAuthContext();
-
   const [showModel, setShowModal] = useState(false);
 
   const [user, setUser] = useState<UserProfileModel>();
@@ -38,31 +34,25 @@ export function Perfil() {
   }
 
   async function handleEditProfile(event: FormEvent) {
+    const toastId = toast.loading('Carregando...');
     event.preventDefault();
 
-    if(name.trim() == '') {
-      toast.error('Preencha um nome válido!');
-      return;
-    }
-
-    if(phone.trim() == '') {
-      toast.error('Preencha um telefone válido!');
-      return;
-    }
-
     var body = {
-      fullname: name.trim(),
-      phoneNumber: phone.trim(),
-      sexo: userSexo
+      fullname: name.trim() === '' ? user?.fullName : name.trim(),
+      phoneNumber: phone.trim() === '' ? user?.telefone : phone.trim(),
+      sexo: userSexo === '' ? user?.sexo : userSexo
     }
 
-    const request = api.put('/v1/Me/profile', body);
-
-    toast.promise(request, {
-      loading: 'Atualizando...',
-      success: 'Perfil atualizado com sucesso :)  Faça logoff e login novamente para visualizar os dados atualizados!',
-      error: (err) => `${err.response.data.errors[0].message} :(`,
-    });
+    await api.put('/v1/Me/profile', body)
+          .then((res) => {
+            toast.dismiss(toastId);
+            window.location.reload();
+            toast.success('Perfil atualizado com sucesso :)');
+          })
+          .catch((err) => {
+            toast.dismiss(toastId);
+            toast.error(err.response.data.errors[0].message);
+          });
   }
 
   async function handleResetPassword(event: FormEvent) {
@@ -82,7 +72,7 @@ export function Perfil() {
     const request = api.post('/v1/Me/password/reset', body);
 
     toast.promise(request, {
-      loading: 'Atualizando...',
+      loading: 'Carregando...',
       success: 'Senha atualizada com sucesso :)',
       error: (err) => `${err.response.data.errors[0].message} :(`,
     });
@@ -127,7 +117,7 @@ export function Perfil() {
               
               <div className="flex flex-col">
                 <p>Olá</p>
-                <p className="text-2xl font-bold text-brand-700">{userName}</p>
+                <p className="text-2xl font-bold text-brand-700">{user?.fullName}</p>
               </div>
             </div>
             {/* <= PROFILE AVATAR AND NAME */}
@@ -163,7 +153,7 @@ export function Perfil() {
                                 type="text"
                                 name="name"
                                 onChange={e => setName(e.target.value)}
-                                defaultValue={userName}
+                                defaultValue={user?.fullName}
                                 required
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
                               />
