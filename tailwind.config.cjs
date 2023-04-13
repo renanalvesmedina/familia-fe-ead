@@ -1,6 +1,9 @@
 module.exports = ({
   content: ["./src/**/*.tsx"],
   theme: {
+    data: {
+      active: 'ui~="active"',
+    },
     extend: {
       fontFamily: {
         'sans': ['Poppins']

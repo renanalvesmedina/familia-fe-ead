@@ -9,7 +9,7 @@ import { Login } from './pages/Login'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Toaster position="top-right" />
+    <Toaster position="top-right" toastOptions={{ duration: 5000 }} />
     <AuthProvider>
       <Login>
         <BrowserRouter>
