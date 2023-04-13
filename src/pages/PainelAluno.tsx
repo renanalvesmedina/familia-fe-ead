@@ -26,11 +26,11 @@ export function PainelAluno() {
   }, []);
 
   return (
-    <main className="w-full h-full ">
+    <main className="w-full h-full">
       <div className="flex items-center flex-col">
         <Header />
 
-        <div className="flex flex-col gap-20 pb-60 w-full md:max-w-[1180px] mt-8">
+        <div className="flex flex-col gap-20 px-4 pb-60 w-full md:max-w-[1180px] mt-8">
           <div className="flex flex-col gap-5">
             <div className="flex w-full items-center gap-2">
               <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> Meus Cursos</h4>

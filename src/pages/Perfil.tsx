@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 
 export function Perfil() {
   const { userName } = useAuthContext();
-  const _navigate = useNavigate();
 
   const [showModel, setShowModal] = useState(false);
 
@@ -25,7 +24,7 @@ export function Perfil() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [selectedFile, setSelectedFile] = useState<File | null>();
+  const [file, setFile] = useState<File | null>();
 
   useEffect(() => {
     api.get('/v1/Me/profile').then(response => {
@@ -90,30 +89,27 @@ export function Perfil() {
   }
 
   function handleImage(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedFile(event.target.files?.item(0));
+    setFile(event.target.files?.item(0));
   }
 
   async function handleSendPhoto(event: FormEvent) {
+    const toastId = toast.loading('Carregando...');
     event.preventDefault();
 
-    if(!selectedFile) {
+    if(!file) {
       toast.error('Selecione uma imagem!');
       return;
     }
 
-    var body = {
-      image: selectedFile
-    }
-
-    console.log(selectedFile);
-
-    const request = api.put('/v1/Me/profile/avatar', body, { headers: {'Content-Type': 'multipart/form-data' }});;
-
-    toast.promise(request, {
-      loading: 'Atualizando...',
-      success: 'Imagem atualizada com sucesso! Atualize sua página... :)',
-      error: (err) => `${err.response.data.errors[0].message} :(`,
-    });
+    await api.put('/v1/Me/profile/avatar', { image: file }, { headers: {'Content-Type': 'multipart/form-data' }})
+          .then((res) => {
+            toast.dismiss(toastId);
+            window.location.reload();
+          })
+          .catch((err) => {
+            toast.dismiss(toastId);
+            toast.error(err.response.data.errors[0].message);
+          });
   }
 
   return (
@@ -124,14 +120,12 @@ export function Perfil() {
 
           <div className="flex flex-col items-center justify-center w-full">
             {/* PROFILE AVATAR AND NAME => */}
-            <div className="flex items-center justify-center mb-4">
-              <div className="flex flex-col items-center">
-                <label onClick={() => setShowModal(true)} className="cursor-pointer p-2 text-[8px] text-zinc-900 transition hover:opacity-60">
-                  <img src={user?.profilePicture == undefined ? avatar : user?.profilePicture} alt="" title='Alterar Imagem do Perfil' className="w-20 h-20 rounded-full object-cover" />
-                </label>
-              </div>
+            <div className="flex items-center mb-4">
+              <label onClick={() => setShowModal(true)} className="cursor-pointer p-2 text-[8px] text-zinc-900 transition hover:opacity-60">
+                <img src={user?.profilePicture == undefined ? avatar : user?.profilePicture} alt="" title='Alterar Imagem do Perfil' className="w-20 h-20 rounded-full object-cover" />
+              </label>
               
-              <div>
+              <div className="flex flex-col">
                 <p>Olá</p>
                 <p className="text-2xl font-bold text-brand-700">{userName}</p>
               </div>
@@ -144,11 +138,11 @@ export function Perfil() {
                 <div className="w-full">
                   <Tabs.Root className="flex flex-col shadow-sm" defaultValue="tab1">
                     <Tabs.List className="flex flex-shrink-0 border-b-[1px] border-gray-300">
-                      <Tabs.Trigger data-ui="active" className="flex flex-1 items-center justify-center rounded-tl-xl bg-gray-900 px-5 h-11 text-white select-none gap-2 border border-gray-900 data-[state=active]:text-brand-700 data-[state=active]:border-b-brand-700" value="tab1">
+                      <Tabs.Trigger data-ui="active" className="flex flex-1 items-center justify-center rounded-tl-xl bg-gray-900 px-5 h-11 text-white select-none gap-2 border-b-[1px] border-b-gray-200 data-[state=active]:text-brand-700 data-[state=active]:border-b-brand-700" value="tab1">
                         <UserCircleGear size={28} /> Perfil
                       </Tabs.Trigger>
 
-                      <Tabs.Trigger className="flex flex-1 items-center justify-center rounded-tr-xl bg-gray-900 px-5 h-11 text-white font-medium select-none gap-2 border border-gray-900 data-[state=active]:text-brand-700 data-[state=active]:border-b-brand-700" value="tab2">
+                      <Tabs.Trigger className="flex flex-1 items-center justify-center rounded-tr-xl bg-gray-900 px-5 h-11 text-white font-medium select-none gap-2 border-b-[1px] border-b-gray-200 data-[state=active]:text-brand-700 data-[state=active]:border-b-brand-700" value="tab2">
                         <Key size={28} /> Segurança
                       </Tabs.Trigger>
                     </Tabs.List>
@@ -231,7 +225,7 @@ export function Perfil() {
 
                             <div className="w-full">
                               <label htmlFor="currentPassword" className="block mb-2 text-sm font-medium text-gray-900">
-                                Senha Atual:
+                                Senha atual:
                               </label>
                               <input
                                 id="currentPassword"
@@ -243,10 +237,10 @@ export function Perfil() {
                               />
                             </div>
 
-                            <div className="flex gap-6">
+                            <div className="flex flex-wrap md:flex-nowrap md:gap-6">
                               <div className="w-full md:w-[50%]">
                                 <label htmlFor="newPassword" className="block mb-2 mt-4 text-sm font-medium text-gray-900">
-                                  Nova Senha:
+                                  Nova senha:
                                 </label>
                                 <input
                                   id="newPassword"
@@ -260,7 +254,7 @@ export function Perfil() {
 
                               <div className="w-full md:w-[50%]">
                                 <label htmlFor="confirmPassword" className="block mb-2 mt-4 text-sm font-medium text-gray-900">
-                                  Confirme Nova Senha:
+                                  Confirme a nova senha:
                                 </label>
                                 <input
                                   id="confirmPassword"
@@ -303,7 +297,7 @@ export function Perfil() {
           <form className="space-y-6" onSubmit={handleSendPhoto}>
             <div className="flex items-center justify-center w-full">
               <label className="flex flex-col w-48 h-48 rounded-full border-4 items-center justify-center border-dashed cursor-pointer hover:bg-gray-100 hover:border-gray-300">
-                { !selectedFile && (
+                { !file && (
                   <div className="flex flex-col items-center justify-center pt-7">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" />
@@ -312,8 +306,8 @@ export function Perfil() {
                   </div>
                 )}
 
-                { selectedFile && (
-                  <img className={`w-48 h-48 object-cover p-2 rounded-full ${selectedFile?'opacity-1':'opacity-0'}`} src={selectedFile.name ? URL.createObjectURL(selectedFile) : undefined} />
+                { file && (
+                  <img className={`w-48 h-48 object-cover p-2 rounded-full ${file?'opacity-1':'opacity-0'}`} src={file.name ? URL.createObjectURL(file) : undefined} />
                 )}
 
                 <input type="file" onChange={handleImage} className="opacity-0" />

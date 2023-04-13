@@ -61,7 +61,7 @@ export function Curso() {
         <Header />
         { activeClass && (
           <>
-            <div className="flex flex-col gap-10 w-full md:max-w-[1180px] h-full mt-8">
+            <div className="flex flex-col gap-10 px-4 w-full md:max-w-[1180px] h-full mt-8">
               <div className="flex w-full h-full flex-wrap md:h-[439px] md:flex-nowrap gap-5">
                 <div className="flex flex-col w-full h-full relative">
                   <h1 className="text-xl mb-6">{activeClass.orderId + ' - ' + activeClass.className}</h1>

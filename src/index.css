@@ -10,8 +10,8 @@
   --bg-aux: #1C2328;
 }
 
-body {
-  @apply bg-zinc-900 text-gray-100 m-2;
+:root {
+  @apply bg-zinc-900 text-gray-100;
 }
 
 .player-wrapper {

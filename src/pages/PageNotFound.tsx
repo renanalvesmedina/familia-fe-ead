@@ -9,7 +9,7 @@ export function PageNotFound() {
 
         <div className="w-full h-full flex flex-col justify-center items-center gap-6">
           <img src={illustration} className="w-96" alt="" />
-          <h1 className="text-xl">Página não Encontrada!</h1>
+          <h1 className="text-xl">Página em Desenvolvimento!</h1>
         </div>
       </div>
     </main>
