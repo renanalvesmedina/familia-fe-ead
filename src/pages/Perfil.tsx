@@ -116,7 +116,7 @@ export function Perfil() {
               </label>
               
               <div className="flex flex-col">
-                <p>Olá</p>
+                <p className="text-gray-200">Olá</p>
                 <p className="text-2xl font-bold text-brand-700">{user?.fullName}</p>
               </div>
             </div>

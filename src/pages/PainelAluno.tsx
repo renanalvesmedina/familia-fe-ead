@@ -32,7 +32,7 @@ export function PainelAluno() {
         <div className="flex flex-col gap-20 px-4 pb-60 w-full md:max-w-[1180px] mt-8">
           <div className="flex flex-col gap-5">
             <div className="flex w-full items-center gap-2">
-              <h4 className="flex text-xl m-0 gap-2"><BookBookmark size={32} /> Meus Cursos</h4>
+              <h4 className="flex text-xl text-white m-0 gap-2"><BookBookmark size={32} /> Meus Cursos</h4>
             </div>
 
             { cardCourses.length > 0 && (
