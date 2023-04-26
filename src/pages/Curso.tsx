@@ -56,7 +56,7 @@ export function Curso() {
   }
 
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-full bg-zinc-900">
       <div className="flex items-center flex-col">
         <Header />
         { activeClass && (

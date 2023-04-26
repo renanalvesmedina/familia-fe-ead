@@ -6,7 +6,6 @@ import { Card } from '../components/Card';
 import { CardCourseModel } from '../models/CardCourseModel';
 import illustrationImg from '../assets/rafiki.svg'
 import { Loading } from '../components/Loading';
-import { Footer } from '../components/Footer';
 
 export function PainelAluno() {
   const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
@@ -26,7 +25,7 @@ export function PainelAluno() {
   }, []);
 
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-full bg-zinc-900">
       <div className="flex items-center flex-col">
         <Header />
 

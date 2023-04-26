@@ -852,7 +852,7 @@
   "resolved" "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   "version" "0.4.0"
 
-"autoprefixer@^10.4.13":
+"autoprefixer@^10.0.2", "autoprefixer@^10.4.13":
   "integrity" "sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg=="
   "resolved" "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.13.tgz"
   "version" "10.4.13"
@@ -941,15 +941,43 @@
   dependencies:
     "color-name" "1.1.3"
 
+"color-convert@^2.0.1":
+  "integrity" "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ=="
+  "resolved" "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "color-name" "~1.1.4"
+
+"color-name@^1.0.0", "color-name@1.1.3":
+  "integrity" "sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw=="
+  "resolved" "https://registry.npmjs.org/color-name/-/color-name-1.1.3.tgz"
+  "version" "1.1.3"
+
 "color-name@^1.1.4":
   "integrity" "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA=="
   "resolved" "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
   "version" "1.1.4"
 
-"color-name@1.1.3":
-  "integrity" "sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw=="
-  "resolved" "https://registry.npmjs.org/color-name/-/color-name-1.1.3.tgz"
-  "version" "1.1.3"
+"color-name@~1.1.4":
+  "integrity" "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA=="
+  "resolved" "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
+  "version" "1.1.4"
+
+"color-string@^1.9.0":
+  "integrity" "sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg=="
+  "resolved" "https://registry.npmjs.org/color-string/-/color-string-1.9.1.tgz"
+  "version" "1.9.1"
+  dependencies:
+    "color-name" "^1.0.0"
+    "simple-swizzle" "^0.2.2"
+
+"color@^4.2":
+  "integrity" "sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A=="
+  "resolved" "https://registry.npmjs.org/color/-/color-4.2.3.tgz"
+  "version" "4.2.3"
+  dependencies:
+    "color-convert" "^2.0.1"
+    "color-string" "^1.9.0"
 
 "combined-stream@^1.0.8":
   "integrity" "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg=="
@@ -963,6 +991,14 @@
   "resolved" "https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.9.0.tgz"
   "version" "1.9.0"
 
+"css-selector-tokenizer@^0.8.0":
+  "integrity" "sha512-Jd6Ig3/pe62/qe5SBPTN8h8LeUg/pT4lLgtavPf7updwwHpvFzxvOQBHYj2LZDMjUnBzgvIUSjRcf6oT5HzHFg=="
+  "resolved" "https://registry.npmjs.org/css-selector-tokenizer/-/css-selector-tokenizer-0.8.0.tgz"
+  "version" "0.8.0"
+  dependencies:
+    "cssesc" "^3.0.0"
+    "fastparse" "^1.1.2"
+
 "cssesc@^3.0.0":
   "integrity" "sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg=="
   "resolved" "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
@@ -972,6 +1008,16 @@
   "integrity" "sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw=="
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.1.1.tgz"
   "version" "3.1.1"
+
+"daisyui@^2.51.5":
+  "integrity" "sha512-L05dRw0tasmz2Ha+10LhftEGLq4kaA8vRR/T0wDaXfHwqcgsf81jfXDJ6NlZ63Z7Rl1k3rj7UHs0l0p7CM3aYA=="
+  "resolved" "https://registry.npmjs.org/daisyui/-/daisyui-2.51.5.tgz"
+  "version" "2.51.5"
+  dependencies:
+    "color" "^4.2"
+    "css-selector-tokenizer" "^0.8.0"
+    "postcss-js" "^4.0.0"
+    "tailwindcss" "^3"
 
 "debug@^4.1.0":
   "integrity" "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ=="
@@ -1024,38 +1070,38 @@
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz"
   "version" "1.4.284"
 
-"esbuild-windows-64@0.15.15":
-  "integrity" "sha512-xaAUIB2qllE888SsMU3j9nrqyLbkqqkpQyWVkfwSil6BBPgcPk3zOFitTTncEKCLTQy3XV9RuH7PDj3aJDljWA=="
-  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.15.tgz"
-  "version" "0.15.15"
+"esbuild-windows-64@0.15.18":
+  "integrity" "sha512-qinug1iTTaIIrCorAUjR0fcBk24fjzEedFYhhispP8Oc7SFvs+XeW3YpAKiKp8dRpizl4YYAhxMjlftAMJiaUw=="
+  "resolved" "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.18.tgz"
+  "version" "0.15.18"
 
 "esbuild@^0.15.9":
-  "integrity" "sha512-TEw/lwK4Zzld9x3FedV6jy8onOUHqcEX3ADFk4k+gzPUwrxn8nWV62tH0udo8jOtjFodlEfc4ypsqX3e+WWO6w=="
-  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.15.15.tgz"
-  "version" "0.15.15"
+  "integrity" "sha512-x/R72SmW3sSFRm5zrrIjAhCeQSAWoni3CmHEqfQrZIQTM3lVCdehdwuIqaOtfC2slvpdlLa62GYoN8SxT23m6Q=="
+  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.15.18.tgz"
+  "version" "0.15.18"
   optionalDependencies:
-    "@esbuild/android-arm" "0.15.15"
-    "@esbuild/linux-loong64" "0.15.15"
-    "esbuild-android-64" "0.15.15"
-    "esbuild-android-arm64" "0.15.15"
-    "esbuild-darwin-64" "0.15.15"
-    "esbuild-darwin-arm64" "0.15.15"
-    "esbuild-freebsd-64" "0.15.15"
-    "esbuild-freebsd-arm64" "0.15.15"
-    "esbuild-linux-32" "0.15.15"
-    "esbuild-linux-64" "0.15.15"
-    "esbuild-linux-arm" "0.15.15"
-    "esbuild-linux-arm64" "0.15.15"
-    "esbuild-linux-mips64le" "0.15.15"
-    "esbuild-linux-ppc64le" "0.15.15"
-    "esbuild-linux-riscv64" "0.15.15"
-    "esbuild-linux-s390x" "0.15.15"
-    "esbuild-netbsd-64" "0.15.15"
-    "esbuild-openbsd-64" "0.15.15"
-    "esbuild-sunos-64" "0.15.15"
-    "esbuild-windows-32" "0.15.15"
-    "esbuild-windows-64" "0.15.15"
-    "esbuild-windows-arm64" "0.15.15"
+    "@esbuild/android-arm" "0.15.18"
+    "@esbuild/linux-loong64" "0.15.18"
+    "esbuild-android-64" "0.15.18"
+    "esbuild-android-arm64" "0.15.18"
+    "esbuild-darwin-64" "0.15.18"
+    "esbuild-darwin-arm64" "0.15.18"
+    "esbuild-freebsd-64" "0.15.18"
+    "esbuild-freebsd-arm64" "0.15.18"
+    "esbuild-linux-32" "0.15.18"
+    "esbuild-linux-64" "0.15.18"
+    "esbuild-linux-arm" "0.15.18"
+    "esbuild-linux-arm64" "0.15.18"
+    "esbuild-linux-mips64le" "0.15.18"
+    "esbuild-linux-ppc64le" "0.15.18"
+    "esbuild-linux-riscv64" "0.15.18"
+    "esbuild-linux-s390x" "0.15.18"
+    "esbuild-netbsd-64" "0.15.18"
+    "esbuild-openbsd-64" "0.15.18"
+    "esbuild-sunos-64" "0.15.18"
+    "esbuild-windows-32" "0.15.18"
+    "esbuild-windows-64" "0.15.18"
+    "esbuild-windows-arm64" "0.15.18"
 
 "escalade@^3.1.1":
   "integrity" "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
@@ -1077,6 +1123,11 @@
     "glob-parent" "^5.1.2"
     "merge2" "^1.3.0"
     "micromatch" "^4.0.4"
+
+"fastparse@^1.1.2":
+  "integrity" "sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ=="
+  "resolved" "https://registry.npmjs.org/fastparse/-/fastparse-1.1.2.tgz"
+  "version" "1.1.2"
 
 "fastq@^1.6.0":
   "integrity" "sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw=="
@@ -1180,6 +1231,11 @@
   "version" "2.2.4"
   dependencies:
     "loose-envify" "^1.0.0"
+
+"is-arrayish@^0.3.1":
+  "integrity" "sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ=="
+  "resolved" "https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.3.2.tgz"
+  "version" "0.3.2"
 
 "is-binary-path@~2.1.0":
   "integrity" "sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw=="
@@ -1395,7 +1451,7 @@
   "resolved" "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   "version" "4.2.0"
 
-"postcss@^8.0.0", "postcss@^8.1.0", "postcss@^8.2.14", "postcss@^8.3.3", "postcss@^8.4.18", "postcss@^8.4.19", "postcss@>=8.0.9":
+"postcss@^8.0.0", "postcss@^8.1.0", "postcss@^8.1.6", "postcss@^8.2.14", "postcss@^8.3.3", "postcss@^8.4.18", "postcss@^8.4.19", "postcss@>=8.0.9":
   "integrity" "sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.4.19.tgz"
   "version" "8.4.19"
@@ -1578,6 +1634,13 @@
   "resolved" "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
   "version" "6.3.0"
 
+"simple-swizzle@^0.2.2":
+  "integrity" "sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg=="
+  "resolved" "https://registry.npmjs.org/simple-swizzle/-/simple-swizzle-0.2.2.tgz"
+  "version" "0.2.2"
+  dependencies:
+    "is-arrayish" "^0.3.1"
+
 "source-map-js@^1.0.2":
   "integrity" "sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw=="
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
@@ -1610,7 +1673,7 @@
   "resolved" "https://registry.npmjs.org/tailwind-scrollbar/-/tailwind-scrollbar-2.0.1.tgz"
   "version" "2.0.1"
 
-"tailwindcss@^3.2.4", "tailwindcss@3.x":
+"tailwindcss@^3", "tailwindcss@^3.2.4", "tailwindcss@3.x":
   "integrity" "sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ=="
   "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.2.4.tgz"
   "version" "3.2.4"

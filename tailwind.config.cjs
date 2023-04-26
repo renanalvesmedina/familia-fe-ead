@@ -1,5 +1,23 @@
 module.exports = ({
   content: ["./src/**/*.tsx"],
+  daisyui: {
+    themes: [
+      {
+        familia: {
+        "primary": "#faba16",
+        "secondary": "#111827",
+        "accent": "#9ca3af",
+        "neutral": "#1B1929",
+        "base-100": "#3F3D48",
+        "info": "#1CC4F2",
+        "success": "#118D49",
+        "warning": "#fde047",
+        "error": "#E3313F",
+        },
+      },
+      "bumblebee",
+    ],
+  },
   theme: {
     data: {
       active: 'ui~="active"',
@@ -33,5 +51,6 @@ module.exports = ({
   },
   plugins: [
     require('tailwind-scrollbar')({ nocompatible: true }),
+    require("daisyui")
   ],
 });

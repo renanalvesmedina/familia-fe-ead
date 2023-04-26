@@ -3,7 +3,7 @@ import illustration from "../assets/404Error.svg"
 
 export function PageNotFound() {
   return (
-    <main className="w-full h-screen">
+    <main className="w-full h-screen bg-zinc-900">
       <div className="flex h-full items-center flex-col">
         <Header />
 

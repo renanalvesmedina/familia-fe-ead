@@ -53,15 +53,15 @@ export function Login({ children } : ILoginProps) {
               className="
                 h-12 
                 mb-2
-                rounded-md 
+                rounded-lg 
                 px-4
                 py-3 
                 text-zinc-900
-                bg-white 
-                placeholder-zinc-200 
+                bg-white
+                placeholder-zinc-200
                 border-[1px] 
                 border-gray-400 
-                hover:border-brand-600 
+                hover:border-brand-600
                 w-full 
                 focus:border-brand-600 
                 focus:ring-brand-600 
@@ -75,12 +75,12 @@ export function Login({ children } : ILoginProps) {
               className="
                 h-12 
                 mb-4
-                rounded-md 
+                rounded-lg 
                 px-4
                 py-3  
                 text-zinc-900
-                bg-white 
-                placeholder-zinc-200 
+                bg-white
+                placeholder-zinc-200
                 border-[1px] 
                 border-gray-400 
                 hover:border-brand-600 

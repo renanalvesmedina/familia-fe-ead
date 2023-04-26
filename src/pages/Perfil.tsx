@@ -104,7 +104,7 @@ export function Perfil() {
 
   return (
     <Fragment>
-      <main className="w-full h-full">
+      <main className="w-full h-full bg-zinc-900">
         <div className="flex items-center h-full flex-col">
           <Header />
 
@@ -155,7 +155,7 @@ export function Perfil() {
                                 onChange={e => setName(e.target.value)}
                                 defaultValue={user?.fullName}
                                 required
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                               />
 
                               <label htmlFor="email" className="block mb-2 mt-4 text-sm font-medium text-gray-900">
@@ -174,7 +174,7 @@ export function Perfil() {
                               <label htmlFor="sexo" className="block mb-2 text-sm font-medium text-gray-900">
                                 Sexo:
                               </label>
-                              <select value={userSexo} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5">
+                              <select value={userSexo} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5">
                                 <option value="M">Masculino</option>
                                 <option value="F">Feminino</option>
                               </select>
@@ -188,7 +188,7 @@ export function Perfil() {
                                 defaultValue={user?.telefone}
                                 onChange={e => setPhone(e.target.value)}
                                 required
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                               />
                             </div>
                           </div>
@@ -196,7 +196,7 @@ export function Perfil() {
                           <div className="flex justify-end w-full">
                             <button
                               type="submit"
-                              className="md:w-[20%] text-white bg-brand-700 hover:bg-gradient-to-bl from-brand-600 focus:ring-4 focus:outline-none focus:ring-brand-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                              className="md:w-[20%] text-white bg-brand-700 hover:bg-gradient-to-bl from-brand-600 active:opacity-90 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Salvar
                             </button>
                           </div>
@@ -223,7 +223,7 @@ export function Perfil() {
                                 onChange={e => setCurrentPassword(e.target.value)}
                                 required
                                 placeholder='••••••'
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                               />
                             </div>
 
@@ -238,7 +238,7 @@ export function Perfil() {
                                   onChange={e => setNewPassword(e.target.value)}
                                   required
                                   placeholder='••••••'
-                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
+                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                                 />
                               </div>
 
@@ -252,7 +252,7 @@ export function Perfil() {
                                   onChange={e => setConfirmPassword(e.target.value)}
                                   required
                                   placeholder='••••••'
-                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-2.5"
+                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                                 />
                               </div>
                             </div>
@@ -261,7 +261,7 @@ export function Perfil() {
                           <div className="flex justify-end w-full">
                             <button
                               type="submit"
-                              className="md:w-[20%] text-white bg-brand-700 hover:bg-gradient-to-bl from-brand-600 focus:ring-4 focus:outline-none focus:ring-brand-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                              className="md:w-[20%] text-white bg-brand-700 hover:bg-gradient-to-bl from-brand-600 active:opacity-90 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Redefinir
                             </button>
                           </div>
@@ -270,7 +270,7 @@ export function Perfil() {
                       {/* <= FROM ALTERAR SENHA */}
                     </Tabs.Content>
                   </Tabs.Root>
-                </div>              
+                </div>
               </div>
             </div>
             {/* <= EDIT PROFILE */}
