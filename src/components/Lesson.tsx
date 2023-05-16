@@ -10,7 +10,7 @@ interface LessonProps {
 export function Lesson(props: LessonProps) {
   return (
     <a onClick={props.handleClick} className="group cursor-pointer">
-      <div className="rounded-lg p-3 group-hover:bg-gradient-to-r from-aux-500">
+      <div className="rounded-lg p-3 group-hover:bg-gradient-to-r from-aux-500 group-active:bg-aux-500">
         <div className="flex">
           <div className="flex items-center w-full">
             <img src={props.thumb} width='80px' className="mr-4 rounded aspect-video" />

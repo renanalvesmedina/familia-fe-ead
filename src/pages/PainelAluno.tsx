@@ -52,7 +52,7 @@ export function PainelAluno() {
             { !isEnrollment && (
               <div className="flex flex-col justify-center items-center pt-6 h-full">
                 <img src={illustrationImg} className="w-96" alt="" />
-                <h2 className="font-semibold text-xl text-center">Você ainda não foi matriculado em um curso!</h2>
+                <h2 className="font-semibold text-xl text-white text-center">Você ainda não foi matriculado em um curso!</h2>
               </div>
             ) }
 

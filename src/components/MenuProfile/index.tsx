@@ -19,7 +19,7 @@ export function MenuProfile() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <button className="rounded-full shadow-md hover:outline hover:outline-offset-2 hover:outline-2 outline-brand-700 transition" aria-label="Profile Options">
+        <button className="rounded-full shadow hover:outline hover:outline-offset-2 hover:outline-2 outline-brand-700 transition" aria-label="Profile Options">
           <Avatar.Root className="flex items-center justify-center overflow-hidden w-14 h-14 rounded-full">
             <Avatar.Image className="w-full h-full object-cover"
               src={profilePicture} />
@@ -39,7 +39,7 @@ export function MenuProfile() {
             Informações <div className="RightSlot"><Info size={24} /></div>
           </DropdownMenu.Item>
 
-          {/* <DropdownMenu.Item onClick={() => _navigate('/admin/users')} className="DropdownMenuItem">
+          {/* <DropdownMenu.Item onClick={() => _navigate('/admin/dashboard')} className="DropdownMenuItem">
             Administrativo <div className="RightSlot"><Info size={24} /></div>
           </DropdownMenu.Item> */}
 
