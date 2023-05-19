@@ -48,7 +48,7 @@ export function EditUser() {
 
     var prof = [""];
 
-    var body = { 
+    var body = {
       fullName: fullName === "" ? user?.fullName : fullName.trim(), 
       phone: phone === "" ? user?.phone : phone.trim(),
       gender: userGender === "" ? user?.gender : userGender.trim(),

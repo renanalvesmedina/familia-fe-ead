@@ -55,7 +55,6 @@ export function PainelAluno() {
                 <h2 className="font-semibold text-xl text-white text-center">Você ainda não foi matriculado em um curso!</h2>
               </div>
             ) }
-
           </div>
         </div>
 

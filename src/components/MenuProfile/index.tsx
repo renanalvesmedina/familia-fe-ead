@@ -39,9 +39,11 @@ export function MenuProfile() {
             Informações <div className="RightSlot"><Info size={24} /></div>
           </DropdownMenu.Item>
 
-          {/* <DropdownMenu.Item onClick={() => _navigate('/admin/dashboard')} className="DropdownMenuItem">
-            Administrativo <div className="RightSlot"><Info size={24} /></div>
-          </DropdownMenu.Item> */}
+          { userName === "Administrador" && 
+            <DropdownMenu.Item onClick={() => _navigate('/admin/dashboard')} className="DropdownMenuItem">
+              Administrativo <div className="RightSlot"><Info size={24} /></div>
+            </DropdownMenu.Item>
+          }
 
           <DropdownMenu.Separator className="DropdownMenuSeparator" />
 

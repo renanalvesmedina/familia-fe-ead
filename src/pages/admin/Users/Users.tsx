@@ -17,9 +17,9 @@ export function Users() {
           <MenuProfile />
         </div>
         
-        <div className="flex flex-col p-4 mt-4 gap-4 w-full">
+        <div className="flex flex-col p-4 mt-4 gap-4 w-full h-[89vh]">
           <button
-            onClick={() => _navigate('/admin/user/:123')}
+            onClick={() => _navigate('/admin/user/create')}
             className="flex justify-center gap-1 w-44 text-white bg-brand-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow hover:bg-gradient-to-bl from-brand-500 active:opacity-90">
               <PlusCircle size={20} /> Novo Usuário
           </button>

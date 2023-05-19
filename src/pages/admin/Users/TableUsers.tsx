@@ -25,13 +25,12 @@ export function TableUsers() {
     });
   }, []);
 
-
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 w-full">
       {
         users == null || users == undefined ?
           <>
-          <table className="table table-zebra mb-32 w-full">
+          <table className="table table-zebra overflow-scroll mb-32 w-full">
             {/* HEAD => */}
             <thead className="border-b">
               <tr>
@@ -58,12 +57,12 @@ export function TableUsers() {
           :
           <table className="table table-zebra w-full">
             {/* HEAD => */}
-            <thead className="border-b">
-              <tr>
-                <th className="bg-white text-sm">Nome</th>
-                <th className="bg-white text-sm">Email</th>
-                <th className="bg-white text-sm">Perfil</th>
-                <th className="bg-white text-sm"></th>
+            <thead className="border-b w-full">
+              <tr className="w-full">
+                <th className="rounded-none shadow sticky top-0 after:absolute bg-white text-sm">Nome</th>
+                <th className="shadow sticky top-0 after:absolute bg-white text-sm">Email</th>
+                <th className="shadow sticky top-0 after:absolute bg-white text-sm">Perfil</th>
+                <th className="rounded-none shadow sticky top-0 after:absolute bg-white text-sm"></th>
               </tr>
             </thead>
             {/* <= HEAD */}
