@@ -16,17 +16,22 @@ export function CreateUser() {
   const [gender, setGender] = useState('M');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [profile, setProfile] = useState('Student');
+  const [profiles, setProfiles] = useState<string[]>([]);
 
   function handleGenderChange(e: any) {
     setGender(e.target.value);
   }
 
-  function handleProfileChange(e: any) {
-    console.log('CHANGE PROFILE => ', e.target.value);
-    setProfile(e.target.value);
+  function addProfileChange(profile: string) {
+    console.log(profile);
+    if(profiles.includes(profile)) {
+      return;
+    }
+    
+    profiles.push(profile);
+    setProfiles(profiles);
+    console.log(profiles);
   }
-
 
   async function handleCreateUser(e:FormEvent) {
     const toastId = toast.loading('Carregando...');
@@ -52,7 +57,7 @@ export function CreateUser() {
       return;
     }
 
-    var userModel = new UserModel(name, email, password, phone, gender, profile);
+    var userModel = new UserModel(name, email, password, phone, gender, profiles);
 
     await api.post('/api/Authentication/Register', userModel)
           .then((res) => {
@@ -69,11 +74,11 @@ export function CreateUser() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex bg-zinc-100">
         <Sidebar menuActived="Usuários" />
 
         <div className="w-full">
-          <div className="flex px-8 h-20 w-full items-center justify-between shadow">
+          <div className="flex px-8 h-20 w-full items-center justify-between shadow bg-white">
             <span className="text-2xl font-bold">Criar Usuário</span>
             <MenuProfile />
           </div>
@@ -155,12 +160,12 @@ export function CreateUser() {
                   </div>
                 </div>
 
-                <label htmlFor="gender" className="block mb-2 text-sm font-semibold text-gray-900">
+                <label htmlFor="profile" className="block mb-2 text-sm font-semibold text-gray-900">
                   Perfil:
                 </label>
                 <div className="flex gap-2">
-                  <input type="radio" name="gender" value="Student" className="radio border-1" checked={profile === "Student"} onChange={handleProfileChange} /> <span className="text-zinc-900 mr-4">Aluno</span>
-                  <input type="radio" name="gender" value="Admin" className="radio border-1" checked={profile === "Admin"} onChange={handleProfileChange} /> <span className="text-zinc-900">Administrador</span>
+                  <input type="checkbox" name="student" onChange={() => addProfileChange("Student")}  className="checkbox" /> <span className="text-zinc-900 mr-4">Aluno</span>
+                  <input type="checkbox" name="admin" onChange={() => addProfileChange("Admin")}  className="checkbox" /> <span className="text-zinc-900">Administrador</span>
                 </div>
 
                 <div className="flex justify-end w-full gap-2">

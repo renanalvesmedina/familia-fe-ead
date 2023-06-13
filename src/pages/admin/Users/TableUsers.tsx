@@ -30,29 +30,29 @@ export function TableUsers() {
       {
         users == null || users == undefined ?
           <>
-          <table className="table table-zebra overflow-scroll mb-32 w-full">
-            {/* HEAD => */}
-            <thead className="border-b">
-              <tr>
-                <th className="bg-white text-sm">Nome</th>
-                <th className="bg-white text-sm">Email</th>
-                <th className="bg-white text-sm">Perfil</th>
-                <th className="bg-white text-sm"></th>
-              </tr>
-            </thead>
-            {/* <= HEAD */}
+            <table className="table table-zebra overflow-scroll mb-32 w-full">
+              {/* HEAD => */}
+              <thead className="border-b">
+                <tr>
+                  <th className="bg-white text-sm">Nome</th>
+                  <th className="bg-white text-sm">Email</th>
+                  <th className="bg-white text-sm">Perfil</th>
+                  <th className="bg-white text-sm"></th>
+                </tr>
+              </thead>
+              {/* <= HEAD */}
 
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <th></th>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <th></th>
+                </tr>
+              </tbody>
+            </table>
 
-          <p className="flex justify-center text-lg font-semibold">Nenhum usuário cadastrado!</p> 
+            <p className="flex justify-center text-lg font-semibold">Nenhum usuário cadastrado!</p> 
           </>
           :
           <table className="table table-zebra w-full">
@@ -74,7 +74,7 @@ export function TableUsers() {
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
-                          <div className="mask mask-circle w-12 h-12">
+                          <div className="mask mask-circle w-8 h-8">
                             <img src={user.photoUri == undefined ? avatar : user?.photoUri} alt={user.fullName} />
                           </div>
                         </div>

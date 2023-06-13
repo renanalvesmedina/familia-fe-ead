@@ -4,11 +4,11 @@ import { MenuProfile } from '../../../components/MenuProfile'
 
 export function Courses() {
   return (
-    <div className="flex">
+    <div className="flex bg-zinc-100">
       <Sidebar menuActived="Cursos" />
         
       <div className="w-full">
-        <div className="flex px-8 h-20 w-full items-center justify-between shadow">
+        <div className="flex px-8 h-20 w-full items-center justify-between shadow bg-white">
           <span className="text-2xl font-bold">Gestão de Cursos</span>
           <MenuProfile />
         </div>

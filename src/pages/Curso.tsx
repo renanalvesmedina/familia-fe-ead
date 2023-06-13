@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
 import ReactPlayer from 'react-player/youtube'
-import { Books, Exam, PlusCircle } from "phosphor-react";
+import { Books, Exam } from "phosphor-react";
 import { Lesson } from '../components/Lesson';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import * as Separator from '@radix-ui/react-separator';
-import { NavigateOptions, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ActiveClassModel } from '../models/ActiveClassModel';
 import { api } from '../services/api';
 import { ClassModel } from '../models/ClassModel';
 import { CourseModel } from '../models/CourseModel';
 import { Loading } from '../components/Loading';
+import { getCompletedClassLocalStorage, setCompletedClassLocalStorage } from '../services/utils';
 
 export function Curso() {
-  const _navigate = useNavigate();
-
   const { courseId, aulaId } = useParams();
 
   const [inLoading, setInLoading] = useState(true);
@@ -54,7 +53,27 @@ export function Curso() {
   }
 
   async function handleRegisterHistory(classId?: string, courseId?: string) {
-    await api.post(`v1/Me/history/register`, {classId, courseId});
+    if(classId == undefined || courseId == undefined) {
+      return;
+    }
+
+    var completedClass = getCompletedClassLocalStorage();
+
+    if(completedClass.includes(classId)) {
+      return;
+    }
+
+    try {
+      await api.post(`v1/Me/history/register`, {classId, courseId});
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+
+    completedClass.push(classId);
+    setCompletedClassLocalStorage(completedClass);
+
+    console.log("AULA CONCLUÍDA", completedClass);
   }
 
   return (
@@ -75,7 +94,7 @@ export function Curso() {
                       width="100%"
                       height="100%"
                       controls={true}
-                      onEnded={() => handleRegisterHistory(activeClass.classId, courseId)}
+                      onProgress={(state) => state.played >= 0.97 && handleRegisterHistory(activeClass.classId, courseId)}
                     />
                   </div>
 

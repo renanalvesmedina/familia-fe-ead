@@ -1,6 +1,7 @@
 import { AuthenticationModel } from "../models/AuthenticationModel";
 
 const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData';
+const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass';
 
 export function setAuthLocalStorage(authData: AuthenticationModel | null) {
   localStorage.setItem(REACT_LOCAL_STORAGE_AUTH_DATA, JSON.stringify(authData));
@@ -35,4 +36,17 @@ export function getAvatarLetters(userName: string) {
   }
 
   return avatarLetters;
+}
+
+export function setCompletedClassLocalStorage(completedClass: String[]) {
+  localStorage.setItem(REACT_LOCAL_STORAGE_COMPLETED_CLASS, JSON.stringify(completedClass));
+}
+
+export function getCompletedClassLocalStorage(): String[] {
+  const data = localStorage.getItem(REACT_LOCAL_STORAGE_COMPLETED_CLASS);
+  if(!data) {
+    return [];
+  }
+
+  return JSON.parse(data);
 }

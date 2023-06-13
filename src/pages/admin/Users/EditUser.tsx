@@ -55,8 +55,6 @@ export function EditUser() {
       profiles: prof
     }
 
-    console.log(body);
-
     await api.put(`/v1/User?UserId=${userId}`, body)
           .then((res) => {
             toast.dismiss(toastId);
@@ -70,12 +68,11 @@ export function EditUser() {
   }
 
   return (
-    <>
-      <div className="flex">
+      <div className="flex bg-zinc-100">
         <Sidebar menuActived="Usuários" />
 
         <div className="w-full">
-          <div className="flex px-8 h-20 w-full items-center justify-between shadow">
+          <div className="flex px-8 h-20 w-full items-center justify-between shadow bg-white">
             <span className="text-2xl font-bold">Criar Usuário</span>
             <MenuProfile />
           </div>
@@ -104,10 +101,9 @@ export function EditUser() {
                   type="email"
                   name="email"
                   defaultValue={user?.email}
-                  onChange={e => setEmail(e.target.value)}
                   disabled
                   placeholder="joao@exemplo.com.br"
-                  className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-4 mb-4"
+                  className="bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-brand-700 focus:border-brand-700 block w-full p-4 mb-4"
                 />
 
                 <label htmlFor="phone" className="block mb-2 text-sm font-semibold text-gray-900">
@@ -156,7 +152,6 @@ export function EditUser() {
           </div>
         </div>
       </div>
-    </>
   )
 }
 
