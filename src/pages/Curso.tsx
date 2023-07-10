@@ -149,8 +149,9 @@ export function Curso() {
                         <span className="text-xs font-thin text-zinc-400">Carga Horária: {curso?.workload} Aulas</span>
 
                         <button
-                          onClick={() => window.open("https://forms.office.com/r/6ifS2BQTSd", "_blank", "noreferrer")}
-                          className="flex justify-center gap-1 w-full mt-4 text-zinc-900 bg-brand-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow hover:bg-gradient-to-bl from-brand-500 active:opacity-90">
+                          disabled
+                          onClick={() => window.open("https://forms.office.com/r/KqgUUABPy5", "_blank", "noreferrer")}
+                          className="flex justify-center gap-1 w-full mt-4 text-zinc-900 font-bold bg-brand-700 rounded-lg text-sm px-5 py-2.5 text-center shadow hover:bg-gradient-to-bl from-brand-500 active:opacity-90">
                           <Exam size={20} /> Faça sua Prova!
                         </button>
                       </div>
