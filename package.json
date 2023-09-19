@@ -9,7 +9,9 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
-    "format:check": "prettier --check \"./src/**/*.{ts,tsx}\""
+    "format:check": "prettier --check \"./src/**/*.{ts,tsx}\"",
+    "prepare": "husky install",
+    "precommit": "yarn lint && yarn format:check"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.1",
@@ -25,6 +27,7 @@
     "axios": "^1.2.2",
     "classnames": "^2.3.2",
     "daisyui": "^2.51.5",
+    "husky-init": "^8.0.0",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
