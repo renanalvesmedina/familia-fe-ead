@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import * as Tabs from '@radix-ui/react-tabs';
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import { Key, UserCircleGear } from 'phosphor-react';
+import React from 'react'
+
+import { Key, UserCircleGear } from 'phosphor-react'
+
+import * as RadioGroup from '@radix-ui/react-radio-group'
+import * as Tabs from '@radix-ui/react-tabs'
 
 interface TabProfileProps {
-  userName?: string;
-  email?: string;
-  telefone?: string;
-  sexo?: string;
+  userName?: string
+  email?: string
+  telefone?: string
+  sexo?: string
 }
 
 export function TabProfile({ ...props }: TabProfileProps) {
-  
   return (
     <Tabs.Root className="TabsRoot" defaultValue="tab1">
       <Tabs.List className="TabsList" aria-label="Manage your account">
@@ -30,7 +31,11 @@ export function TabProfile({ ...props }: TabProfileProps) {
               <label className="Label" htmlFor="name">
                 Nome:
               </label>
-              <input className="Input" id="name" defaultValue={props.userName} />
+              <input
+                className="Input"
+                id="name"
+                defaultValue={props.userName}
+              />
             </fieldset>
             <fieldset disabled className="Fieldset">
               <label className="Label" htmlFor="email">
@@ -44,22 +49,22 @@ export function TabProfile({ ...props }: TabProfileProps) {
               <label className="Label" htmlFor="name">
                 Sexo:
               </label>
-              <RadioGroup.Root className="RadioGroupRoot" defaultValue={props.sexo} aria-label="View density">
-                <div className='flex items-center'>
-                  <RadioGroup.Item className="RadioGroupItem" value='M' id="r1">
+              <RadioGroup.Root
+                className="RadioGroupRoot"
+                defaultValue={props.sexo}
+                aria-label="View density"
+              >
+                <div className="flex items-center">
+                  <RadioGroup.Item className="RadioGroupItem" value="M" id="r1">
                     <RadioGroup.Indicator className="RadioGroupIndicator" />
                   </RadioGroup.Item>
-                  <p className="text-aux-500">
-                    Masculino
-                  </p>
+                  <p className="text-aux-500">Masculino</p>
                 </div>
-                <div className='flex items-center'>
-                  <RadioGroup.Item className="RadioGroupItem" value='F' id="r2">
+                <div className="flex items-center">
+                  <RadioGroup.Item className="RadioGroupItem" value="F" id="r2">
                     <RadioGroup.Indicator className="RadioGroupIndicator" />
                   </RadioGroup.Item>
-                  <p className="text-aux-500">
-                    Feminino
-                  </p>
+                  <p className="text-aux-500">Feminino</p>
                 </div>
               </RadioGroup.Root>
             </fieldset>
@@ -67,16 +72,24 @@ export function TabProfile({ ...props }: TabProfileProps) {
               <label className="Label" htmlFor="telefone">
                 WhatsApp:
               </label>
-              <input className="Input" id="telefone" defaultValue={props.telefone} />
+              <input
+                className="Input"
+                id="telefone"
+                defaultValue={props.telefone}
+              />
             </fieldset>
           </div>
         </div>
-        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
+        <div
+          style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
+        >
           <button className="Button green">Salvar</button>
         </div>
       </Tabs.Content>
       <Tabs.Content className="TabsContent" value="tab2">
-        <p className="Text">Para alterar sua senha, preencha os campos abaixo.</p>
+        <p className="Text">
+          Para alterar sua senha, preencha os campos abaixo.
+        </p>
         {/* <fieldset className="Fieldset">
           <label className="Label" htmlFor="currentPassword">
             Current password
@@ -95,11 +108,12 @@ export function TabProfile({ ...props }: TabProfileProps) {
           </label>
           <input className="Input" id="confirmPassword" type="password" />
         </fieldset> */}
-        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
+        <div
+          style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
+        >
           <button className="Button green">Alterar Senha</button>
         </div>
       </Tabs.Content>
     </Tabs.Root>
   )
 }
-

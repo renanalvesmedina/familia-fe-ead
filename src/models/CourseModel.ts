@@ -1,5 +1,5 @@
 export interface CourseModel {
-  courseName: string;
-  workload: string;
+  courseName: string
+  workload: string
   courseCardUri: string
 }

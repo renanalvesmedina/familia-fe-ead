@@ -1,5 +1,5 @@
-import { Header } from "../components/Header";
-import illustration from "../assets/404Error.svg"
+import { Header } from '../components/Header'
+import illustration from '../assets/404Error.svg'
 
 export function PageNotFound() {
   return (
