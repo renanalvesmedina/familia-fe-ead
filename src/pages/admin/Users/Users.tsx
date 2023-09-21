@@ -1,10 +1,11 @@
-import { Sidebar } from '../../../components/Sidebar'
+import { withProtectedRoute } from '../../../hocs/withProtectedRoute.hoc'
 import { MenuProfile } from '../../../components/MenuProfile'
-import { TableUsers } from './TableUsers'
 import { useNavigate } from 'react-router-dom'
 import { PlusCircle } from 'phosphor-react'
+import { TableUsers } from './TableUsers'
+import { Sidebar } from '../../../components/Sidebar'
 
-export function Users() {
+const Users: React.FC = () => {
   const _navigate = useNavigate()
 
   return (
@@ -33,3 +34,5 @@ export function Users() {
     </div>
   )
 }
+
+export default withProtectedRoute(Users)

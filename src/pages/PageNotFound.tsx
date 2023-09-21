@@ -1,7 +1,8 @@
-import { Header } from '../components/Header'
 import illustration from '../assets/404Error.svg'
 
-export function PageNotFound() {
+import { Header } from '../components/Header'
+
+const PageNotFound: React.FC = () => {
   return (
     <main className="w-full h-screen bg-zinc-900">
       <div className="flex h-full items-center flex-col">
@@ -15,3 +16,5 @@ export function PageNotFound() {
     </main>
   )
 }
+
+export default PageNotFound

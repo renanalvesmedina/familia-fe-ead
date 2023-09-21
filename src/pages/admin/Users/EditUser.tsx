@@ -2,12 +2,13 @@ import toast from 'react-hot-toast'
 
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { withProtectedRoute } from '../../../hocs/withProtectedRoute.hoc'
 import { EditUserModel } from './EditUserModel'
 import { MenuProfile } from '../../../components/MenuProfile'
 import { Sidebar } from '../../../components/Sidebar'
 import { api } from '../../../services/api'
 
-export function EditUser() {
+const EditUser: React.FC = () => {
   const { userId } = useParams()
   const _navigate = useNavigate()
 
@@ -197,3 +198,5 @@ export function EditUser() {
     </div>
   )
 }
+
+export default withProtectedRoute(EditUser)

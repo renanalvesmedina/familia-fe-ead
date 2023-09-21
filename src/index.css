@@ -3,15 +3,30 @@
 @tailwind utilities;
 
 :root {
- @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-aux-500 overflow-y-scroll;
-  --bg-brand: #FABA16;
-  --bg-brand1: #FFE500;
-  --bg-brand2: #E9D404;
-  --bg-aux: #1C2328;
+  @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-aux-500 overflow-y-scroll;
+  --bg-brand: #faba16;
+  --bg-brand1: #ffe500;
+  --bg-brand2: #e9d404;
+  --bg-aux: #1c2328;
 }
 
 :root {
   @apply bg-zinc-900 text-gray-100;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+input[data-autocompleted] {
+  background-color: transparent !important;
 }
 
 .player-wrapper {
@@ -32,7 +47,9 @@
   background-color: var(--bg-aux);
   border-radius: 6px;
   padding: 8px;
-  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  box-shadow:
+    0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
@@ -63,7 +80,7 @@ polygon {
 .DropdownMenuCheckboxItem,
 .DropdownMenuRadioItem,
 .DropdownMenuSubTrigger {
-  font-family: 'Poppins';
+  font-family: 'Roboto';
   font-size: 14px;
   line-height: 1;
   color: gray;

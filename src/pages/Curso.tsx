@@ -5,6 +5,7 @@ import { Books, Exam } from 'phosphor-react'
 import { Header } from '../components/Header'
 import { Lesson } from '../components/Lesson'
 
+import { withPrivateRoute } from '../hocs/withPrivateRoute.hoc'
 import { ActiveClassModel } from '../models/ActiveClassModel'
 import { CourseModel } from '../models/CourseModel'
 import { ClassModel } from '../models/ClassModel'
@@ -20,7 +21,7 @@ import {
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as Separator from '@radix-ui/react-separator'
 
-export function Curso() {
+const Curso: React.FC = () => {
   const { courseId, aulaId } = useParams()
 
   const [inLoading, setInLoading] = useState(true)
@@ -213,3 +214,5 @@ export function Curso() {
     </main>
   )
 }
+
+export default withPrivateRoute(Curso)

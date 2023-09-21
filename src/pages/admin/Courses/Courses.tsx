@@ -1,8 +1,10 @@
 import React from 'react'
-import { Sidebar } from '../../../components/Sidebar'
-import { MenuProfile } from '../../../components/MenuProfile'
 
-export function Courses() {
+import { withProtectedRoute } from '../../../hocs/withProtectedRoute.hoc'
+import { MenuProfile } from '../../../components/MenuProfile'
+import { Sidebar } from '../../../components/Sidebar'
+
+const Courses: React.FC = () => {
   return (
     <div className="flex bg-zinc-100">
       <Sidebar menuActived="Cursos" />
@@ -18,3 +20,5 @@ export function Courses() {
     </div>
   )
 }
+
+export default withProtectedRoute(Courses)

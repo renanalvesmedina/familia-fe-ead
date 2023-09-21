@@ -1,13 +1,14 @@
 import React, { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
 
+import { withProtectedRoute } from '../../../hocs/withProtectedRoute.hoc'
 import { MenuProfile } from '../../../components/MenuProfile'
 import { useNavigate } from 'react-router-dom'
 import { UserModel } from '../../../models/UserModel'
 import { Sidebar } from '../../../components/Sidebar'
 import { api } from '../../../services/api'
 
-export function CreateUser() {
+const CreateUser: React.FC = () => {
   const _navigate = useNavigate()
 
   const [name, setName] = useState('')
@@ -238,3 +239,5 @@ export function CreateUser() {
     </>
   )
 }
+
+export default withProtectedRoute(CreateUser)

@@ -3,14 +3,15 @@ import toast from 'react-hot-toast'
 
 import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
 import { Key, UserCircleGear } from 'phosphor-react'
+import { withPrivateRoute } from '../hocs/withPrivateRoute.hoc'
 import { UserProfileModel } from '../models/UserProfileModel'
 import { Header } from '../components/Header'
-import { api } from '../services/api'
 import { Modal } from '../components/Modal'
+import { api } from '../services/api'
 
 import * as Tabs from '@radix-ui/react-tabs'
 
-export function Perfil() {
+const Perfil: React.FC = () => {
   const [showModel, setShowModal] = useState(false)
 
   const [user, setUser] = useState<UserProfileModel>()
@@ -410,3 +411,5 @@ export function Perfil() {
     </Fragment>
   )
 }
+
+export default withPrivateRoute(Perfil)

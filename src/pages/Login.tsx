@@ -1,21 +1,18 @@
-import { SignIn } from 'phosphor-react'
-import React, { FormEvent, useState } from 'react'
+import illustration from '../assets/webnar-illustration.svg'
+import React from 'react'
 import toast from 'react-hot-toast'
-import illustration from '../assets/webinar-amico.svg'
+
+import { withPublicRoute } from '../hocs/withPublicRoute.hoc'
 import { useAuthContext } from '../contexts'
+import { SignIn } from 'phosphor-react'
 
-interface ILoginProps {
-  children: React.ReactNode
-}
+const Login: React.FC = () => {
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
-export function Login({ children }: ILoginProps) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { isAuthenticated, login } = useAuthContext()
+  const { login } = useAuthContext()
 
-  if (isAuthenticated) return <>{children}</>
-
-  async function handleAuth(event: FormEvent) {
+  async function handleAuth(event: React.FormEvent) {
     event.preventDefault()
 
     if (email.trim() == '') {
@@ -32,99 +29,111 @@ export function Login({ children }: ILoginProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center bg-zinc-900">
-      <div className="flex justify-center items-center">
-        <img
-          src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_4688718/WHITE%20YELLOW%20HORIZONTAL.png"
-          className="max-w-[200px]"
-        />
-      </div>
+    <main className="min-h-screen flex max-md:flex-col justify-center bg-zinc-800">
+      <section className="flex-1 flex flex-col items-center justify-center">
+        <div className="max-w-lg w-full px-8 flex flex-col justify-between min-h-[80vh]">
+          <img
+            src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/7ba73aaa-3da9-4cf1-abf2-ccc85dea5875/uid_4688718/WHITE%20YELLOW%20HORIZONTAL.png"
+            className="max-w-[200px]"
+          />
 
-      {/* Container Login ==> */}
-      <div className="bg-white md:mx-auto mx-4 mt-4 max-w-md md:py-8 py-3 px-10 shadow rounded-lg">
-        <div className="md:mb-10 mb-5 flex justify-center">
-          <img src={illustration} className="md:h-80" />
-        </div>
+          <form onSubmit={handleAuth} className="space-y-10">
+            <div className="space-y-4">
+              <h1 className="text-white text-3xl font-semibold">
+                Seja bem-vindo(a) ao nosso portal de{' '}
+                <span className="text-brand-700">ensino.</span>
+              </h1>
 
-        <form onSubmit={handleAuth}>
-          <div className="mb-4">
-            <input
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              className="
-                h-12 
-                mb-2
-                rounded-lg 
-                px-4
-                py-3 
-                text-zinc-900
-                bg-white
-                placeholder-zinc-200
-                border-[1px] 
-                border-gray-400 
-                hover:border-brand-600
-                w-full 
-                focus:border-brand-600 
-                focus:ring-brand-600 
-                focus:ring-1 
-                focus:outline-none"
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              className="
-                h-12 
-                mb-4
-                rounded-lg 
-                px-4
-                py-3  
-                text-zinc-900
-                bg-white
-                placeholder-zinc-200
-                border-[1px] 
-                border-gray-400 
-                hover:border-brand-600 
-                w-full 
-                focus:border-brand-600 
-                focus:ring-brand-600 
-                focus:ring-1 
-                focus:outline-none"
-              placeholder="Senha"
-            />
-            <button
-              type="submit"
-              className="
-              bg-brand-700 
-              h-12 
-              rounded-md 
-              font-semibold 
-              text-white 
-              pr-8 
-              flex 
-              justify-center 
-              items-center 
-              cursor-pointer 
-              border-0
-              w-full
-              hover:bg-gradient-to-bl from-brand-600
-              transition-colors"
-            >
-              <SignIn /> Entrar
-            </button>
-            <div className="mt-2">
-              <p>
-                <a
-                  href=""
-                  className="text-sm text-zinc-900 hover:text-zinc-400"
-                >
-                  Esqueceu sua senha ?
-                </a>
+              <p className="text-gray-400">
+                Para começar digite o seu e-mail e senha abaixo:
               </p>
             </div>
-          </div>
-        </form>
-      </div>
-    </div>
+
+            <div className="space-y-4">
+              <input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="
+                rounded-lg 
+                px-6
+                py-6 
+                text-white
+                bg-zinc-900
+                placeholder-zinc-200
+                border-[1px] 
+              border-zinc-700
+                border-opacity-50
+                hover:border-brand-700
+                w-full 
+                focus:border-brand-700 
+                focus:ring-brand-700 
+                focus:ring-1 
+                focus:outline-none"
+                placeholder="Email"
+              />
+
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="
+                rounded-lg 
+                px-6
+                py-6
+                text-white
+                bg-zinc-900
+                placeholder-zinc-200
+                border-[1px] 
+                border-zinc-700
+                border-opacity-50
+                hover:border-brand-700 
+                w-full 
+                focus:border-brand-700 
+                focus:ring-brand-700 
+                focus:ring-1 
+                focus:outline-none"
+                placeholder="Senha"
+              />
+
+              <button
+                type="submit"
+                className="
+                bg-brand-700 
+                  rounded-md 
+                  font-medium 
+                  text-white
+                  py-6
+                  flex 
+                  justify-center 
+                  items-center 
+                  cursor-pointer 
+                  border-0
+                  w-full
+                  hover:brightness-110
+                  transition-colors"
+              >
+                <SignIn className="mr-2" size={24} /> <span>Entrar</span>
+              </button>
+
+              <div className="mt-2">
+                <a href="" className="text-gray-400 hover:text-white">
+                  Esqueceu sua senha ?
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <a href="" className="text-gray-400">
+            Dúvidas sobre o acesso?{' '}
+            <strong className="text-white">Fale Conosco</strong>
+          </a>
+        </div>
+      </section>
+
+      <section className="bg-white flex-1 flex items-center justify-center max-md:hidden">
+        <img src={illustration} className="md:h-96" />
+      </section>
+    </main>
   )
 }
+
+export default withPublicRoute(Login)

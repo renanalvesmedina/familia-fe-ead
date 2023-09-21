@@ -31,7 +31,7 @@ export function getAvatarLetters(userName: string) {
 
   for (let a = 0; a < words.length; a++) {
     const w = words[a]
-    words[a] = w[0].toUpperCase()
+    words[a] = w[0]?.toUpperCase()
     avatarLetters = words.join().replace(',', '').substring(0, 2)
   }
 

@@ -1,12 +1,14 @@
-import { Header } from './components/Header'
+import React from 'react'
+
+import { AuthProvider } from './contexts'
+import { AppRoutes } from './routes'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
   return (
-    <div className="w-full h-full">
-      <Header />
-      <div className="flex items-center justify-center h-96">
-        <h1>In Development...</h1>
-      </div>
-    </div>
+    <AuthProvider>
+      <Toaster position="top-right" toastOptions={{ duration: 5000 }} />
+      <AppRoutes />
+    </AuthProvider>
   )
 }

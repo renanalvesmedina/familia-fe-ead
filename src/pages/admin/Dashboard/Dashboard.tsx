@@ -1,8 +1,10 @@
 import React from 'react'
-import { Sidebar } from '../../../components/Sidebar'
-import { MenuProfile } from '../../../components/MenuProfile'
 
-export function Dashboard() {
+import { withProtectedRoute } from '../../../hocs/withProtectedRoute.hoc'
+import { MenuProfile } from '../../../components/MenuProfile'
+import { Sidebar } from '../../../components/Sidebar'
+
+const Dashboard: React.FC = () => {
   return (
     <div className="flex bg-zinc-100">
       <Sidebar menuActived="Dashboard" />
@@ -18,3 +20,5 @@ export function Dashboard() {
     </div>
   )
 }
+
+export default withProtectedRoute(Dashboard)

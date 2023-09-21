@@ -1,6 +1,7 @@
 import illustrationImg from '../assets/rafiki.svg'
 
 import { useEffect, useState } from 'react'
+import { withPrivateRoute } from '../hocs/withPrivateRoute.hoc'
 import { CardCourseModel } from '../models/CardCourseModel'
 import { BookBookmark } from 'phosphor-react'
 import { Loading } from '../components/Loading'
@@ -8,7 +9,7 @@ import { Header } from '../components/Header'
 import { Card } from '../components/Card'
 import { api } from '../services/api'
 
-export function PainelAluno() {
+const PainelAluno: React.FC = () => {
   const [cardCourses, setCardCourses] = useState<CardCourseModel[]>([])
   const [inLoading, setInLoading] = useState(true)
   const [isEnrollment, setIsEnrollment] = useState(true)
@@ -76,3 +77,5 @@ export function PainelAluno() {
     </main>
   )
 }
+
+export default withPrivateRoute(PainelAluno)

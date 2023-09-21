@@ -1,20 +1,23 @@
-import { useNavigate } from 'react-router-dom'
-import * as Avatar from '@radix-ui/react-avatar'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import React from 'react'
 
 import { Info, SignOut, UserCircleGear } from 'phosphor-react'
+import { useNavigate } from 'react-router-dom'
 
-import { useAuthContext } from '../../contexts'
 import { getAvatarLetters } from '../../services/utils'
+import { useAuthContext } from '../../contexts'
+import { Can } from '../can'
+
+import * as Avatar from '@radix-ui/react-avatar'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 export function MenuProfile() {
   const _navigate = useNavigate()
   const { logout, profilePicture, userName } = useAuthContext()
 
-  async function handleLogout() {
+  const handleLogout = React.useCallback(async () => {
     _navigate('/')
     logout()
-  }
+  }, [_navigate, logout])
 
   return (
     <DropdownMenu.Root>
@@ -59,7 +62,7 @@ export function MenuProfile() {
             </div>
           </DropdownMenu.Item>
 
-          {userName === 'Administrador' && (
+          <Can user={{ fullName: userName! }}>
             <DropdownMenu.Item
               onClick={() => _navigate('/admin/dashboard')}
               className="DropdownMenuItem"
@@ -69,7 +72,7 @@ export function MenuProfile() {
                 <Info size={24} />
               </div>
             </DropdownMenu.Item>
-          )}
+          </Can>
 
           <DropdownMenu.Separator className="DropdownMenuSeparator" />
 
