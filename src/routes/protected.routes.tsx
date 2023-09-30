@@ -1,16 +1,19 @@
 import React from 'react'
 
-import { useAuthContext } from '../contexts'
 import { Navigate } from 'react-router-dom'
-import { useCan } from '../hooks/useCan'
+
+import { useAuthContext } from '@contexts/auth.context'
+import { useCan } from '@hooks/use-can'
 
 interface ProtectedRouteProps {
   children: JSX.Element
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated, userName } = useAuthContext()
-  const isAdmin = useCan({ isAuthenticated, user: { fullName: userName! } })
+  const { isAuthenticated, userName, loading } = useAuthContext()
+  const isAdmin = useCan({ user: { fullName: userName! } })
+
+  if (loading) return <></>
 
   if (!isAuthenticated) return <Navigate to="/login" />
 

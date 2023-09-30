@@ -200,3 +200,20 @@ polygon {
     transform: translateX(0);
   }
 }
+
+.react-calendar abbr {
+  text-decoration: none;
+}
+
+.react-calendar__month-view__days__day {
+  border-radius: 4px;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #faba16;
+}
+
+.react-calendar__month-view__days__day:hover,
+.react-calendar__month-view__days__day:focus {
+  background-color: #252b2f !important;
+}

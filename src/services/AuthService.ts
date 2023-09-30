@@ -1,5 +1,7 @@
 import { toast } from 'react-hot-toast'
-import { AuthenticationModel } from '../models/AuthenticationModel'
+
+import { AuthenticationModel } from '@models/AuthenticationModel'
+
 import { api } from './api'
 
 export const auth = async (

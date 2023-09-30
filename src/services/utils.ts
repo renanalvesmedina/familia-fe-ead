@@ -1,4 +1,4 @@
-import { AuthenticationModel } from '../models/AuthenticationModel'
+import { AuthenticationModel } from '@models/AuthenticationModel'
 
 const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData'
 const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass'

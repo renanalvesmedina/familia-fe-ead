@@ -1,4 +1,4 @@
-import { UserModel } from '../models/UserModel'
+import { UserModel } from '@models/UserModel'
 
 type ValidateUserPermissionsParams = Partial<UserModel> | null
 
