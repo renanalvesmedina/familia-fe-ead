@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { IconProps } from 'phosphor-react'
 
 interface QuikAccessCardProps {
@@ -16,11 +16,11 @@ const QuikAccessCard: React.FC<QuikAccessCardProps> = ({
   icon: Icon,
   href,
 }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   return (
     <button
-      onClick={() => navigate(href)}
+      onClick={() => push(href)}
       className="flex items-center select-none border border-zinc-700/50 cursor-pointer flex-1 bg-zinc-700/20 hover:bg-zinc-700/40 focus-within:bg-zinc-700/50 transition-colors px-8 py-6 rounded-lg gap-6 text-white outline-none"
     >
       <span className="p-3 rounded-lg bg-zinc-700/40">

@@ -2,7 +2,7 @@ import React from 'react'
 import toast from 'react-hot-toast'
 
 import { ArrowsClockwise, Plus } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
 import { AdminLayout } from '@layouts/admin-layout'
@@ -13,7 +13,7 @@ import { api } from '@services/api'
 import { UserDetails, UsersData } from '../../components'
 
 const UsersPage: React.FC = () => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const {
     data: users,
@@ -53,7 +53,7 @@ const UsersPage: React.FC = () => {
           </button>
 
           <button
-            onClick={() => navigate('/admin/users/create')}
+            onClick={() => push('/admin/users/create')}
             className="flex justify-center gap-1 text-white bg-indigo-700/60 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-indigo-700 active:bg-indigo-700 transition"
           >
             <Plus size={20} />

@@ -1,7 +1,6 @@
 import React from 'react'
-import LOGO from '@assets/images/logo_white.png'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
 
 import {
@@ -15,6 +14,7 @@ import { Navigation } from '@components/siderbar/navigation'
 import { clickByKey } from '@utils'
 import { Siderbar } from '@components/siderbar'
 import { Menu } from '@components/menu'
+import { NextSeo } from 'next-seo'
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -22,12 +22,12 @@ interface AdminLayoutProps {
 }
 
 const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const { openUserDetails } = useUserDetails()
   const { lg } = useBreakpoint()
 
-  const onClick = React.useCallback(() => navigate('/'), [navigate])
+  const onClick = React.useCallback(() => push('/'), [push])
 
   return (
     <div className="flex w-full min-h-full bg-zinc-900">
@@ -57,7 +57,11 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
                 tabIndex={0}
                 onKeyDown={(e) => clickByKey(e, onClick)}
               >
-                <img className="h-12" src={LOGO} alt="Igreja Familia" />
+                <img
+                  className="h-12"
+                  src="/images/logo_white.png"
+                  alt="Igreja Familia"
+                />
               </div>
             )}
           </div>
@@ -79,6 +83,7 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
 
 const AdminLayout: React.FC<AdminLayoutProps> = (props) => (
   <UserDetailsProvider>
+    <NextSeo title="Adm Dashboard" />
     <Layout {...props} />
   </UserDetailsProvider>
 )

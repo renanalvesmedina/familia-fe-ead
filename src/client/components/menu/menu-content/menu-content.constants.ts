@@ -2,7 +2,7 @@ import { UserCircleGear, ShieldStar, SignOut } from 'phosphor-react'
 import { MenuProps } from './menu-content'
 
 export const menus: MenuProps[] = [
-  { title: 'Meu perfil', icon: UserCircleGear, href: '/perfil' },
+  { title: 'Meu perfil', icon: UserCircleGear, href: '/profile' },
   {
     title: 'Administrativo',
     icon: ShieldStar,

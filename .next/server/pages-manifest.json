@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/course/[courseId]/class/[classId]": "pages/course/[courseId]/class/[classId].js",
+  "/profile": "pages/profile.js",
+  "/admin/dashboard": "pages/admin/dashboard.js",
+  "/admin/users": "pages/admin/users.js",
+  "/admin/users/edit/[id]": "pages/admin/users/edit/[id].js",
+  "/admin/users/create": "pages/admin/users/create.js",
+  "/login": "pages/login.js"
+}

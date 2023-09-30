@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { Play } from 'phosphor-react'
 
 import { CardCourseModel } from '@models/CardCourseModel'
@@ -16,11 +16,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
   courseName,
   lastClassAttendedId,
 }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const onClick = React.useCallback(
-    () => navigate(`/curso/${courseId}/aula/${lastClassAttendedId}`),
-    [navigate, courseId, lastClassAttendedId]
+    () => push(`/course/${courseId}/class/${lastClassAttendedId}`),
+    [push, courseId, lastClassAttendedId]
   )
 
   return (

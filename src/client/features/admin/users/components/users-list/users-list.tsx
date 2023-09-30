@@ -1,7 +1,6 @@
 import React from 'react'
-import avatar from '@assets/images/avatarDefault.png'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
 import { Pencil } from 'phosphor-react'
 
@@ -15,7 +14,7 @@ interface ListUsersProps {
 }
 
 const CardUser: React.FC<{ user: UsersModel }> = ({ user }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const { onOpenUserDetails } = useUserDetails()
 
@@ -29,9 +28,9 @@ const CardUser: React.FC<{ user: UsersModel }> = ({ user }) => {
   const onEditClick = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation()
-      navigate(`/admin/users/edit/${user.userId}`)
+      push(`/admin/users/edit/${user.userId}`)
     },
-    [navigate, user.userId]
+    [push, user.userId]
   )
 
   return (
@@ -43,7 +42,11 @@ const CardUser: React.FC<{ user: UsersModel }> = ({ user }) => {
         <div className="mask mask-circle w-8 h-8">
           <img
             alt={user.fullName}
-            src={user.photoUri == undefined ? avatar : user?.photoUri}
+            src={
+              user.photoUri == undefined
+                ? '/images/avatarDefault.png'
+                : user?.photoUri
+            }
           />
         </div>
       </div>

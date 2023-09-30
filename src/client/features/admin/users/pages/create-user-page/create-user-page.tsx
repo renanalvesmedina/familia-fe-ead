@@ -1,14 +1,14 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 import { AdminLayout } from '@layouts/admin-layout'
 import { UserModel } from '@models/UserModel'
 import { api } from '@services/api'
 
 const CreateUserPage: React.FC = () => {
-  const _navigate = useNavigate()
+  const { push } = useRouter()
 
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -71,7 +71,7 @@ const CreateUserPage: React.FC = () => {
       .then((res) => {
         console.log(res)
         toast.dismiss(toastId)
-        _navigate('/admin/users')
+        push('/admin/users')
         toast.success('Usuário criado com sucesso :)')
       })
       .catch((err) => {
@@ -213,7 +213,7 @@ const CreateUserPage: React.FC = () => {
 
           <div className="flex justify-end items-end gap-2">
             <button
-              onClick={() => _navigate('/admin/users')}
+              onClick={() => push('/admin/users')}
               className="h-fit flex justify-center gap-1 text-white bg-zinc-700/50 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-zinc-700 active:bg-zinc-700 transition"
             >
               Cancelar

@@ -1,6 +1,5 @@
 import React from 'react'
 import toast from 'react-hot-toast'
-import avatar from '@assets/images/avatarDefault.png'
 
 import { useQuery } from 'react-query'
 import { twMerge } from 'tailwind-merge'
@@ -81,7 +80,11 @@ const Component: React.FC = () => {
           <div className="flex flex-col justify-center items-center gap-4">
             <div className="h-36 w-36 rounded-full bg-zinc-700">
               <img
-                src={user?.photoUri == undefined ? avatar : user?.photoUri}
+                src={
+                  user?.photoUri == undefined
+                    ? '/images/avatarDefault.png'
+                    : user?.photoUri
+                }
                 alt=""
                 className="rounded-full w-full h-full object-cover object-center border border-brand-700"
               />

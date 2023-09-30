@@ -14,5 +14,5 @@ export interface TiketoEventModel {
 }
 
 export interface TiketoEventListModel {
-  eventos: TiketoEventModel[]
+  data: TiketoEventModel[]
 }

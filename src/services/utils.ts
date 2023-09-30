@@ -1,17 +1,25 @@
+import { destroyCookie, parseCookies, setCookie } from 'nookies'
 import { AuthenticationModel } from '@models/AuthenticationModel'
 
-const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData'
-const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass'
+export const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData'
+export const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass'
 
 export function setAuthLocalStorage(authData: AuthenticationModel | null) {
-  localStorage.setItem(REACT_LOCAL_STORAGE_AUTH_DATA, JSON.stringify(authData))
+  setCookie(
+    undefined,
+    REACT_LOCAL_STORAGE_AUTH_DATA,
+    JSON.stringify(authData),
+    {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/', // Whitch paths in my app has access to this cookie
+    }
+  )
 }
 
 export function getAuthLocalStorage() {
-  const data = localStorage.getItem(REACT_LOCAL_STORAGE_AUTH_DATA)
-  if (!data) {
-    return null
-  }
+  const { [REACT_LOCAL_STORAGE_AUTH_DATA]: data } = parseCookies()
+
+  if (!data) return null
 
   return JSON.parse(data)
 }
@@ -22,7 +30,7 @@ export function getToken() {
 }
 
 export function removeAuthLocalStorage() {
-  localStorage.removeItem(REACT_LOCAL_STORAGE_AUTH_DATA)
+  destroyCookie(null, REACT_LOCAL_STORAGE_AUTH_DATA, { path: '/' })
 }
 
 export function getAvatarLetters(userName: string) {

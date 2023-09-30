@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Headphones, IconProps, X } from 'phosphor-react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
 
 import { validateUserPermission } from '@validators/userPermission.validate'
@@ -23,19 +23,19 @@ export interface MenuProps {
 }
 
 const LinkButton: React.FC<MenuProps> = ({ icon: Icon, ...menu }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const { logout } = useAuthContext()
 
   const handleLogout = React.useCallback(async () => {
-    navigate('/')
+    push('/')
     logout()
-  }, [navigate, logout])
+  }, [push, logout])
 
   return (
     <li key={menu.title}>
       <button
-        onClick={() => (menu.href ? navigate(menu.href) : handleLogout())}
+        onClick={() => (menu.href ? push(menu.href) : handleLogout())}
         className={twMerge(
           'flex items-center justify-start gap-4 w-full rounded-full py-2 px-3 border border-transparent transition outline-none text-white',
           'hover:text-brand-700 hover:bg-brand-700/10 hover:border-brand-700/60',
@@ -57,7 +57,7 @@ interface MenuContentProps {
 const MenuContent: React.FC<MenuContentProps> = ({ onClose }) => {
   const menuRef: React.LegacyRef<HTMLDivElement> = React.useRef(null)
 
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const { user, userName } = useAuthContext()
 
@@ -130,7 +130,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ onClose }) => {
               mesmo:
             </p>
             <button
-              onClick={() => navigate('/admin/enrollments')}
+              onClick={() => push('/admin/enrollments')}
               className="w-full bg-brand-700 py-4 px-4 rounded-lg font-medium text-zinc-800"
             >
               Ir para matrículas

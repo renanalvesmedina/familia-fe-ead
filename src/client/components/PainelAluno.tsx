@@ -1,10 +1,11 @@
+import React from 'react'
 import illustrationImg from '@assets/illustrations/rafiki.svg'
 
 import { BookOpen, CalendarCheck, Play } from 'phosphor-react'
 import { useQuery } from 'react-query'
+import { NextSeo } from 'next-seo'
 
 import { TiketoEventListModel } from '@models/TiketoEventModel'
-import { withPrivateRoute } from '@hocs/withPrivateRoute'
 import { CardCourseModel } from '@models/CardCourseModel'
 import { api } from '@services/api'
 
@@ -19,7 +20,9 @@ const getCourses = async () =>
 
 const getTiketoEvents = async () =>
   api
-    .get<TiketoEventListModel>('https://api.tiketo.com.br/usuario/id/28486')
+    .get<TiketoEventListModel>(
+      'https://api.tiketo.com.br/eventos?per_page=3&order_column=data_hora_inicio&order_type=desc&usuario_id=28486&visibilidade=publico'
+    )
     .then((response) => response.data)
 
 const commonQueriesOptions = {
@@ -28,8 +31,6 @@ const commonQueriesOptions = {
 }
 
 const PainelAluno: React.FC = () => {
-  // const { user } = useAuthContext()
-
   const {
     data: cardCourses,
     isLoading: cardCoursesLoading,
@@ -43,22 +44,25 @@ const PainelAluno: React.FC = () => {
   )
 
   return (
-    <main className="w-full h-full bg-zinc-900">
-      <Header />
+    <React.Fragment>
+      <NextSeo title="Home" />
 
-      <div className="flex mx-auto flex-col gap-20 px-6 pt-16 pb-60 w-full md:max-w-[1180px]">
-        {isError ? (
-          <div className="flex flex-col justify-center items-center pt-6 h-full">
-            <img src={illustrationImg} className="w-96" alt="" />
-            <h2 className="font-semibold text-xl text-white text-center">
-              Você ainda não foi matriculado em um curso!
-            </h2>
-          </div>
-        ) : null}
+      <main className="w-full h-full bg-zinc-900">
+        <Header />
 
-        <div className="space-y-20">
-          <Section>
-            {/* <BannerCard
+        <div className="flex mx-auto flex-col gap-20 px-6 pt-16 pb-60 w-full md:max-w-[1180px]">
+          {isError ? (
+            <div className="flex flex-col justify-center items-center pt-6 h-full">
+              <img src={illustrationImg} className="w-96" alt="" />
+              <h2 className="font-semibold text-xl text-white text-center">
+                Você ainda não foi matriculado em um curso!
+              </h2>
+            </div>
+          ) : null}
+
+          <div className="space-y-20">
+            <Section>
+              {/* <BannerCard
               title={`Olá, ${user?.fullName}`}
               description="Seja muito bem-vindo (a) ao nosso portal de ensino. Antes de
               começar, assista à aula inaugural para entender como nossa
@@ -69,63 +73,64 @@ const PainelAluno: React.FC = () => {
               colorScheme="brand"
             /> */}
 
-            <BannerCard
-              title="Continue de onde parou"
-              description="Memórias do casulo / Módulo 01"
-              ctaText="Continuar assistindo"
-              ctaLink="/"
-              icon={Play}
-            />
-          </Section>
+              <BannerCard
+                title="Continue de onde parou"
+                description="Memórias do casulo / Módulo 01"
+                ctaText="Continuar assistindo"
+                ctaLink="/"
+                icon={Play}
+              />
+            </Section>
 
-          <Section title="Meus Cursos" icon={BookOpen}>
-            <div className="w-full grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-              {cardCoursesLoading
-                ? [0, 1, 2].map((i) => (
-                    <div
-                      key={i}
-                      className="bg-zinc-700 bg-opacity-50 animate-pulse rounded-lg h-96"
-                    />
-                  ))
-                : null}
+            <Section title="Meus Cursos" icon={BookOpen}>
+              <div className="w-full grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                {cardCoursesLoading
+                  ? [0, 1, 2].map((i) => (
+                      <div
+                        key={i}
+                        className="bg-zinc-700 bg-opacity-50 animate-pulse rounded-lg h-96"
+                      />
+                    ))
+                  : null}
 
-              {cardCourses && cardCourses?.length > 0
-                ? cardCourses.map((card) => (
-                    <CourseCard key={card.courseId} {...card} />
-                  ))
-                : null}
-            </div>
-          </Section>
-
-          {tiketoEventsLoading ? (
-            <div className="w-full grid gap-10">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="bg-zinc-700 bg-opacity-50 animate-pulse rounded-lg h-60"
-                />
-              ))}
-            </div>
-          ) : null}
-
-          {tiketoEvents?.eventos && tiketoEvents?.eventos.length > 0 ? (
-            <Section
-              title="Fique atento aos novos cursos e eventos"
-              icon={CalendarCheck}
-            >
-              <div className="w-full grid gap-10">
-                {tiketoEvents?.eventos && tiketoEvents?.eventos?.length > 0
-                  ? tiketoEvents?.eventos.map((event) => (
-                      <EventCard key={event.id} {...event} />
+                {cardCourses && cardCourses?.length > 0
+                  ? cardCourses.map((card) => (
+                      <CourseCard key={card.courseId} {...card} />
                     ))
                   : null}
               </div>
             </Section>
-          ) : null}
+
+            {tiketoEventsLoading ? (
+              <div className="w-full grid gap-10">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="bg-zinc-700 bg-opacity-50 animate-pulse rounded-lg h-60"
+                  />
+                ))}
+              </div>
+            ) : null}
+
+            {tiketoEvents?.data && tiketoEvents?.data.length > 0 ? (
+              <Section
+                title="Fique atento aos novos cursos e eventos"
+                icon={CalendarCheck}
+              >
+                <div className="w-full grid gap-10">
+                  {tiketoEvents?.data && tiketoEvents?.data?.length > 0
+                    ? tiketoEvents?.data.map((event) => (
+                        <EventCard key={event.id} {...event} />
+                      ))
+                    : null}
+                </div>
+              </Section>
+            ) : null}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </React.Fragment>
   )
 }
 
-export default withPrivateRoute(PainelAluno)
+export default PainelAluno

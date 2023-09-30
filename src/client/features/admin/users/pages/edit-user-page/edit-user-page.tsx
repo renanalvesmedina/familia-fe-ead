@@ -1,7 +1,7 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
 import { EditUserModel } from '@models/EditUserModel'
@@ -13,9 +13,12 @@ const putUser = async (userId?: string) =>
     .get<EditUserModel>(`/v1/User/details?UserId=${userId}`)
     .then((res) => res.data)
 
-const EditUserPage: React.FC = () => {
-  const { userId } = useParams()
-  const _navigate = useNavigate()
+interface EditUserPageProps {
+  userId: string
+}
+
+const EditUserPage: React.FC<EditUserPageProps> = ({ userId }) => {
+  const { push } = useRouter()
 
   const [fullName, setFullName] = React.useState('')
   const [phone, setPhone] = React.useState('')
@@ -56,7 +59,7 @@ const EditUserPage: React.FC = () => {
       .then(() => {
         toast.dismiss(toastId)
         toast.success('Usuário atualizado com sucesso :)')
-        _navigate('/admin/users')
+        push('/admin/users')
       })
       .catch((err) => {
         toast.dismiss(toastId)
@@ -179,7 +182,7 @@ const EditUserPage: React.FC = () => {
           <div className="flex justify-end items-end gap-2">
             <button
               type="button"
-              onClick={() => _navigate('/admin/users')}
+              onClick={() => push('/admin/users')}
               className="h-fit flex justify-center gap-1 text-white bg-zinc-700/50 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-zinc-700 active:bg-zinc-700 transition"
             >
               Cancelar

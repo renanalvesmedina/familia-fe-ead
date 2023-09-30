@@ -1,6 +1,5 @@
 import React from 'react'
-import Chart from 'react-apexcharts'
-import Calendar from 'react-calendar'
+import dynamic from 'next/dynamic'
 
 import { TeacherIllustration } from '@assets/illustrations/teacher-illustration'
 import { useAuthContext } from '@contexts/auth.context'
@@ -9,6 +8,14 @@ import { BannerCard } from '@components/banner-card'
 
 import { options, quikAccess, series } from './dashboard-page.constants'
 import { QuikAccessCard } from '../../components'
+
+const Chart = dynamic(() => import('react-apexcharts'), {
+  ssr: false,
+})
+
+const Calendar = dynamic(() => import('react-calendar'), {
+  ssr: false,
+})
 
 type ValuePiece = Date | null
 

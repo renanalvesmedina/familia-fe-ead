@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { IconProps } from 'phosphor-react'
 import { twMerge } from 'tailwind-merge'
 
@@ -27,11 +27,11 @@ const BannerCard: React.FC<BannerCardProps> = ({
   colorScheme = 'indigo',
   illustration,
 }) => {
-  const navigate = useNavigate()
+  const { push } = useRouter()
 
   const onClick = React.useCallback(
-    () => ctaLink && navigate(ctaLink),
-    [ctaLink, navigate]
+    () => ctaLink && push(ctaLink),
+    [ctaLink, push]
   )
 
   return (

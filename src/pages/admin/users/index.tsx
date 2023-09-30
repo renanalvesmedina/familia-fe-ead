@@ -1,4 +1,10 @@
-import { withProtectedRoute } from '@hocs/withProtectedRoute'
+import { withSSRAuth } from '@hocs/with-ssr-auth'
 import { UsersPage } from '@features/admin/users'
 
-export default withProtectedRoute(() => <UsersPage />)
+export default UsersPage
+
+export const getServerSideProps = withSSRAuth(async () => {
+  return {
+    props: {},
+  }
+}, true)

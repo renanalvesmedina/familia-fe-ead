@@ -1,8 +1,7 @@
 import React from 'react'
-import avatar from '@assets/images/avatarDefault.png'
 
 import { useQueryClient } from 'react-query'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
 import { Pencil } from 'phosphor-react'
 
@@ -19,7 +18,7 @@ interface UsersTableProps {
 }
 
 const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
-  const _navigate = useNavigate()
+  const { push } = useRouter()
 
   const { xl } = useBreakpoint()
   const { onOpenUserDetails, userId: selectedUserId } = useUserDetails()
@@ -81,7 +80,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
                 e: React.MouseEvent<HTMLButtonElement, MouseEvent>
               ) => {
                 e.stopPropagation()
-                _navigate(`/admin/users/edit/${user.userId}`)
+                push(`/admin/users/edit/${user.userId}`)
               }
 
               return (
@@ -102,7 +101,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
                             alt={user.fullName}
                             src={
                               user.photoUri == undefined
-                                ? avatar
+                                ? '/images/avatarDefault.png'
                                 : user?.photoUri
                             }
                           />

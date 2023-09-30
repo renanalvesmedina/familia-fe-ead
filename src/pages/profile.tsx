@@ -1,10 +1,11 @@
-import avatar from '@assets/images/avatarDefault.png'
+import React from 'react'
 import toast from 'react-hot-toast'
 
-import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
 import { Key, UserCircleGear } from 'phosphor-react'
-import { withPrivateRoute } from '@hocs/withPrivateRoute'
-import { UserProfileModel } from '@models/UserProfileModel'
+import { NextSeo } from 'next-seo'
+
+import { useAuthContext } from '@contexts/auth.context'
+import { withSSRAuth } from '@hocs/with-ssr-auth'
 import { Header } from '@components/header'
 import { Modal } from '@components/Modal'
 import { api } from '@services/api'
@@ -12,31 +13,25 @@ import { api } from '@services/api'
 import * as Tabs from '@radix-ui/react-tabs'
 
 const ProfilePage: React.FC = () => {
-  const [showModel, setShowModal] = useState(false)
+  const { user } = useAuthContext()
 
-  const [user, setUser] = useState<UserProfileModel>()
-  const [userSexo, setUserSexo] = useState<string | undefined>()
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
+  const [showModel, setShowModal] = React.useState(false)
 
-  const [currentPassword, setCurrentPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [userSexo, setUserSexo] = React.useState<string | undefined>()
+  const [name, setName] = React.useState('')
+  const [phone, setPhone] = React.useState('')
 
-  const [file, setFile] = useState<File | null>()
+  const [currentPassword, setCurrentPassword] = React.useState('')
+  const [newPassword, setNewPassword] = React.useState('')
+  const [confirmPassword, setConfirmPassword] = React.useState('')
 
-  useEffect(() => {
-    api.get('/v1/Me/profile').then((response) => {
-      setUser(response.data)
-      setUserSexo(response.data.sexo)
-    })
-  }, [])
+  const [file, setFile] = React.useState<File | null>()
 
   function handleChange(event: any) {
     setUserSexo(event.target.value)
   }
 
-  async function handleEditProfile(event: FormEvent) {
+  async function handleEditProfile(event: React.FormEvent) {
     const toastId = toast.loading('Carregando...')
     event.preventDefault()
 
@@ -59,7 +54,7 @@ const ProfilePage: React.FC = () => {
       })
   }
 
-  async function handleResetPassword(event: FormEvent) {
+  async function handleResetPassword(event: React.FormEvent) {
     event.preventDefault()
 
     if (
@@ -86,11 +81,11 @@ const ProfilePage: React.FC = () => {
     })
   }
 
-  function handleImage(event: ChangeEvent<HTMLInputElement>) {
+  function handleImage(event: React.ChangeEvent<HTMLInputElement>) {
     setFile(event.target.files?.item(0))
   }
 
-  async function handleSendPhoto(event: FormEvent) {
+  async function handleSendPhoto(event: React.FormEvent) {
     const toastId = toast.loading('Carregando...')
     event.preventDefault()
 
@@ -116,7 +111,9 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <Fragment>
+    <React.Fragment>
+      <NextSeo title="Meu perfil" />
+
       <main className="w-full h-full bg-zinc-900">
         <div className="flex items-center h-full flex-col">
           <Header />
@@ -131,7 +128,7 @@ const ProfilePage: React.FC = () => {
                 <img
                   src={
                     user?.profilePicture == undefined
-                      ? avatar
+                      ? '/images/avatarDefault.png'
                       : user?.profilePicture
                   }
                   alt=""
@@ -225,7 +222,7 @@ const ProfilePage: React.FC = () => {
                                 Sexo:
                               </label>
                               <select
-                                value={userSexo}
+                                defaultValue={user?.sexo}
                                 onChange={handleChange}
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-2.5"
                               >
@@ -408,8 +405,14 @@ const ProfilePage: React.FC = () => {
         </div>
       </Modal>
       {/* <= MODAL UPLOAD PROFILE AVATAR */}
-    </Fragment>
+    </React.Fragment>
   )
 }
 
-export default withPrivateRoute(ProfilePage)
+export default ProfilePage
+
+export const getServerSideProps = withSSRAuth(async () => {
+  return {
+    props: {},
+  }
+})
