@@ -37,21 +37,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/admin/users.js"
     ],
-    "/admin/users/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/users/create.js"
-    ],
-    "/admin/users/edit/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/admin/users/edit/[id].js"
-    ],
-    "/course/[courseId]/class/[classId]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/course/[courseId]/class/[classId].js"
-    ],
     "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
