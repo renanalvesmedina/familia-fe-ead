@@ -1,21 +1,22 @@
 import React from 'react'
 
+import { LucideIcon } from 'lucide-react'
 import { useRouter } from 'next/router'
-import { IconProps } from 'phosphor-react'
 import { twMerge } from 'tailwind-merge'
 
 import { clickByKey } from '@utils'
+import { RichText } from '@core/rich-text'
+import { Container } from '@core/container'
 
 interface BannerCardProps {
   illustration?: React.ReactNode
   colorScheme?: 'indigo' | 'brand'
   description?: string
+  rounded?: boolean
   ctaText?: string
   ctaLink?: string
   title: string
-  icon?: React.ForwardRefExoticComponent<
-    IconProps & React.RefAttributes<SVGSVGElement>
-  >
+  icon?: LucideIcon
 }
 
 const BannerCard: React.FC<BannerCardProps> = ({
@@ -26,6 +27,7 @@ const BannerCard: React.FC<BannerCardProps> = ({
   icon: Icon,
   colorScheme = 'indigo',
   illustration,
+  rounded,
 }) => {
   const { push } = useRouter()
 
@@ -37,10 +39,11 @@ const BannerCard: React.FC<BannerCardProps> = ({
   return (
     <div
       className={twMerge(
-        'select-none flex justify-between bg-gradient-to-l to-zinc-800 rounded-lg border border-zinc-800 transition',
-        colorScheme === 'indigo' && 'from-indigo-900 hover:border-indigo-700',
-        colorScheme === 'brand' && 'from-[#453C1F] hover:border-brand-700',
-        ctaLink && ctaText ? 'cursor-pointer' : 'hover:border-zinc-800'
+        'select-none flex justify-between bg-indigo-500 dark:bg-gradient-to-l dark:to-zinc-800 transition',
+        rounded ? 'rounded-lg' : 'rounded-none',
+        colorScheme === 'indigo' && 'from-indigo-900',
+        colorScheme === 'brand' && 'from-[#453C1F]',
+        ctaLink && ctaText ? 'cursor-pointer' : ''
       )}
       {...(ctaLink &&
         ctaText && {
@@ -49,16 +52,23 @@ const BannerCard: React.FC<BannerCardProps> = ({
           onKeyDown: (e) => clickByKey(e, onClick),
         })}
     >
-      <div className="md:max-w-[1180px] mx-auto p-8 w-full flex max-md:flex-col justify-between md:items-center max-md:space-y-6">
+      <Container
+        className={twMerge(
+          'flex justify-between max-md:space-y-6',
+          illustration
+            ? 'px-6 max-sm:pb-12 max-sm:flex-col-reverse items-center'
+            : 'p-6 max-sm:flex-col md:items-center'
+        )}
+      >
         <div className="space-y-2">
           <h4 className="flex text-2xl text-white font-semibold m-0 gap-2">
             {title}
           </h4>
 
           {description ? (
-            <p className="text-gray-300 font-normal text-base md:max-w-xl">
+            <RichText className="text-gray-50 font-normal text-base md:max-w-xl">
               {description}
-            </p>
+            </RichText>
           ) : null}
         </div>
 
@@ -83,11 +93,11 @@ const BannerCard: React.FC<BannerCardProps> = ({
             </span>
           </span>
         ) : null}
-      </div>
 
-      {React.isValidElement(illustration) ? (
-        <div className="max-md:hidden mr-24 pt-8">{illustration}</div>
-      ) : null}
+        {React.isValidElement(illustration) ? (
+          <div className="py-4">{illustration}</div>
+        ) : null}
+      </Container>
     </div>
   )
 }

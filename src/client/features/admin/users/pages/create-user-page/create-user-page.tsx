@@ -1,232 +1,97 @@
 import React from 'react'
-import toast from 'react-hot-toast'
 
-import { useRouter } from 'next/router'
+import { Form } from 'react-final-form'
 
 import { AdminLayout } from '@layouts/admin-layout'
-import { UserModel } from '@models/UserModel'
-import { api } from '@services/api'
+import { validate } from '@validators/validateForm'
+
+import { useCreateUserPage } from './create-user-page.hook'
+
+import * as Input from '@components/input'
 
 const CreateUserPage: React.FC = () => {
-  const { push } = useRouter()
-
-  const [name, setName] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [phone, setPhone] = React.useState('')
-  const [gender, setGender] = React.useState('M')
-  const [password, setPassword] = React.useState('')
-  const [confirmPassword, setConfirmPassword] = React.useState('')
-  const [profiles, setProfiles] = React.useState<string[]>([])
-
-  function handleGenderChange(e: any) {
-    setGender(e.target.value)
-  }
-
-  function addProfileChange(profile: string) {
-    console.log(profile)
-    if (profiles.includes(profile)) {
-      return
-    }
-
-    profiles.push(profile)
-    setProfiles(profiles)
-    console.log(profiles)
-  }
-
-  async function handleCreateUser(e: React.FormEvent) {
-    const toastId = toast.loading('Carregando...')
-    e.preventDefault()
-
-    if (name.trim() == '' || name.trim().length <= 3) {
-      toast.error('Preencha um nome válido!')
-      return
-    }
-
-    if (email.trim() == '') {
-      toast.error('Preencha um email válido!')
-      return
-    }
-
-    if (password.trim() == '') {
-      toast.error('Preencha uma senha válida!')
-      return
-    }
-
-    if (password.trim() != confirmPassword.trim()) {
-      toast.error('As senhas precisam ser iguais!')
-      return
-    }
-
-    const userModel = new UserModel(
-      name,
-      email,
-      password,
-      phone,
-      gender,
-      profiles
-    )
-
-    await api
-      .post('/api/Authentication/Register', userModel)
-      .then((res) => {
-        console.log(res)
-        toast.dismiss(toastId)
-        push('/admin/users')
-        toast.success('Usuário criado com sucesso :)')
-      })
-      .catch((err) => {
-        toast.dismiss(toastId)
-        toast.error(err.response.data.errors[0].message)
-      })
-  }
+  const { push, onSubmit, validateSchema } = useCreateUserPage()
 
   return (
     <AdminLayout>
-      <p className="text-2xl font-medium text-white sticky top-0 pt-10 pb-6 bg-zinc-900 z-40">
+      <p className="text-2xl font-medium text-zinc-800 dark:text-white sticky top-0 pt-10 pb-6 bg-white dark:bg-zinc-900 z-40">
         Criar Usuário
       </p>
 
-      <div className="flex w-full rounded-lg bg-zinc-800 px-6 py-8">
-        <form
-          className="w-full grid grid-cols-2 gap-6"
-          onSubmit={handleCreateUser}
-        >
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="name" className="block text-sm text-gray-400">
-              Nome:
-            </label>
-            <input
-              type="text"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder="João Batista"
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="email" className="block text-sm text-gray-400">
-              Email:
-            </label>
-            <input
-              type="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="joao@exemplo.com.br"
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="phone" className="block text-sm text-gray-400">
-              Telefone:
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="27999999999"
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
-            />
-          </fieldset>
-
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="sexo" className="block text-sm text-gray-400">
-              Sexo:
-            </label>
-            <select
-              onChange={handleGenderChange}
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
+      <div className="flex w-full rounded-lg mb-20">
+        <Form
+          onSubmit={(values) => onSubmit(values as never)}
+          validate={(values) => validate(values, validateSchema)}
+          render={({ handleSubmit }) => (
+            <form
+              className="flex flex-col w-full gap-6"
+              onSubmit={handleSubmit}
             >
-              <option value="M">Masculino</option>
-              <option value="F">Feminino</option>
-            </select>
-          </fieldset>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input.Form.Field name="fullName" label="Nome:" />
 
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="password" className="block text-sm text-gray-400">
-              Senha:
-            </label>
-            <input
-              type="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••"
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
-            />
-          </fieldset>
+                <Input.Form.Field type="email" name="email" label="E-mail:" />
 
-          <fieldset className="flex flex-col space-y-4">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm text-gray-400"
-            >
-              Confirme a Senha:
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              placeholder="••••••"
-              className="bg-zinc-700/30 border border-zinc-700/50 text-white text-sm rounded-lg focus:border-brand-600 focus:ring-brand-600 focus:ring-1 focus:outline-none block w-full p-4"
-            />
-          </fieldset>
+                <Input.Form.Field type="cel" name="phone" label="Telefone:" />
 
-          <fieldset className="flex flex-col space-y-4">
-            <label htmlFor="profile" className="block text-sm text-gray-400">
-              Perfil:
-            </label>
-            <div className="flex gap-6">
-              <label
-                htmlFor="checkbox-student"
-                className="text-white flex items-center gap-2"
-              >
-                <input
-                  id="checkbox-student"
-                  type="checkbox"
-                  name="student"
-                  onChange={() => addProfileChange('Student')}
-                  className="checkbox bg-zinc-700"
+                <Input.Form.Select
+                  name="gender"
+                  label="Sexo:"
+                  options={[
+                    { value: 'F', label: 'Feminino' },
+                    { value: 'M', label: 'Masculino' },
+                  ]}
                 />
 
-                <span>Aluno</span>
-              </label>
-              <label
-                htmlFor="checkbox-admin"
-                className="text-white flex items-center gap-2"
-              >
-                <input
-                  id="checkbox-admin"
-                  type="checkbox"
-                  name="admin"
-                  onChange={() => addProfileChange('Admin')}
-                  className="checkbox bg-zinc-700"
+                <Input.Form.Password name="password" label="Senha:" />
+
+                <Input.Form.Password
+                  name="confirmPassword"
+                  label="Confirme a nova senha:"
                 />
-                <span>Administrador</span>
-              </label>
-            </div>
-          </fieldset>
 
-          <div className="flex justify-end items-end gap-2">
-            <button
-              onClick={() => push('/admin/users')}
-              className="h-fit flex justify-center gap-1 text-white bg-zinc-700/50 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-zinc-700 active:bg-zinc-700 transition"
-            >
-              Cancelar
-            </button>
+                <div className="flex flex-col col-start-1 md:col-end-3 gap-4">
+                  <p className="text-sm text-zinc-800 dark:text-white">
+                    Perfil:
+                  </p>
 
-            <button
-              type="submit"
-              className="h-fit flex justify-center gap-1 text-white bg-indigo-700/60 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-indigo-700 active:bg-indigo-700 transition"
-            >
-              Salvar
-            </button>
-          </div>
-        </form>
+                  <div className="w-full flex max-md:flex-col gap-6">
+                    <Input.Form.Radio
+                      name="profile"
+                      label="Aluno"
+                      radioValue="Student"
+                      containerClassName="w-full"
+                    />
+
+                    <Input.Form.Radio
+                      name="profile"
+                      label="Administrador"
+                      radioValue="Admin"
+                      containerClassName="w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end items-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => push('/admin/users')}
+                  className="h-fit flex justify-center gap-1 text-white bg-zinc-700 font-medium rounded-lg text-sm p-4 text-center shadow hover:bg-zinc-700/90 active:bg-zinc-700/90 transition"
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="submit"
+                  className="h-fit flex justify-center gap-1 text-zinc-800 bg-brand-700 font-medium rounded-lg text-sm p-4 text-center shadow hover:bg-brand-700/90 active:bg-brand-700/90 transition"
+                >
+                  Salvar
+                </button>
+              </div>
+            </form>
+          )}
+        />
       </div>
     </AdminLayout>
   )

@@ -1,20 +1,22 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
+import { NextSeo } from 'next-seo'
 
 import {
   UserDetailsProvider,
   useUserDetails,
 } from '@contexts/user-details.context'
 
+import { useThemeSwitcher } from '@contexts/theme.context'
 import { useBreakpoint } from '@hooks/use-breakpoints'
 import { FamiliaIcon } from '@assets/icons/familia-icon'
 import { Navigation } from '@components/siderbar/navigation'
 import { clickByKey } from '@utils'
 import { Siderbar } from '@components/siderbar'
 import { Menu } from '@components/menu'
-import { NextSeo } from 'next-seo'
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -22,15 +24,18 @@ interface AdminLayoutProps {
 }
 
 const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
-  const { push } = useRouter()
-
   const { openUserDetails } = useUserDetails()
+  const { theme } = useThemeSwitcher()
+  const { push } = useRouter()
   const { lg } = useBreakpoint()
+
+  const logoUrl =
+    theme === 'dark' ? '/images/logo_white.png' : '/images/logo.png'
 
   const onClick = React.useCallback(() => push('/'), [push])
 
   return (
-    <div className="flex w-full min-h-full bg-zinc-900">
+    <div className="flex w-full h-[100vh] bg-white dark:bg-zinc-900 lg:overflow-hidden">
       <div
         className={twMerge(
           'w-full space-y-8 transition-all',
@@ -48,7 +53,7 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
                 tabIndex={0}
                 onKeyDown={(e) => clickByKey(e, onClick)}
               >
-                <FamiliaIcon fill="white" />
+                <FamiliaIcon fill={theme === 'light' ? 'black' : 'white'} />
               </div>
             ) : (
               <div
@@ -57,11 +62,7 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
                 tabIndex={0}
                 onKeyDown={(e) => clickByKey(e, onClick)}
               >
-                <img
-                  className="h-12"
-                  src="/images/logo_white.png"
-                  alt="Igreja Familia"
-                />
+                <img className="h-12" src={logoUrl} alt="Igreja Familia" />
               </div>
             )}
           </div>

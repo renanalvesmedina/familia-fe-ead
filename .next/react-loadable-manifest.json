@@ -1,14 +1,1 @@
-{
-  "../client/features/admin/dashboard/pages/dashboard-page/dashboard-page.tsx -> react-apexcharts": {
-    "id": "../client/features/admin/dashboard/pages/dashboard-page/dashboard-page.tsx -> react-apexcharts",
-    "files": [
-      "static/chunks/node_modules_react-apexcharts_dist_react-apexcharts_min_js.js"
-    ]
-  },
-  "../client/features/admin/dashboard/pages/dashboard-page/dashboard-page.tsx -> react-calendar": {
-    "id": "../client/features/admin/dashboard/pages/dashboard-page/dashboard-page.tsx -> react-calendar",
-    "files": [
-      "static/chunks/node_modules_react-calendar_dist_esm_index_js.js"
-    ]
-  }
-}
+{}

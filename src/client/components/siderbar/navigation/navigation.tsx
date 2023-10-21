@@ -24,14 +24,14 @@ const Navigation: React.FC = () => {
                     'text-zinc-200 my-4 flex items-center justify-center gap-x-4 cursor-pointer rounded-lg hover:text-brand-700 active:text-brand-700',
                     pathname.startsWith(menu.route)
                       ? 'text-brand-700'
-                      : 'text-white'
+                      : 'text-zinc-800 dark:text-white'
                   )}
                 >
                   <span>
                     <Icon size={24} />
                   </span>
 
-                  <span className={'text-base font-medium flex-1'}>
+                  <span className="text-base font-medium flex-1">
                     {menu.title}
                   </span>
                 </button>

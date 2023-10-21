@@ -1,12 +1,7 @@
-import React from 'react'
-import PainelAluno from '@components/PainelAluno'
-
+import { UserDashboardPage } from '@features/user'
 import { withSSRAuth } from '@hocs/with-ssr-auth'
-import { NextPage } from 'next'
 
-const Home: NextPage = () => <PainelAluno />
-
-export default Home
+export default UserDashboardPage
 
 export const getServerSideProps = withSSRAuth(async () => {
   return {

@@ -1,13 +1,13 @@
 import {
+  LayoutDashboard,
   GraduationCap,
-  CirclesFour,
-  UsersThree,
+  CalendarHeart,
+  Presentation,
+  Settings2,
   BookOpen,
-  Calendar,
-  Books,
-  Gear,
-  ChalkboardSimple,
-} from 'phosphor-react'
+  Library,
+  Users2,
+} from 'lucide-react'
 
 export const navigationMenus = [
   {
@@ -16,12 +16,32 @@ export const navigationMenus = [
       {
         title: 'Dashboard',
         route: '/admin/dashboard',
-        icon: CirclesFour,
+        icon: LayoutDashboard,
       },
       {
         title: 'Configurações',
         route: '/admin/settings',
-        icon: Gear,
+        icon: Settings2,
+      },
+    ],
+  },
+  {
+    title: 'Gestão',
+    links: [
+      {
+        title: 'Usuários',
+        route: '/admin/users',
+        icon: Users2,
+      },
+      {
+        title: 'Cursos',
+        route: '/admin/courses',
+        icon: Library,
+      },
+      {
+        title: 'Turmas',
+        route: '/admin/classes',
+        icon: Presentation,
       },
     ],
   },
@@ -34,21 +54,6 @@ export const navigationMenus = [
         icon: GraduationCap,
       },
       {
-        title: 'Usuários',
-        route: '/admin/users',
-        icon: UsersThree,
-      },
-      {
-        title: 'Cursos',
-        route: '/admin/courses',
-        icon: Books,
-      },
-      {
-        title: 'Turmas',
-        route: '/admin/classes',
-        icon: ChalkboardSimple,
-      },
-      {
         title: 'Provas',
         route: '/admin/exams',
         icon: BookOpen,
@@ -56,7 +61,7 @@ export const navigationMenus = [
       {
         title: 'Calendário',
         route: '/admin/calendar',
-        icon: Calendar,
+        icon: CalendarHeart,
       },
     ],
   },

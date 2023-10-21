@@ -4,5 +4,5 @@ export class EditUserModel {
   phone?: string
   gender?: string
   photoUri?: string
-  profile?: string[]
+  profiles?: string[]
 }

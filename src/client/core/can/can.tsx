@@ -1,15 +1,13 @@
 import React from 'react'
 
-import { UserModel } from '@models/UserModel'
 import { useCan } from '@hooks/use-can'
 
 export interface CanProps {
   children: React.ReactNode
-  user: Partial<UserModel> | null
 }
 
-const Can: React.FC<CanProps> = ({ children, user }) => {
-  const userCanSeeComponent = useCan({ user })
+const Can: React.FC<CanProps> = ({ children }) => {
+  const userCanSeeComponent = useCan()
 
   return !userCanSeeComponent ? null : (
     <React.Fragment>{children}</React.Fragment>

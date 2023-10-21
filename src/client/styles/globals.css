@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-brand-700 scrollbar-track-aux-500 overflow-y-scroll;
+  @apply h-screen scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-zinc-400 scrollbar-track-zinc-700 overflow-y-scroll;
   --bg-brand: #faba16;
   --bg-brand1: #ffe500;
   --bg-brand2: #e9d404;

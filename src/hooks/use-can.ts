@@ -1,15 +1,10 @@
-import { validateUserPermission } from '@validators/userPermission.validate'
+import { validateUserPermission } from '@validators/validatePermission'
 import { useAuthContext } from '@contexts/auth.context'
-import { UserModel } from '@models/UserModel'
 
-type UseCanParams = {
-  user: Partial<UserModel> | null
-}
-
-export function useCan({ user }: UseCanParams) {
+export function useCan() {
   const { isAuthenticated } = useAuthContext()
 
   if (!isAuthenticated) return false
 
-  return validateUserPermission(user)
+  return validateUserPermission()
 }

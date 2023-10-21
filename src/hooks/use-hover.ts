@@ -5,6 +5,7 @@ export function useHover<T>(): [React.MutableRefObject<T>, boolean] {
   const ref: any = React.useRef<T | null>(null)
   const handleMouseOver = (): void => setValue(true)
   const handleMouseOut = (): void => setValue(false)
+
   React.useEffect(
     () => {
       const node: any = ref.current

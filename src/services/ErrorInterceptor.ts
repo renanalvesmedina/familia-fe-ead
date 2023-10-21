@@ -1,5 +1,7 @@
-import { AxiosError } from 'axios'
 import toast from 'react-hot-toast'
+
+import { AxiosError } from 'axios'
+
 import { removeAuthLocalStorage } from './utils'
 
 export const errorInterceptor = (error: AxiosError) => {

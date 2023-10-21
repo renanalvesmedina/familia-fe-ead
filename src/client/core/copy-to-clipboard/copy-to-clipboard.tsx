@@ -1,8 +1,7 @@
 import React from 'react'
 import copy from 'copy-to-clipboard'
 
-import { Check, Copy } from 'phosphor-react'
-
+import { Check, Copy } from 'lucide-react'
 import { useHover } from '@hooks/use-hover'
 
 export interface CopyToClipboardProps {
@@ -40,7 +39,7 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
     <button
       ref={ref as never}
       onClick={onClick}
-      className="relative select-none hover:text-white transition-colors cursor-pointer"
+      className="relative select-none hover:text-zinc-800 dark:hover:text-white transition-colors cursor-pointer"
     >
       {isHover ? (
         <span className="absolute -right-5 top-0">

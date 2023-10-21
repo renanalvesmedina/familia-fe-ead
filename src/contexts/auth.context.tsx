@@ -53,27 +53,30 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({
       api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`
       setAuthLocalStorage(result)
       setAuthData(result)
+      queryClient.refetchQueries(queryKey)
 
       Router.push('/')
     },
-    []
+    [queryClient, queryKey]
   )
 
   const handleLogout = React.useCallback(() => {
-    queryClient.cancelQueries(queryKey)
-    queryClient.removeQueries(queryKey)
     removeAuthLocalStorage()
-    setAuthData(undefined)
-    delete api.defaults.headers.common['Authorization']
-    Router.push('/login')
+
+    Router.push('/login').then(() => {
+      setAuthData(undefined)
+      queryClient.cancelQueries(queryKey)
+      queryClient.removeQueries(queryKey)
+      queryClient.cancelQueries(['courses'])
+      queryClient.removeQueries(['courses'])
+      delete api.defaults.headers.common['Authorization']
+    })
   }, [queryClient, queryKey])
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const accessData = getAuthLocalStorage()
 
     if (accessData) {
-      if (Date.parse(accessData.expiration) <= Date.now()) handleLogout()
-
       setAuthData(accessData)
 
       api.defaults.headers.common[

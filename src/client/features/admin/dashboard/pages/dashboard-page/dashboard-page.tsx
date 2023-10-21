@@ -2,38 +2,39 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 
 import { TeacherIllustration } from '@assets/illustrations/teacher-illustration'
+import { useThemeSwitcher } from '@contexts/theme.context'
 import { useAuthContext } from '@contexts/auth.context'
+import { getFirstName } from '@utils'
 import { AdminLayout } from '@layouts/admin-layout'
 import { BannerCard } from '@components/banner-card'
 
-import { options, quikAccess, series } from './dashboard-page.constants'
+import {
+  welcolmeAdminText,
+  quikAccess,
+  options,
+  series,
+} from './dashboard-page.constants'
+
 import { QuikAccessCard } from '../../components'
+import { ScheduleCard } from '../../components/schedule-card'
 
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 })
 
-const Calendar = dynamic(() => import('react-calendar'), {
-  ssr: false,
-})
-
-type ValuePiece = Date | null
-
-type Value = ValuePiece | [ValuePiece, ValuePiece]
-
 const DashboardPage: React.FC = () => {
+  const { theme } = useThemeSwitcher()
   const { user } = useAuthContext()
-
-  const [value, onChange] = React.useState<Value>(new Date())
 
   return (
     <AdminLayout>
-      <div className="space-y-14 w-full pb-32">
+      <div className="space-y-14 w-full pb-28">
         <BannerCard
-          title={`Olá, ${user?.fullName}`}
-          description="Seja bem-vindo (a) ao painel administrativo do nosso portal de ensino."
+          title={`Olá, ${getFirstName(user?.fullName)}`}
+          description={welcolmeAdminText}
           illustration={<TeacherIllustration />}
           colorScheme="indigo"
+          rounded={true}
         />
 
         <div className="space-y-6">
@@ -54,53 +55,24 @@ const DashboardPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-10">
-          <div className="space-y-6 col-start-1 col-end-3">
+          <div className="space-y-6">
             <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
               Agenda
             </p>
 
-            <div className="grid grid-cols-2 gap-10">
-              <div className="space-y-6">
-                <div className="flex-1 border border-zinc-700/50 bg-indigo-900 px-6 py-8 rounded-lg gap-6 flex items-center">
-                  <span className="text-4xl font-bold text-white">52</span>
-                  <div className="h-full w-0.5 bg-white">.</div>
-                  <div className="w-full">
-                    <div className="flex justify-between items-center">
-                      <p className="text-xl text-white">Prova final</p>
-                      <time className="text-sm text-gray-400">28/set</time>
-                    </div>
-                    <p className="text-sm text-white">
-                      Comprometidos com a membresia
-                      <br />
-                      Turma 03
-                    </p>
-                  </div>
-                </div>
+            <div className="space-y-6">
+              <ScheduleCard
+                title="Prova final"
+                date="2023-10-02"
+                description={`Comprometidos com a membresia\n\n Turma 03`}
+                highlight
+              />
 
-                <div className="flex-1 border border-zinc-700/50 bg-aux-400 px-6 py-8 rounded-lg gap-6 flex items-center">
-                  <span className="text-4xl font-bold text-white">52</span>
-                  <div className="h-full w-0.5 bg-white">.</div>
-                  <div className="w-full">
-                    <div className="flex justify-between items-center">
-                      <p className="text-xl text-white">Prova final</p>
-                      <time className="text-sm text-gray-400">28/set</time>
-                    </div>
-                    <p className="text-sm text-white">
-                      Comprometidos com a membresia
-                      <br />
-                      Turma 03
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Calendar
-                  onChange={onChange}
-                  value={value}
-                  className="bg-zinc-800 border-none shadow-2xl rounded-lg w-full text-white py-3 px-4"
-                />
-              </div>
+              <ScheduleCard
+                title="Encerramento de turma"
+                date="2023-10-02"
+                description={`Comprometidos com a membresia\n\n Turma 03`}
+              />
             </div>
           </div>
 
@@ -109,27 +81,12 @@ const DashboardPage: React.FC = () => {
               Novas matrículas
             </p>
 
-            <div className="bg-zinc-800 px-4 py-6 rounded-lg">
+            <div className="bg-white border border-zinc-700/10 dark:bg-zinc-800 px-4 py-6 rounded-lg">
               <Chart
-                options={options}
+                options={options(theme === 'dark')}
                 series={series}
                 type="area"
-                height={160}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-              Taxa de aprovação
-            </p>
-
-            <div className="bg-zinc-800 px-4 py-6 rounded-lg">
-              <Chart
-                options={options}
-                series={series}
-                type="area"
-                height={160}
+                height={190}
               />
             </div>
           </div>

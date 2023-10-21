@@ -8,12 +8,14 @@ interface ProgressBarProps {
   total: number
   completed: number
   rounded_full?: boolean
+  absolute?: boolean
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
   total,
   completed,
   rounded_full = false,
+  absolute = true,
 }) => {
   const calculatedProgress = React.useMemo(
     () => calculateProgressPercentage(completed, total),
@@ -33,7 +35,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     <div
       className={twMerge(
         'bg-zinc-700 bg-opacity-30 absolute bottom-0 left-0 right-0 h-2 overflow-hidden',
-        rounded_full ? 'rounded-full' : 'rounded-b-lg'
+        rounded_full ? 'rounded-full' : 'rounded-b-lg',
+        absolute ? 'absolute' : 'relative'
       )}
     >
       <div

@@ -7,18 +7,15 @@ import { UsersTable } from '../users-table'
 import { UsersList } from '../users-list'
 
 interface UsersDataProps {
-  users: UsersModel[]
   isLoading: boolean
+  users: UsersModel[]
 }
 
-const UsersData: React.FC<UsersDataProps> = ({ users, isLoading }) => {
-  const { lg } = useBreakpoint()
-
-  return !lg ? (
-    <UsersList users={users} isLoading={isLoading} />
-  ) : (
+const UsersData: React.FC<UsersDataProps> = ({ users, isLoading }) =>
+  useBreakpoint().lg ? (
     <UsersTable users={users} isLoading={isLoading} />
+  ) : (
+    <UsersList users={users} isLoading={isLoading} />
   )
-}
 
 export default UsersData

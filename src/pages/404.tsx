@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import illustration from '@assets/illustrations/404Error.svg'
 
@@ -15,6 +16,7 @@ const NotFoundPage: React.FC = () => {
 
           <div className="w-full h-full flex flex-col justify-center items-center gap-6">
             <img src={illustration} className="w-96" alt="" />
+
             <h1 className="text-xl text-white">Página em Desenvolvimento!</h1>
           </div>
         </div>

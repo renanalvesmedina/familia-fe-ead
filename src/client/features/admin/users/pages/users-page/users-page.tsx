@@ -1,7 +1,7 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 
-import { ArrowsClockwise, Plus } from 'phosphor-react'
+import { Plus, RefreshCw } from 'lucide-react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
@@ -33,9 +33,9 @@ const UsersPage: React.FC = () => {
 
   return (
     <AdminLayout renderOnRight={<UserDetails />}>
-      <div className="flex items-center justify-between sticky top-0 pt-10 pb-6 bg-zinc-900 z-40">
+      <div className="flex items-center justify-between sticky top-0 pt-10 pb-6 px-2 bg-white dark:bg-zinc-900 z-40">
         <span className="flex items-center gap-2">
-          <p className="text-xl md:text-2xl font-medium text-white">
+          <p className="text-xl md:text-2xl font-medium text-zinc-800 dark:text-white">
             Gestão de usuários
           </p>
           {isLoading || isRefetching || isFetching ? (
@@ -46,15 +46,15 @@ const UsersPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => refetch()}
-            className="flex justify-center gap-1 text-white bg-zinc-700/50 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-zinc-700 active:bg-zinc-700 transition"
+            className="flex justify-center gap-1 text-white bg-zinc-700 font-medium rounded-lg text-sm p-4 text-center hover:bg-zinc-700/90 active:bg-zinc-700/90 transition"
           >
-            <ArrowsClockwise size={20} />
+            <RefreshCw size={20} />
             <span className="max-lg:hidden">Refresh</span>
           </button>
 
           <button
             onClick={() => push('/admin/users/create')}
-            className="flex justify-center gap-1 text-white bg-indigo-700/60 font-medium rounded-lg text-sm px-4 py-2 text-center shadow hover:bg-indigo-700 active:bg-indigo-700 transition"
+            className="flex justify-center gap-1 text-zinc-800 bg-brand-700 font-medium rounded-lg text-sm p-4 text-center hover:bg-brand-700/90 active:bg-brand-700/90 transition"
           >
             <Plus size={20} />
             <span className="max-lg:hidden">Novo Usuário</span>

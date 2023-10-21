@@ -1,14 +1,26 @@
 import { destroyCookie, parseCookies, setCookie } from 'nookies'
 import { AuthenticationModel } from '@models/AuthenticationModel'
 
-export const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData'
-export const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass'
+import {
+  REACT_LOCAL_STORAGE_COMPLETED_CLASS,
+  REACT_LOCAL_STORAGE_AUTH_TOKEN,
+  REACT_LOCAL_STORAGE_AUTH_DATA,
+} from '@config'
 
 export function setAuthLocalStorage(authData: AuthenticationModel | null) {
   setCookie(
     undefined,
     REACT_LOCAL_STORAGE_AUTH_DATA,
     JSON.stringify(authData),
+    {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/', // Whitch paths in my app has access to this cookie
+    }
+  )
+  setCookie(
+    undefined,
+    REACT_LOCAL_STORAGE_AUTH_TOKEN,
+    String(authData?.token),
     {
       maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/', // Whitch paths in my app has access to this cookie
@@ -31,19 +43,7 @@ export function getToken() {
 
 export function removeAuthLocalStorage() {
   destroyCookie(null, REACT_LOCAL_STORAGE_AUTH_DATA, { path: '/' })
-}
-
-export function getAvatarLetters(userName: string) {
-  const words = userName.trim().toLowerCase().split(' ')
-  let avatarLetters = ''
-
-  for (let a = 0; a < words.length; a++) {
-    const w = words[a]
-    words[a] = w[0]?.toUpperCase()
-    avatarLetters = words.join().replace(',', '').substring(0, 2)
-  }
-
-  return avatarLetters
+  destroyCookie(null, REACT_LOCAL_STORAGE_AUTH_TOKEN, { path: '/' })
 }
 
 export function setCompletedClassLocalStorage(completedClass: string[]) {

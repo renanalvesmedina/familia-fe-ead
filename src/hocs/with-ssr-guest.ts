@@ -4,7 +4,8 @@ import {
   GetServerSideProps,
 } from 'next'
 
-import { REACT_LOCAL_STORAGE_AUTH_DATA } from '@services/utils'
+import { REACT_LOCAL_STORAGE_AUTH_TOKEN } from '@config'
+import { validateToken } from '@validators/validateToken'
 import { parseCookies } from 'nookies'
 
 export function withSSRGuest<P extends { [key: string]: any }>(
@@ -13,9 +14,10 @@ export function withSSRGuest<P extends { [key: string]: any }>(
   return async (
     ctx: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
-    const { [REACT_LOCAL_STORAGE_AUTH_DATA]: accessData } = parseCookies(ctx)
+    const { [REACT_LOCAL_STORAGE_AUTH_TOKEN]: token } = parseCookies(ctx)
+    const { isValidToken } = validateToken(token)
 
-    if (accessData) {
+    if (token && isValidToken) {
       return {
         redirect: {
           destination: '/',

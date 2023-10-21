@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Check, WhatsappLogo } from 'phosphor-react'
 import { twMerge } from 'tailwind-merge'
 
+import { Check, Phone } from 'lucide-react'
 import { useHover } from '@hooks/use-hover'
 
 export interface PhoneToWhatsappProps {
@@ -34,7 +34,7 @@ export const PhoneToWhatsapp: React.FC<PhoneToWhatsappProps> = ({
       href={`https://api.whatsapp.com/send?phone=55${value}`}
       target="_blank"
       rel="noreferrer"
-      className="relative select-none hover:text-white transition-colors cursor-pointer"
+      className="relative select-none hover:text-zinc-800 dark:hover:text-white transition-colors cursor-pointer"
     >
       {isHover ? (
         <span
@@ -46,7 +46,7 @@ export const PhoneToWhatsapp: React.FC<PhoneToWhatsappProps> = ({
           {copied ? (
             <Check className="text-indigo-600" size={18} />
           ) : (
-            <WhatsappLogo className="text-emerald-600" size={18} />
+            <Phone className="text-emerald-600" size={18} />
           )}
         </span>
       ) : null}

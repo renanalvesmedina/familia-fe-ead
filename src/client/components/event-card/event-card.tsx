@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
-import { ArrowSquareOut, Calendar, MapPin } from 'phosphor-react'
+import { CalendarCheck, Link, MapPin } from 'lucide-react'
 import { format } from 'date-fns'
 
 import { TiketoEventModel } from '@models/TiketoEventModel'
@@ -14,17 +15,20 @@ const EventCard: React.FC<TiketoEventModel> = ({
   categoria_principal_nome,
   local_evento_nome,
 }) => {
-  const onClick = () =>
-    window.open(`https://tiketo.com.br/evento/${id}`, '_blank', 'noreferrer')
+  const onClick = React.useCallback(
+    () =>
+      window.open(`https://tiketo.com.br/evento/${id}`, '_blank', 'noreferrer'),
+    [id]
+  )
 
   return (
     <div
       onClick={onClick}
       onKeyDown={(e) => clickByKey(e, onClick)}
       tabIndex={0}
-      className="select-none cursor-pointer grid max-md:grid-rows-2 md:grid-cols-4 bg-zinc-800 border border-zinc-700 hover:border-zinc-500 transition rounded-lg outline-none focus-within:border-indigo-600"
+      className="select-none cursor-pointer grid max-md:grid-rows-2 md:grid-cols-4 bg-white dark:bg-zinc-800 border border-zinc-700/20 dark:border-zinc-700 hover:border-zinc-700/30 dark:hover:border-zinc-500 transition rounded-lg outline-none focus-within:border-indigo-600"
     >
-      <div className="bg-zinc-700 bg-opacity-25 max-md:rounded-t-lg md:rounded-l-lg max-md:w-full h-60 overflow-hidden">
+      <div className="bg-zinc-700/25 max-md:rounded-t-lg md:rounded-l-lg max-md:w-full h-60 overflow-hidden">
         <img
           className="object-cover object-center max-md:rounded-t-lg md:rounded-l-lg pointer-events-auto h-full w-full"
           decoding="async"
@@ -33,17 +37,19 @@ const EventCard: React.FC<TiketoEventModel> = ({
         />
       </div>
 
-      <div className="p-8 md:p-10 md:col-start-2 md:col-end-5 flex flex-col justify-between">
-        <div className="space-y-3">
-          <p className="text-white bg-brand-600 bg-opacity-30 text-xs border border-brand-700 border-opacity-60 w-fit px-3 py-1 rounded-full">
+      <div className="p-6 md:p-10 md:col-start-2 md:col-end-5 flex flex-col justify-between gap-4">
+        <div className="space-y-4">
+          <p className="text-zinc-800 dark:text-white bg-brand-700/30 text-xs border border-brand-700 border-opacity-60 w-fit px-3 py-1 rounded-full">
             {categoria_principal_nome}
           </p>
 
-          <h4 className="text-white text-xl font-medium">{nome}</h4>
+          <h4 className="text-zinc-800 dark:text-white text-xl font-medium">
+            {nome}
+          </h4>
 
-          <div className="flex items-center gap-3">
+          <div className="flex max-md:flex-col md:items-center gap-2">
             <p className="text-gray-400 inline-flex items-center gap-2">
-              <Calendar size={20} />
+              <CalendarCheck size={20} />
               {format(new Date(data_hora_inicio), 'dd/MM/yyyy')}
             </p>
 
@@ -54,10 +60,10 @@ const EventCard: React.FC<TiketoEventModel> = ({
           </div>
         </div>
 
-        <span className="text-brand-600 font-medium flex items-center gap-2">
+        <div className="text-brand-700 font-medium flex items-center gap-2">
           Saiba mais
-          <ArrowSquareOut size={20} />
-        </span>
+          <Link size={18} />
+        </div>
       </div>
     </div>
   )
