@@ -1,7 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 
-import { useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 import { AuthenticationModel } from '@models/AuthenticationModel'
 import { UserProfileModel } from '@models/UserProfileModel'
@@ -14,11 +14,17 @@ import {
   setAuthLocalStorage,
 } from '@services/utils'
 
+export interface Credentials {
+  email: string
+  password: string
+}
+
 interface IAuthContextData extends AuthenticationModel {
   isAuthenticated: boolean
   user?: UserProfileModel
   loading: boolean
-  login: (email: string, password: string) => Promise<string | void>
+  isLoginLoading: boolean
+  login: (values: Credentials) => Promise<AuthenticationModel | Error>
   logout: () => void
 }
 
@@ -45,20 +51,25 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({
   })
 
   const handleLogin = React.useCallback(
-    async (email: string, password: string) => {
-      const result = await AuthService.auth(email, password)
-
-      if (result instanceof Error) return result.message
-
-      api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`
-      setAuthLocalStorage(result)
-      setAuthData(result)
-      queryClient.refetchQueries(queryKey)
-
-      Router.push('/')
-    },
-    [queryClient, queryKey]
+    async ({ email, password }: Credentials) =>
+      AuthService.auth(email, password),
+    []
   )
+
+  const loginMutation = useMutation(handleLogin, {
+    onError: (error) => console.error(error),
+    onSuccess: (result) => {
+      const isError = result instanceof Error
+
+      if (!isError) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${result.token}`
+        setAuthLocalStorage(result)
+        setAuthData(result)
+        queryClient.refetchQueries(queryKey)
+        Router.push('/')
+      }
+    },
+  })
 
   const handleLogout = React.useCallback(() => {
     removeAuthLocalStorage()
@@ -95,7 +106,8 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({
         loading: isLoading,
         ...authData,
         user: me,
-        login: handleLogin,
+        isLoginLoading: loginMutation.isLoading,
+        login: loginMutation.mutateAsync,
         logout: handleLogout,
       }}
     >

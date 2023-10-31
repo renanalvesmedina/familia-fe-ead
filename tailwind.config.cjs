@@ -1,4 +1,4 @@
-const { violet, blackA } = require('@radix-ui/colors')
+const { violet, blackA, mauve } = require('@radix-ui/colors')
 
 module.exports = {
   content: ['./src/**/*.tsx', './src/**/*.ts'],
@@ -30,6 +30,9 @@ module.exports = {
         sans: ['Poppins'],
       },
       colors: {
+        ...violet,
+        ...blackA,
+        ...mauve,
         brand: {
           500: '#FFE500',
           600: '#E9D404',
@@ -51,34 +54,43 @@ module.exports = {
           900: '#121313',
         },
       },
-    },
-  },
-  extend: {
-    colors: { ...violet, ...blackA },
-    keyframes: {
-      slideDownAndFade: {
-        from: { opacity: 0, transform: 'translateY(-2px)' },
-        to: { opacity: 1, transform: 'translateY(0)' },
+      keyframes: {
+        slideDownAndFade: {
+          from: { opacity: 0, transform: 'translateY(-2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideLeftAndFade: {
+          from: { opacity: 0, transform: 'translateX(2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+        slideUpAndFade: {
+          from: { opacity: 0, transform: 'translateY(2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideRightAndFade: {
+          from: { opacity: 0, transform: 'translateX(-2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+        slideDown: {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        slideUp: {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
+        },
       },
-      slideLeftAndFade: {
-        from: { opacity: 0, transform: 'translateX(2px)' },
-        to: { opacity: 1, transform: 'translateX(0)' },
+      animation: {
+        slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        slideDownAndFade:
+          'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideLeftAndFade:
+          'slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideRightAndFade:
+          'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
-      slideUpAndFade: {
-        from: { opacity: 0, transform: 'translateY(2px)' },
-        to: { opacity: 1, transform: 'translateY(0)' },
-      },
-      slideRightAndFade: {
-        from: { opacity: 0, transform: 'translateX(-2px)' },
-        to: { opacity: 1, transform: 'translateX(0)' },
-      },
-    },
-    animation: {
-      slideDownAndFade: 'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
-      slideLeftAndFade: 'slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
-      slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
-      slideRightAndFade:
-        'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
     },
   },
   plugins: [

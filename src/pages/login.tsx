@@ -7,24 +7,20 @@ import { NextSeo } from 'next-seo'
 import { LogIn } from 'lucide-react'
 import { Form } from 'react-final-form'
 
+import { Credentials, useAuthContext } from '@contexts/auth.context'
 import { whatsappSuportLink } from '@config'
-import { useAuthContext } from '@contexts/auth.context'
 import { validateLogin } from '@validators/yup'
 import { withSSRGuest } from '@hocs/with-ssr-guest'
 import { validate } from '@validators/validateForm'
+import { Loader } from '@core/loader'
 
 import * as Input from '@components/input'
 
-export type Credentials = {
-  email: string
-  password: string
-}
-
 const LoginPage: React.FC = () => {
-  const { login } = useAuthContext()
+  const { login, isLoginLoading } = useAuthContext()
 
   const onSubmit = React.useCallback(
-    async (values: Credentials) => login(values.email, values.password),
+    async (values: Credentials) => login({ ...values }),
     [login]
   )
 
@@ -70,6 +66,7 @@ const LoginPage: React.FC = () => {
 
                     <button
                       type="submit"
+                      disabled={isLoginLoading}
                       className="
                       bg-brand-700 
                         rounded-md 
@@ -84,10 +81,19 @@ const LoginPage: React.FC = () => {
                         w-full
                         gap-2
                         hover:brightness-110
-                        transition-colors"
+                        transition-colors
+                        disabled:bg-opacity-10
+                        disabled:cursor-not-allowed
+                        "
                     >
-                      Entrar
-                      <LogIn size={20} />
+                      {isLoginLoading ? (
+                        <Loader />
+                      ) : (
+                        <React.Fragment>
+                          Entrar
+                          <LogIn size={20} />
+                        </React.Fragment>
+                      )}
                     </button>
 
                     <div className="mt-2">

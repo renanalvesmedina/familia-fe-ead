@@ -27,7 +27,7 @@ const UsersPage: React.FC = () => {
     {
       staleTime: 1000 * 60 * 1, // 1 minutes
       onError: (error: any) =>
-        toast.error(error.response.data.errors[0].message),
+        toast.error(error.response.data.errors?.[0].message),
     }
   )
 

@@ -11,6 +11,7 @@ export const auth = async (
   const toastId = toast.loading('Carregando...')
   try {
     const { data } = await api.post('/api/Authentication', { email, password })
+
     if (data) {
       toast.dismiss(toastId)
       return data
@@ -20,6 +21,7 @@ export const auth = async (
   } catch (error: any) {
     toast.dismiss(toastId)
     toast.error(`${error.response.data.errors[0].message} :(`)
+
     return new Error(
       (error as { message: string }).message || 'Falha no Login!'
     )

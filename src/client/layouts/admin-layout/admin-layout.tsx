@@ -84,7 +84,7 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
 
 const AdminLayout: React.FC<AdminLayoutProps> = (props) => (
   <UserDetailsProvider>
-    <NextSeo title="Adm Dashboard" />
+    <NextSeo title="Dashboard" />
     <Layout {...props} />
   </UserDetailsProvider>
 )

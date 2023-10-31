@@ -41,6 +41,7 @@ const UserCard: React.FC<{ user: UsersModel }> = ({ user }) => {
             alt={user.fullName!}
             src={userProfileUri}
             fill
+            sizes="100%"
             className="absolute w-full h-full"
           />
         </div>

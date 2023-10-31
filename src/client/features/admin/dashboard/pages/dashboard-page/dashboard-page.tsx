@@ -1,8 +1,8 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 
-import { TeacherIllustration } from '@assets/illustrations/teacher-illustration'
-import { useThemeSwitcher } from '@contexts/theme.context'
+import { WebinarGirlIllustration } from '@assets/illustrations/webinar-girl-illustration'
+// import { useThemeSwitcher } from '@contexts/theme.context'
 import { useAuthContext } from '@contexts/auth.context'
 import { getFirstName } from '@utils'
 import { AdminLayout } from '@layouts/admin-layout'
@@ -11,19 +11,19 @@ import { BannerCard } from '@components/banner-card'
 import {
   welcolmeAdminText,
   quikAccess,
-  options,
-  series,
+  // options,
+  // series,
 } from './dashboard-page.constants'
 
 import { QuikAccessCard } from '../../components'
-import { ScheduleCard } from '../../components/schedule-card'
+// import { ScheduleCard } from '../../components/schedule-card'
 
-const Chart = dynamic(() => import('react-apexcharts'), {
-  ssr: false,
-})
+// const Chart = dynamic(() => import('react-apexcharts'), {
+//   ssr: false,
+// })
 
 const DashboardPage: React.FC = () => {
-  const { theme } = useThemeSwitcher()
+  // const { theme } = useThemeSwitcher()
   const { user } = useAuthContext()
 
   return (
@@ -32,7 +32,7 @@ const DashboardPage: React.FC = () => {
         <BannerCard
           title={`Olá, ${getFirstName(user?.fullName)}`}
           description={welcolmeAdminText}
-          illustration={<TeacherIllustration />}
+          illustration={<WebinarGirlIllustration className="h-[200px]" />}
           colorScheme="indigo"
           rounded={true}
         />
@@ -42,7 +42,7 @@ const DashboardPage: React.FC = () => {
             Acessos rápidos
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {quikAccess.map((item) => (
               <QuikAccessCard
                 key={item.title}
@@ -54,7 +54,7 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-10">
+        {/* <div className="grid grid-cols-2 gap-10">
           <div className="space-y-6">
             <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
               Agenda
@@ -90,7 +90,7 @@ const DashboardPage: React.FC = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </AdminLayout>
   )
