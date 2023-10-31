@@ -1,52 +1,63 @@
-import { AuthenticationModel } from "../models/AuthenticationModel";
+import { destroyCookie, parseCookies, setCookie } from 'nookies'
+import { AuthenticationModel } from '@models/AuthenticationModel'
 
-const REACT_LOCAL_STORAGE_AUTH_DATA = '@App:authData';
-const REACT_LOCAL_STORAGE_COMPLETED_CLASS = '@App:completedClass';
+import {
+  REACT_LOCAL_STORAGE_COMPLETED_CLASS,
+  REACT_LOCAL_STORAGE_AUTH_TOKEN,
+  REACT_LOCAL_STORAGE_AUTH_DATA,
+} from '@config'
 
 export function setAuthLocalStorage(authData: AuthenticationModel | null) {
-  localStorage.setItem(REACT_LOCAL_STORAGE_AUTH_DATA, JSON.stringify(authData));
+  setCookie(
+    undefined,
+    REACT_LOCAL_STORAGE_AUTH_DATA,
+    JSON.stringify(authData),
+    {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/', // Whitch paths in my app has access to this cookie
+    }
+  )
+  setCookie(
+    undefined,
+    REACT_LOCAL_STORAGE_AUTH_TOKEN,
+    String(authData?.token),
+    {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/', // Whitch paths in my app has access to this cookie
+    }
+  )
 }
 
 export function getAuthLocalStorage() {
-  const data = localStorage.getItem(REACT_LOCAL_STORAGE_AUTH_DATA);
-  if(!data) {
-    return null;
-  }
+  const { [REACT_LOCAL_STORAGE_AUTH_DATA]: data } = parseCookies()
 
-  return JSON.parse(data);
+  if (!data) return null
+
+  return JSON.parse(data)
 }
 
 export function getToken() {
-  var authData = getAuthLocalStorage();
-  return authData != null ? authData.token.toString() : '';
+  const authData = getAuthLocalStorage()
+  return authData != null ? authData.token.toString() : ''
 }
 
 export function removeAuthLocalStorage() {
-  localStorage.removeItem(REACT_LOCAL_STORAGE_AUTH_DATA);
+  destroyCookie(null, REACT_LOCAL_STORAGE_AUTH_DATA, { path: '/' })
+  destroyCookie(null, REACT_LOCAL_STORAGE_AUTH_TOKEN, { path: '/' })
 }
 
-export function getAvatarLetters(userName: string) {
-  var words = userName.trim().toLowerCase().split(" ");
-  var avatarLetters = '';
+export function setCompletedClassLocalStorage(completedClass: string[]) {
+  localStorage.setItem(
+    REACT_LOCAL_STORAGE_COMPLETED_CLASS,
+    JSON.stringify(completedClass)
+  )
+}
 
-  for (var a = 0; a < words.length; a++) {
-    var w = words[a];
-    words[a] = w[0].toUpperCase();
-    avatarLetters = words.join().replace(',', '').substring(0, 2);
+export function getCompletedClassLocalStorage(): string[] {
+  const data = localStorage.getItem(REACT_LOCAL_STORAGE_COMPLETED_CLASS)
+  if (!data) {
+    return []
   }
 
-  return avatarLetters;
-}
-
-export function setCompletedClassLocalStorage(completedClass: String[]) {
-  localStorage.setItem(REACT_LOCAL_STORAGE_COMPLETED_CLASS, JSON.stringify(completedClass));
-}
-
-export function getCompletedClassLocalStorage(): String[] {
-  const data = localStorage.getItem(REACT_LOCAL_STORAGE_COMPLETED_CLASS);
-  if(!data) {
-    return [];
-  }
-
-  return JSON.parse(data);
+  return JSON.parse(data)
 }
