@@ -32,7 +32,8 @@ type EditPasswordTypes = {
 
 const EditProfileForm: React.FC<{
   user?: UserProfileModel
-}> = ({ user }) => {
+  pristine?: boolean
+}> = ({ user, pristine }) => {
   const { batch, change } = useForm()
 
   React.useEffect(() => {
@@ -67,7 +68,8 @@ const EditProfileForm: React.FC<{
       <div className="flex justify-end w-full">
         <button
           type="submit"
-          className="md:w-[20%] text-zinc-800 bg-brand-700 hover:bg-brand-700/90 active:opacity-90 font-medium rounded-lg text-sm p-4 text-center transition"
+          disabled={pristine}
+          className="md:w-[20%] text-zinc-800 bg-brand-700 hover:bg-brand-700/90 active:opacity-90 font-medium rounded-lg text-sm p-4 text-center transition disabled:bg-opacity-50 disabled:cursor-not-allowed"
         >
           Salvar
         </button>
@@ -76,7 +78,7 @@ const EditProfileForm: React.FC<{
   )
 }
 
-const EditPasswordForm: React.FC = () => (
+const EditPasswordForm: React.FC<{ pristine?: boolean }> = ({ pristine }) => (
   <React.Fragment>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Input.Form.Password
@@ -96,6 +98,7 @@ const EditPasswordForm: React.FC = () => (
     <div className="flex justify-end w-full">
       <button
         type="submit"
+        disabled={pristine}
         className="md:w-[20%] text-zinc-800 bg-brand-700 hover:bg-brand-700/90 active:opacity-90 font-medium rounded-lg text-sm p-4 text-center transition"
       >
         Redefinir
@@ -175,9 +178,10 @@ const UserProfilePage: React.FC = () => {
             <Tabs.Content className="flex-grow" value="tab1">
               <Form
                 onSubmit={handleEditProfile}
-                render={({ handleSubmit }) => (
+                subscription={{ pristine: true }}
+                render={({ handleSubmit, pristine }) => (
                   <form className="space-y-6" onSubmit={handleSubmit}>
-                    <EditProfileForm user={user} />
+                    <EditProfileForm user={user} pristine={pristine} />
                   </form>
                 )}
               />
@@ -187,9 +191,10 @@ const UserProfilePage: React.FC = () => {
               <Form
                 onSubmit={handleResetPassword}
                 validate={(values) => validate(values, validateResetPassword)}
-                render={({ handleSubmit }) => (
+                subscription={{ pristine: true }}
+                render={({ handleSubmit, pristine }) => (
                   <form className="space-y-6" onSubmit={handleSubmit}>
-                    <EditPasswordForm />
+                    <EditPasswordForm pristine={pristine} />
                   </form>
                 )}
               />

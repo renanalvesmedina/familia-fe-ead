@@ -20,25 +20,16 @@ interface ClassPageProps {
 }
 
 const ClassPage: React.FC<ClassPageProps> = ({ courseId, classId }) => {
-  const { handleRegisterHistory, showExamCard, activeClass, isLoading, aulas } =
-    useClassPage(courseId, classId)
+  const {
+    handleRegisterHistory,
+    previousClass,
+    showExamCard,
+    activeClass,
+    isLoading,
+    nextClass,
+  } = useClassPage(courseId, classId)
 
   const { push } = useRouter()
-
-  const classPosition = React.useMemo(
-    () => aulas?.findIndex((a) => a.classId === activeClass?.classId),
-    [activeClass?.classId, aulas]
-  )
-
-  const nextClass = React.useMemo(
-    () => aulas?.[classPosition! + 1],
-    [aulas, classPosition]
-  )
-
-  const previousClass = React.useMemo(
-    () => aulas?.[classPosition! - 1],
-    [aulas, classPosition]
-  )
 
   return (
     <React.Fragment>

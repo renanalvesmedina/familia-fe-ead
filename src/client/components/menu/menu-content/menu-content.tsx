@@ -18,6 +18,7 @@ import { api } from '@services/api'
 
 import { whatsappSuportLink } from '@config'
 import { menus } from './menu-content.constants'
+import Link from 'next/link'
 
 export interface MenuProps {
   isProtected?: boolean
@@ -38,10 +39,13 @@ const LinkButton: React.FC<MenuProps> = ({ icon: Icon, ...menu }) => {
     logout()
   }, [push, logout])
 
+  const Component = menu?.href ? Link : 'button'
+
   return (
     <li key={menu.title}>
-      <button
-        onClick={() => (menu.href ? push(menu.href) : handleLogout())}
+      <Component
+        href={menu?.href!}
+        onClick={() => !menu.href && handleLogout()}
         className={twMerge(
           'flex items-center justify-start gap-4 w-full rounded-full py-2 px-3 border border-transparent transition outline-none text-zinc-800 dark:text-white',
           'hover:text-brand-700 dark:hover:bg-brand-700/10 dark:hover:border-brand-700/60',
@@ -51,7 +55,7 @@ const LinkButton: React.FC<MenuProps> = ({ icon: Icon, ...menu }) => {
       >
         <Icon size={24} />
         <p>{menu.title}</p>
-      </button>
+      </Component>
     </li>
   )
 }

@@ -1,11 +1,10 @@
-export interface Enrollment {
-  id: string
-  fullName: string
-  email: string
-  phone: string
-  birthDate: string
-  subscribeDate: string
-  subscriptionId: number
-  transactionId: number
-  courseName: string
+export type Enrollment = {
+  id: number
+  codigo: string
+  data_hora_criacao: string
+  nome_participante: string
+  opcao_ingresso_nome: string
+  situacao: 'confirmado' | 'cancelado' | 'pendente'
+  sobrenome_participante: string
+  valor: string
 }

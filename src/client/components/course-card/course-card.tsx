@@ -1,37 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
+import Link from 'next/link'
 
-import { useRouter } from 'next/router'
 import { Play } from 'phosphor-react'
 
 import { CardCourseModel } from '@models/CardCourseModel'
-import { clickByKey } from '@utils'
 
 import { ProgressBar } from '../progress-bar'
 
 type CourseCardProps = CardCourseModel
 
 const CourseCard: React.FC<CourseCardProps> = ({
-  courseId,
   courseCardUri,
   courseName,
-}) => {
-  const { push } = useRouter()
-
-  const onClick = React.useCallback(
-    () => push(`/course/${courseId}`),
-    [push, courseId]
-  )
-
-  return (
+  courseId,
+}) => (
+  <Link href={`/course/${courseId}`}>
     <div
-      tabIndex={0}
-      onClick={onClick}
-      onKeyDown={(e) => clickByKey(e, onClick)}
       className="
         cursor-pointer relative w-full flex flex-col pointer-events-auto rounded-lg
-        border border-gray-200 dark:border-zinc-700/40 focus-within:border-brand-700
-        bg-white dark:bg-zinc-800 transition outline-none hover:scale-[102%]
+        border border-gray-200 dark:border-zinc-700/40
+        bg-white dark:bg-zinc-800 transition hover:scale-[102%]
       "
     >
       <div>
@@ -57,7 +46,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
       <ProgressBar total={8} completed={7} />
     </div>
-  )
-}
+  </Link>
+)
 
 export default CourseCard

@@ -1,4 +1,4 @@
-import { GraduationCap, Library, Users2 } from 'lucide-react'
+import { Library, Users2 } from 'lucide-react'
 import { ApexOptions } from 'apexcharts'
 
 export const options = (darkTheme: boolean): ApexOptions =>
@@ -57,11 +57,11 @@ export const series = [
 
 export const quikAccess = [
   { title: 'Usuários', icon: Users2, href: '/admin/users' },
-  {
-    title: 'Matrículas',
-    icon: GraduationCap,
-    href: '/admin/enrollments',
-  },
+  // {
+  //   title: 'Matrículas',
+  //   icon: GraduationCap,
+  //   href: '/admin/enrollments',
+  // },
   {
     title: 'Cursos',
     icon: Library,

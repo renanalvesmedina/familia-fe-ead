@@ -1,6 +1,6 @@
 import {
   LayoutDashboard,
-  GraduationCap,
+  // GraduationCap,
   CalendarHeart,
   Presentation,
   Settings2,
@@ -48,11 +48,11 @@ export const navigationMenus = [
   {
     title: 'Operações',
     links: [
-      {
-        title: 'Matriculas',
-        route: '/admin/enrollments',
-        icon: GraduationCap,
-      },
+      // {
+      //   title: 'Matriculas',
+      //   route: '/admin/enrollments',
+      //   icon: GraduationCap,
+      // },
       {
         title: 'Provas',
         route: '/admin/exams',

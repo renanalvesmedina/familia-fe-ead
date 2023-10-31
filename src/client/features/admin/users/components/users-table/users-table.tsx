@@ -90,6 +90,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
                           alt={user.fullName!}
                           src={userProfileUri}
                           fill
+                          sizes="100%"
                           className="absolute w-full h-full"
                         />
                       </div>

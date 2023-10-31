@@ -26,7 +26,7 @@ const EventCard: React.FC<TiketoEventModel> = ({
       onClick={onClick}
       onKeyDown={(e) => clickByKey(e, onClick)}
       tabIndex={0}
-      className="select-none cursor-pointer grid max-md:grid-rows-2 md:grid-cols-4 bg-white dark:bg-zinc-800 border border-zinc-700/20 dark:border-zinc-700 hover:border-zinc-700/30 dark:hover:border-zinc-500 transition rounded-lg outline-none focus-within:border-indigo-600"
+      className="select-none cursor-pointer grid max-md:grid-rows-2 md:grid-cols-4 bg-white dark:bg-zinc-800 border border-zinc-700/20 dark:border-zinc-700 hover:border-zinc-700/30 dark:hover:border-zinc-500 transition rounded-lg"
     >
       <div className="bg-zinc-700/25 max-md:rounded-t-lg md:rounded-l-lg max-md:w-full h-60 overflow-hidden">
         <img

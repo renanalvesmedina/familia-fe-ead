@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useThemeSwitcher } from '@contexts/theme.context'
+
 import { container, input, twlabel } from '../field/field.styles'
 import { FieldInputProps } from '../field'
 
@@ -19,6 +21,13 @@ const TextArea: React.FC<TextAreaProps> = ({
 }) => {
   const id = React.useMemo(() => `${props.name}-f`, [props.name])
 
+  const { theme } = useThemeSwitcher()
+
+  const filledThemeVariant = {
+    dark: 'filled_dark',
+    light: 'filled_light',
+  }[theme]
+
   return (
     <div className={container(containerClassName)}>
       {label && (
@@ -35,7 +44,8 @@ const TextArea: React.FC<TextAreaProps> = ({
         className={input({
           className,
           rounded,
-          variant,
+          variant:
+            variant === 'filled' ? (filledThemeVariant as never) : variant,
           error,
         })}
       />

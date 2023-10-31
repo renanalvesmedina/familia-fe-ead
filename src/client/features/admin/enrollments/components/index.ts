@@ -1,1 +1,1 @@
-export * from './enrollments-data'
+export * from './enrollment-card'

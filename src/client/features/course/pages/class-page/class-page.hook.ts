@@ -69,6 +69,21 @@ export const useClassPage = (courseId?: string, classId?: string) => {
     [aulas]
   )
 
+  const classPosition = React.useMemo(
+    () => aulas?.findIndex((a) => a.classId === activeClass?.classId),
+    [activeClass?.classId, aulas]
+  )
+
+  const nextClass = React.useMemo(
+    () => aulas?.[classPosition! + 1],
+    [aulas, classPosition]
+  )
+
+  const previousClass = React.useMemo(
+    () => aulas?.[classPosition! - 1],
+    [aulas, classPosition]
+  )
+
   const isLoading = React.useMemo(
     () => classLoading || courseLoading || activeClassLoading,
     [activeClassLoading, classLoading, courseLoading]
@@ -107,8 +122,10 @@ export const useClassPage = (courseId?: string, classId?: string) => {
 
   return {
     handleRegisterHistory,
+    previousClass,
     showExamCard,
     activeClass,
+    nextClass,
     isLoading,
     aulas,
     curso,
