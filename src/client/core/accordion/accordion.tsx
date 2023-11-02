@@ -36,13 +36,13 @@ const AccordionTrigger = React.forwardRef<
       {...props}
       ref={forwardedRef}
     >
-      {children}
-
       <ChevronDown
-        className="text-gray-600 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
+        className="text-brand-700 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
         aria-hidden
-        size={24}
+        size={32}
       />
+
+      {children}
     </AccordionRadix.Trigger>
   </AccordionRadix.Header>
 ))

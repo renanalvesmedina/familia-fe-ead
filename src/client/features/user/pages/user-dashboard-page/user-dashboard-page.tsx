@@ -86,7 +86,7 @@ const UserDashboardPage: React.FC = () => {
                 title="Fique atento aos novos cursos e eventos"
                 icon={CalendarCheck}
               >
-                <div className="w-full grid gap-10">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10">
                   {tiketoEvents?.data && tiketoEvents?.data?.length > 0
                     ? tiketoEvents?.data.map((event) => (
                         <EventCard key={event.id} {...event} />

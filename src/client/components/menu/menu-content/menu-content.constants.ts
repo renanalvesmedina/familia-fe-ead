@@ -9,5 +9,11 @@ export const menus: MenuProps[] = [
     href: '/admin/dashboard',
     isProtected: true,
   },
+  // {
+  //   title: 'Pedagógico',
+  //   icon: GraduationCap,
+  //   href: '/pedagogical',
+  //   isProtected: true,
+  // },
   { title: 'Sair', icon: LogOut },
 ]

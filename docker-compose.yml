@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  familia-fe-ead:
+    container_name: familia-fe-ead
+    build:
+      context: ./
+      target: runner
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /root
+    command: npm run dev
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: ddoevelopment
+      CHOKIDAR_USEPOLLING: true
