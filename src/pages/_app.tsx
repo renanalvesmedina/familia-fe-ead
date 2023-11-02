@@ -10,7 +10,6 @@ import { withQueryClient } from '@hocs/with-query-client'
 import { ThemeProvider } from '@contexts/theme.context'
 import { AuthProvider } from '@contexts/auth.context'
 
-import 'react-calendar/dist/Calendar.css'
 import '@styles/globals.css'
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) =>

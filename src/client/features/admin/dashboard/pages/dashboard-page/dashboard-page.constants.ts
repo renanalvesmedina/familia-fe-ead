@@ -1,7 +1,6 @@
 import { Library, Users2 } from 'lucide-react'
-import { ApexOptions } from 'apexcharts'
 
-export const options = (darkTheme: boolean): ApexOptions =>
+export const options = (darkTheme: boolean) =>
   ({
     colors: ['#FABA16'] as any[],
     chart: {
