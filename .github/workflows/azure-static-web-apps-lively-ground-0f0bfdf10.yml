@@ -28,7 +28,7 @@ jobs:
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "" # Built app content directory - optional
-          app_build_command: "npm run start"
+          app_build_command: "npm run build && npm run start"
           api_build_command: ""
           skip_deploy_on_missing_secrets: true
         env: # Add environment variables here
