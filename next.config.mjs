@@ -1,9 +1,5 @@
 import withImages from 'next-images'
 
-module.exports = {
-  output: "standalone",
-}
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
