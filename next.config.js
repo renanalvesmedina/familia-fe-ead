@@ -1,3 +1,7 @@
+module.exports = {
+  output: "standalone",
+}
+
 import withImages from 'next-images'
 
 /** @type {import('next').NextConfig} */
