@@ -1,15 +1,27 @@
 module.exports = {
   output: "standalone",
-
-    "navigationFallback": {
-        "rewrite": "index.html",
-        "exclude": ["/static/images/*.{png,jpg,gif}", "/static/css/*"]
-    },
-    "mimeTypes": {
-        ".json": "text/json",
-        ".css": "text/css",
-        ".html": "text/html"
-    }
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dnafamilia.blob.core.windows.net',
+        port: '',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'luminifirekeeper01.blob.core.windows.net',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  },
 }
 // import withImages from 'next-images'
 

@@ -47,11 +47,11 @@ const UserDashboardPage: React.FC = () => {
           />
         </Section>
 
-        <Container className="flex flex-col gap-16 px-6 pt-16 pb-60">
+        <Container className="flex flex-col gap-16 px-6 pt-16">
           <div className="space-y-20">
             {coursesError ? null : (
               <Section title="Meus Cursos" icon={BookOpen}>
-                <div className="w-full grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="w-full grid gap-20 sm:grid-cols-2 lg:grid-cols-3">
                   {coursesLoading
                     ? [0, 1, 2].map((i) => (
                         <div

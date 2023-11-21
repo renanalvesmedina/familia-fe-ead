@@ -3,4 +3,6 @@ export interface CardCourseModel {
   courseName: string
   courseCardUri: string
   lastClassAttendedId: number
+  totalCourseClasses: number
+  totalCompletedClasses: number
 }

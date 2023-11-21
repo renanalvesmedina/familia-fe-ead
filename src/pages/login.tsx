@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
-import illustration from '@assets/illustrations/webnar-illustration.svg'
-
 import { NextSeo } from 'next-seo'
 import { LogIn } from 'lucide-react'
 import { Form } from 'react-final-form'
@@ -119,7 +117,11 @@ const LoginPage: React.FC = () => {
         </section>
 
         <section className="bg-white flex-1 flex items-center justify-center max-md:hidden">
-          <img src={illustration} alt="" className="md:h-96" />
+          <img
+            src="/images/webinar-illustration.svg"
+            alt=""
+            className="md:h-96"
+          />
         </section>
       </main>
     </React.Fragment>

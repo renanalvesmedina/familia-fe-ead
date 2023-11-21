@@ -14,6 +14,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   courseCardUri,
   courseName,
   courseId,
+  totalCourseClasses,
+  totalCompletedClasses,
 }) => (
   <Link href={`/course/${courseId}`}>
     <div
@@ -38,13 +40,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {courseName}
         </h5>
 
-        <span className="hover:bg-indigo-700/90 transition-colors py-4 px-4 bg-indigo-700 rounded-lg text-white font-medium flex items-center justify-center gap-2">
+        <span className="hover:bg-gray-600/80 transition-colors py-4 px-4 bg-gray-600 rounded-lg text-white font-medium flex items-center justify-center gap-2">
           <Play size={20} />
           Acessar curso
         </span>
       </div>
 
-      <ProgressBar total={8} completed={7} />
+      <ProgressBar
+        total={totalCourseClasses}
+        completed={totalCompletedClasses}
+      />
     </div>
   </Link>
 )
