@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { RadioButton } from 'phosphor-react'
@@ -42,11 +41,9 @@ const LessonCard: React.FC<LessonCardProps> = ({
               )}
             >
               {!thumbLoading ? (
-                <Image
+                <img
                   src={ytThumb ?? thumb}
-                  className="rounded-lg object-cover object-center absolute"
-                  fill
-                  sizes="100%"
+                  className="w-28 h-16 rounded-lg object-cover object-center"
                   alt=""
                 />
               ) : null}

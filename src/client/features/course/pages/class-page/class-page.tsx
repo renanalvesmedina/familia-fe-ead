@@ -83,11 +83,11 @@ const ClassPage: React.FC<ClassPageProps> = ({ courseId, classId }) => {
                     </a>
                   </span>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex gap-4 items-center justify-between">
                     {previousClass ? (
                       <button
                         type="button"
-                        className="px-6 py-4 rounded-lg border border-indigo-600 dark:border-brand-700 text-indigo-600 dark:text-brand-700 text-sm font-medium flex items-center gap-2"
+                        className="px-6 py-4 whitespace-nowrap rounded-lg border border-indigo-600 dark:border-brand-700 text-indigo-600 dark:text-brand-700 text-xs sm:text-sm font-medium flex items-center gap-2"
                         onClick={() =>
                           push(
                             `/course/${courseId}/class/${previousClass?.classId}`
@@ -104,7 +104,7 @@ const ClassPage: React.FC<ClassPageProps> = ({ courseId, classId }) => {
                     {nextClass || showExamCard ? (
                       <button
                         type="button"
-                        className="px-6 py-4 rounded-lg bg-indigo-600 dark:bg-brand-700 text-white dark:text-zinc-800 text-sm font-medium flex items-center gap-2"
+                        className="px-6 py-4 whitespace-nowrap rounded-lg bg-indigo-600 dark:bg-brand-700 text-white dark:text-zinc-800 text-xs sm:text-sm font-medium flex items-center gap-2"
                         onClick={() =>
                           nextClass
                             ? push(

@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 import { useRouter } from 'next/router'
 import { twMerge } from 'tailwind-merge'
@@ -70,10 +69,9 @@ const Component: React.FC = () => {
 
           <div className="flex flex-col justify-center items-center gap-4">
             <div className="h-36 w-36 rounded-full bg-zinc-700 relative">
-              <Image
+              <img
                 src={profileUri}
                 alt=""
-                fill
                 className="absolute rounded-full w-full h-full object-cover object-center border border-brand-700"
               />
             </div>

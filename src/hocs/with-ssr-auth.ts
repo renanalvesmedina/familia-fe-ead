@@ -6,9 +6,11 @@ import { validateToken } from '@validators/validateToken'
 import { parseCookies } from 'nookies'
 import { api } from '@services/api'
 
+type Roles = 'Admin' | 'Student' | 'Teacher'
+
 export function withSSRAuth<P extends { [key: string]: any }>(
   fn: GetServerSideProps<P>,
-  mustBeAdmin = false
+  roles?: Roles[]
 ) {
   return async (ctx: GetServerSidePropsContext) => {
     const { [REACT_LOCAL_STORAGE_AUTH_TOKEN]: token } = parseCookies(ctx)
@@ -29,7 +31,12 @@ export function withSSRAuth<P extends { [key: string]: any }>(
       }
     }
 
-    if (mustBeAdmin && !decodedData?.role.includes('Admin'))
+    const hasRole = () =>
+      roles
+        ?.map((r) => decodedData?.role?.includes(r) && r)
+        .every((r) => r !== false)
+
+    if (roles?.length && !hasRole())
       return {
         redirect: {
           destination: '/',

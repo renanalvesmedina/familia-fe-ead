@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 import { twMerge } from 'tailwind-merge'
 
@@ -37,11 +36,9 @@ const UserCard: React.FC<{ user: UsersModel }> = ({ user }) => {
     >
       <div className="avatar">
         <div className="mask mask-circle w-8 h-8 relative">
-          <Image
+          <img
             alt={user.fullName!}
             src={userProfileUri}
-            fill
-            sizes="100%"
             className="absolute w-full h-full"
           />
         </div>

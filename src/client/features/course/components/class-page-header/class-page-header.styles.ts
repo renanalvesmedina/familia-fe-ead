@@ -34,7 +34,7 @@ export const linkOut = tv({
 })
 
 export const headerWrapper = tv({
-  base: 'flex justify-center items-center w-full',
+  base: 'flex justify-center items-center w-full sticky top-0',
   variants: {
     theme: {
       dark: 'bg-zinc-800',

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 import { CalendarCheck, Link, MapPin } from 'lucide-react'

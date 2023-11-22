@@ -30,7 +30,7 @@ const MenuContent: React.FC<MenuProps> = ({ open, onClose }) => {
         ref={menuRef}
         className="bg-white dark:bg-zinc-800"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between sticky top-0">
           <FamiliaIcon fill={theme === 'light' ? 'black' : 'white'} />
 
           <button
@@ -42,7 +42,7 @@ const MenuContent: React.FC<MenuProps> = ({ open, onClose }) => {
           </button>
         </div>
 
-        <div className="py-20">
+        <div className="py-10 md:py-20">
           <Navigation />
         </div>
       </Container>

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 import { useRouter } from 'next/router'
@@ -70,7 +69,7 @@ const Layout: React.FC<AdminLayoutProps> = ({ children, renderOnRight }) => {
           <Menu />
         </div>
 
-        <div className="flex px-6 gap-36 max-w-[1480px] mx-auto w-full">
+        <div className="flex px-6 gap-36 max-w-[1480px] mx-auto w-full bg-white dark:bg-zinc-900">
           {lg ? <Navigation /> : null}
 
           <div className="w-full">{children}</div>

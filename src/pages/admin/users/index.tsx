@@ -3,8 +3,7 @@ import { UsersPage } from '@features/admin/users'
 
 export default UsersPage
 
-export const getServerSideProps = withSSRAuth(async () => {
-  return {
-    props: {},
-  }
-}, true)
+export const getServerSideProps = withSSRAuth(
+  async () => ({ props: {} }),
+  ['Admin']
+)

@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 
 import { Headphones, IconProps, X } from 'phosphor-react'
 import { useQueryClient } from 'react-query'
@@ -18,7 +18,6 @@ import { api } from '@services/api'
 
 import { whatsappSuportLink } from '@config'
 import { menus } from './menu-content.constants'
-import Link from 'next/link'
 
 export interface MenuProps {
   isProtected?: boolean

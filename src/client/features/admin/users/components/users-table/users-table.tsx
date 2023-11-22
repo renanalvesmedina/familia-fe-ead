@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 import { useQueryClient } from 'react-query'
 import { twMerge } from 'tailwind-merge'
@@ -86,11 +85,9 @@ const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-circle w-8 h-8 relative">
-                        <Image
+                        <img
                           alt={user.fullName!}
                           src={userProfileUri}
-                          fill
-                          sizes="100%"
                           className="absolute w-full h-full"
                         />
                       </div>

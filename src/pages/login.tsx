@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 
 import illustration from '@assets/illustrations/webnar-illustration.svg'

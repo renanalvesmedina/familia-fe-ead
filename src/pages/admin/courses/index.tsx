@@ -7,4 +7,4 @@ export const getServerSideProps = withSSRAuth(async () => {
   return {
     props: {},
   }
-}, true)
+}, ['Admin'])
