@@ -12,7 +12,6 @@ import { PhoneToWhatsapp } from '@core/phone-to-whatsapp'
 import { CopyToClipboard } from '@core/copy-to-clipboard'
 import { useUserDetails } from '@contexts/user-details.context'
 import { ProgressBar } from '@components/progress-bar'
-import { Checkbox } from '@components/input'
 
 const Component: React.FC = () => {
   const { push } = useRouter()
