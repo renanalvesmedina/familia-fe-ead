@@ -1,12 +1,12 @@
 import {
   LayoutDashboard,
-  CalendarHeart,
+  // CalendarHeart,
   // BookOpenCheck,
   // Presentation,
   // Component,
-  Settings2,
-  BookOpen,
-  Library,
+  // Settings2,
+  // BookOpen,
+  // Library,
   Users2,
 } from 'lucide-react'
 
@@ -19,11 +19,11 @@ export const navigationMenus = [
         route: '/admin/dashboard',
         icon: LayoutDashboard,
       },
-      {
-        title: 'Configurações',
-        route: '/admin/configuracoes',
-        icon: Settings2,
-      },
+      // {
+      //   title: 'Configurações',
+      //   route: '/admin/configuracoes',
+      //   icon: Settings2,
+      // },
     ],
   },
   {
@@ -39,11 +39,11 @@ export const navigationMenus = [
       //   route: '/admin/turmas',
       //   icon: Presentation,
       // },
-      {
-        title: 'Cursos',
-        route: '/admin/courses',
-        icon: Library,
-      },
+      // {
+      //   title: 'Cursos',
+      //   route: '/admin/courses',
+      //   icon: Library,
+      // },
       // {
       //   title: 'Treinamentos',
       //   route: '/admin/treinamentos',
@@ -56,24 +56,24 @@ export const navigationMenus = [
       },
     ],
   },
-  {
-    title: 'Operações',
-    links: [
-      // {
-      //   title: 'Matriculas',
-      //   route: '/admin/enrollments',
-      //   icon: GraduationCap,
-      // },
-      {
-        title: 'Provas',
-        route: '/admin/provas',
-        icon: BookOpen,
-      },
-      {
-        title: 'Calendário',
-        route: '/admin/calendario',
-        icon: CalendarHeart,
-      },
-    ],
-  },
+  // {
+  //   title: 'Operações',
+  //   links: [
+  //     // {
+  //     //   title: 'Matriculas',
+  //     //   route: '/admin/enrollments',
+  //     //   icon: GraduationCap,
+  //     // },
+  //     {
+  //       title: 'Provas',
+  //       route: '/admin/provas',
+  //       icon: BookOpen,
+  //     },
+  //     {
+  //       title: 'Calendário',
+  //       route: '/admin/calendario',
+  //       icon: CalendarHeart,
+  //     },
+  //   ],
+  // },
 ]

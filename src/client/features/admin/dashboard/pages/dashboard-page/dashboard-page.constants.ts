@@ -1,4 +1,4 @@
-import { Library, Users2 } from 'lucide-react'
+import { Users2 } from 'lucide-react'
 
 export const options = (darkTheme: boolean) =>
   ({
@@ -61,17 +61,17 @@ export const quikAccess = [
   //   icon: GraduationCap,
   //   href: '/admin/enrollments',
   // },
-  {
-    title: 'Cursos',
-    icon: Library,
-    href: '/admin/courses',
-  },
+  // {
+  //   title: 'Cursos',
+  //   icon: Library,
+  //   href: '/admin/courses',
+  // },
 ]
 
 export const welcolmeAdminText = `
     Seja bem-vindo (a) ao painel administrativo do nosso portal de ensino.
     Para dúvidas ou problemas entre em contato com nosso
-    <a href="https://api.whatsapp.com/send?phone=5527" target="_blank" rel="noreferrer">
+    <a href="https://api.whatsapp.com/send?phone=5527999021768" target="_blank" rel="noreferrer">
       <strong>suporte técnico</strong>
     </a>.
   `
