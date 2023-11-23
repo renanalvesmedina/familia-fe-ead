@@ -1,8 +1,9 @@
 import {
   LayoutDashboard,
-  // GraduationCap,
   CalendarHeart,
-  Presentation,
+  // BookOpenCheck,
+  // Presentation,
+  // Component,
   Settings2,
   BookOpen,
   Library,
@@ -20,7 +21,7 @@ export const navigationMenus = [
       },
       {
         title: 'Configurações',
-        route: '/admin/settings',
+        route: '/admin/configuracoes',
         icon: Settings2,
       },
     ],
@@ -28,20 +29,30 @@ export const navigationMenus = [
   {
     title: 'Gestão',
     links: [
-      {
-        title: 'Usuários',
-        route: '/admin/users',
-        icon: Users2,
-      },
+      // {
+      //   title: 'Circuitos',
+      //   route: '/admin/circuitos',
+      //   icon: Component,
+      // },
+      // {
+      //   title: 'Turmas',
+      //   route: '/admin/turmas',
+      //   icon: Presentation,
+      // },
       {
         title: 'Cursos',
         route: '/admin/courses',
         icon: Library,
       },
+      // {
+      //   title: 'Treinamentos',
+      //   route: '/admin/treinamentos',
+      //   icon: BookOpenCheck,
+      // },
       {
-        title: 'Turmas',
-        route: '/admin/classes',
-        icon: Presentation,
+        title: 'Usuários',
+        route: '/admin/users',
+        icon: Users2,
       },
     ],
   },
@@ -55,12 +66,12 @@ export const navigationMenus = [
       // },
       {
         title: 'Provas',
-        route: '/admin/exams',
+        route: '/admin/provas',
         icon: BookOpen,
       },
       {
         title: 'Calendário',
-        route: '/admin/calendar',
+        route: '/admin/calendario',
         icon: CalendarHeart,
       },
     ],

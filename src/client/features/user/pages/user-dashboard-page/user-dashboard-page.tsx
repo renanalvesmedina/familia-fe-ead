@@ -47,7 +47,7 @@ const UserDashboardPage: React.FC = () => {
           />
         </Section>
 
-        <Container className="flex flex-col gap-16 px-6 pt-16">
+        <Container className="flex flex-col gap-16 px-6 py-16">
           <div className="space-y-20">
             {coursesError ? null : (
               <Section title="Meus Cursos" icon={BookOpen}>

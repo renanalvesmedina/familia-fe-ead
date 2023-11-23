@@ -103,15 +103,27 @@ const LoginPage: React.FC = () => {
               )}
             />
 
-            <a
-              href={whatsappSuportLink}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-400"
-            >
-              Dúvidas sobre o acesso?{' '}
-              <strong className="text-white">Fale Conosco</strong>
-            </a>
+            <div className="flex flex-col space-y-2">
+              <a
+                href={whatsappSuportLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-gray-400"
+              >
+                Novo por aqui?{' '}
+                <strong className="text-white">Solicite seu acesso</strong>
+              </a>
+
+              <a
+                href={whatsappSuportLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-gray-400"
+              >
+                Dúvidas sobre o acesso?{' '}
+                <strong className="text-white">Fale Conosco</strong>
+              </a>
+            </div>
           </div>
         </section>
 

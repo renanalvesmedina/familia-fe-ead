@@ -17,42 +17,8 @@ interface CoursePageProps {
   courseId: string
 }
 
-// const Card = ({
-//   wrapperRef,
-//   wrapperStyles,
-//   getDimentions,
-// }: {
-//   wrapperRef?: React.RefObject<HTMLDivElement>
-//   wrapperStyles?: React.CSSProperties
-//   getDimentions?: (width?: number, height?: number) => void
-// }) => {
-//   React.useEffect(() => {
-//     if (wrapperRef?.current?.clientWidth)
-//       getDimentions &&
-//         getDimentions(
-//           wrapperRef?.current?.clientWidth,
-//           wrapperRef?.current?.clientHeight
-//         )
-
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [wrapperRef?.current])
-
-//   return (
-//     <div
-//       key="cardRef"
-//       ref={wrapperRef}
-//       className={twMerge('bg-white absolute w-full max-w-[500px] h-[300px]')}
-//       style={wrapperStyles}
-//     >
-//       div
-//     </div>
-//   )
-// }
-
 const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
-  const cardRef = React.useRef<HTMLDivElement>(null)
-
-  const { isLoading, aulas, curso, lastClassAttended, showExamCard } =
+  const { isLoading, aulas, curso, lastClassAttended, showExamCard, course } =
     useCoursePage(courseId)
 
   const PlayIcon = () => (
@@ -102,7 +68,6 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div
-                    ref={cardRef}
                     id="course-progress-card"
                     className="flex items-center justify-between border border-gray-200 dark:border-transparent bg-white shadow dark:shadow-none dark:bg-zinc-800 p-6 rounded-lg space-y-4 relative"
                   >
@@ -112,32 +77,41 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
                       </p>
 
                       <p className="text-xl font-medium text-zinc-800 dark:text-white">
-                        8 de 8 aulas concluídas
+                        {course?.totalCompletedClasses || 0} de{' '}
+                        {course?.totalCourseClasses || curso?.workload} aulas
+                        concluídas
                       </p>
                     </div>
 
                     <span
                       className={twMerge(
                         'text-xs px-2 py-1 rounded-full w-fit border whitespace-nowrap',
-                        getProgressColor(calculateProgressPercentage(8, 8))
+                        getProgressColor(
+                          calculateProgressPercentage(
+                            course?.totalCompletedClasses || 0,
+                            course?.totalCourseClasses || +curso?.workload! || 0
+                          )
+                        )
                       )}
                     >
-                      {calculateProgressPercentage(8, 8) + '%'} Concluído
+                      {calculateProgressPercentage(
+                        course?.totalCompletedClasses || 0,
+                        course?.totalCourseClasses || +curso?.workload!
+                      ) + '%'}{' '}
+                      Concluído
                     </span>
 
-                    <ProgressBar completed={8} total={8} />
+                    <ProgressBar
+                      completed={course?.totalCompletedClasses || 0}
+                      total={
+                        course?.totalCourseClasses || +curso?.workload! || 0
+                      }
+                    />
                   </div>
-
-                  {/* <HighlightOverlay
-                    open
-                    position={['right', 'top']}
-                    featuresRefs={[cardRef]}
-                    featuresWrappers={[Card]}
-                  /> */}
 
                   <div className="flex flex-col justify-between border border-gray-200 dark:border-transparent bg-white shadow dark:shadow-none dark:bg-zinc-800 p-6 rounded-lg">
                     <p className="text-gray-500 dark:text-gray-400">
-                      Prova disponível em
+                      Prova disponível até
                     </p>
 
                     <p className="text-xl font-medium text-zinc-800 dark:text-white">

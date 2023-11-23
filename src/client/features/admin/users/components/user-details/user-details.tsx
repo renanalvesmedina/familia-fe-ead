@@ -12,6 +12,7 @@ import { PhoneToWhatsapp } from '@core/phone-to-whatsapp'
 import { CopyToClipboard } from '@core/copy-to-clipboard'
 import { useUserDetails } from '@contexts/user-details.context'
 import { ProgressBar } from '@components/progress-bar'
+import { Checkbox } from '@components/input'
 
 const Component: React.FC = () => {
   const { push } = useRouter()
@@ -66,7 +67,6 @@ const Component: React.FC = () => {
               <X />
             </button>
           </div>
-
           <div className="flex flex-col justify-center items-center gap-4">
             <div className="h-36 w-36 rounded-full bg-zinc-700 relative">
               <img
@@ -86,7 +86,6 @@ const Component: React.FC = () => {
               </p>
             </span>
           </div>
-
           {loadingUser ? (
             <div className="space-y-4">
               <div className="w-full bg-zinc-700/50 animate-pulse h-10 rounded-lg" />
@@ -138,6 +137,20 @@ const Component: React.FC = () => {
             </div>
           )}
 
+          {/* <div>
+            <p className="text-gray-500 text-sm font-medium uppercase tracking-wider">
+              Matricular em
+            </p>
+
+            <label className="relative inline-flex items-center cursor-pointer justify-between w-full">
+              <span className="ms-3 text-lg font-medium text-gray-900 dark:text-gray-300">
+                Comprometidos com a membresia
+              </span>
+
+              <input type="checkbox" value="" className="sr-only peer" />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600"></div>
+            </label>
+          </div> */}
           {loadingHistory ? (
             <div className="space-y-4">
               <div className="w-full bg-zinc-700/50 animate-pulse h-10 rounded-lg" />
@@ -156,9 +169,21 @@ const Component: React.FC = () => {
                     className="flex items-center justify-between gap-10 px-6 pt-6 pb-8 relative shadow-md dark:bg-zinc-800 rounded-lg border border-zinc-700/10 dark:border-zinc-700/50"
                   >
                     <div className="flex flex-col space-y-6 w-full">
-                      <p className="text-zinc-800 dark:text-white font-medium text-lg">
+                      {/* <p className="text-zinc-800 dark:text-white font-medium text-lg">
                         {his.course}
-                      </p>
+                      </p> */}
+
+                      <label className="relative inline-flex items-center cursor-pointer justify-between">
+                        <span className="text-zinc-800 dark:text-white font-medium text-lg">
+                          {his.course}
+                        </span>
+                        {/* <input
+                          type="checkbox"
+                          value=""
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600"></div> */}
+                      </label>
 
                       <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">

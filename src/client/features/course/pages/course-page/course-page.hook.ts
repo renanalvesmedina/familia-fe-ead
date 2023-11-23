@@ -82,6 +82,7 @@ export const useCoursePage = (courseId?: string) => {
     showExamCard,
     isLoading,
     aulas,
+    course,
     curso,
   }
 }
