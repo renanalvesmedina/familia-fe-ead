@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 import { NextSeo } from 'next-seo'
 import { LogIn } from 'lucide-react'
@@ -94,9 +95,12 @@ const LoginPage: React.FC = () => {
                     </button>
 
                     <div className="mt-2">
-                      <a href="" className="text-gray-400 hover:text-white">
+                      <Link
+                        href="/esqueci-minha-senha"
+                        className="text-gray-400 hover:text-white"
+                      >
                         Esqueceu sua senha ?
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </form>
@@ -104,16 +108,6 @@ const LoginPage: React.FC = () => {
             />
 
             <div className="flex flex-col space-y-2">
-              <a
-                href={whatsappSuportLink}
-                target="_blank"
-                rel="noreferrer"
-                className="text-gray-400"
-              >
-                Novo por aqui?{' '}
-                <strong className="text-white">Solicite seu acesso</strong>
-              </a>
-
               <a
                 href={whatsappSuportLink}
                 target="_blank"

@@ -1,12 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react'
 
-import { Enrollment } from '@models/enrollment.model'
-import { DivideY } from '@core/divide'
-import { TIKETO_BASE_URL } from '@config'
 import { useQuery } from 'react-query'
 import { twMerge } from 'tailwind-merge'
+
+import { TIKETO_BASE_URL } from '@config'
+import { Enrollment } from '@models/enrollment.model'
 import { parseDate } from '@utils'
+import { DivideY } from '@core/divide'
+import { UsersModel } from '@models/UsersModel'
+import toast from 'react-hot-toast'
+import { api } from '@services/api'
+import { getUser } from '@features/admin/users/components/user-details/user-details.hook'
 
 interface TiketoUser {
   id: number
@@ -67,6 +72,7 @@ const Trigger: React.FC<
             (selectedRow) => selectedRow.id === enrollment.id
           )}
         />
+
         <p>
           {enrollment?.nome_participante
             .trim()
@@ -74,9 +80,6 @@ const Trigger: React.FC<
         </p>
       </div>
       <div className="flex items-center gap-4">
-        <p className="text-sm text-gray-500">
-          Data de inscrição: {parseDate(enrollment?.data_hora_criacao)}
-        </p>
         <span
           className={twMerge(
             'px-4 py-2 rounded-full text-xs font-medium text-white uppercase',
@@ -84,21 +87,32 @@ const Trigger: React.FC<
             enrollment?.situacao === 'cancelado' && 'bg-red-600'
           )}
         >
-          {enrollment?.situacao}
+          Pagamento {enrollment?.situacao}
+        </span>
+
+        <span
+          className={twMerge(
+            'px-4 py-2 rounded-full text-xs font-medium text-white bg-zinc-700/50'
+          )}
+        >
+          Ver detalhes
         </span>
       </div>
     </div>
   </div>
 )
 
-const Content: React.FC<Enrollment> = ({ id, data_hora_criacao }) => {
+const Content: React.FC<Enrollment> = ({
+  data_hora_criacao: tiketoUserSubscriptionDate,
+  id,
+}) => {
   const { data: tiketoUser } = useQuery<TiketoUser>(
     ['tiketo-user', id],
     () =>
       fetch(`${TIKETO_BASE_URL}/integracao/participantes/${id}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer 7f5d002428a6751bab1597d58eb783ed`,
+          Authorization: `Bearer 1a6125ce97c537f26d6447a43e23163d`,
         },
       }).then((response) => response.json()),
     {
@@ -107,30 +121,82 @@ const Content: React.FC<Enrollment> = ({ id, data_hora_criacao }) => {
     }
   )
 
+  const tiketoUserEmail = tiketoUser?.respostas_formulario?.[0]?.resposta
+  const tiketoUserPhone = tiketoUser?.respostas_formulario?.[1]?.resposta
+  const tiketoUserSaleId = tiketoUser?.venda_id
+
+  const { data: users } = useQuery(
+    ['users'],
+    () =>
+      api
+        .get<UsersModel[]>('/v1/User?start=0&limit=9999')
+        .then((response) => response.data),
+    {
+      staleTime: 1000 * 60 * 1, // 1 minutes
+      onError: (error: any) =>
+        toast.error(error.response.data.errors?.[0].message),
+    }
+  )
+
+  const userRegistered = users?.find((user) => user.email === tiketoUserEmail)
+
+  console.log(users)
+  console.log(userRegistered)
+
+  const { data: user } = useQuery(
+    ['user', userRegistered?.userId],
+    () => getUser(userRegistered?.userId),
+    {
+      staleTime: 1000 * 60 * 1, // 1 minutes
+      onError: (err: any) => {
+        toast.error(err.response.data.errors[0].message)
+      },
+    }
+  )
+
+  const isUserEnrolled = user?.courseEnrollments?.some(
+    (courseEnrollment) =>
+      courseEnrollment.courseName === 'Comprometidos com a Membresia'
+  )
+
   return (
     <DivideY dividerClassName="my-6 border-gray-200 dark:border-zinc-700/40">
       <div className="flex items-center justify-between">
         <p>Email</p>
 
-        <p>{tiketoUser?.respostas_formulario?.[1]?.resposta}</p>
+        <p>{tiketoUserEmail}</p>
       </div>
 
       <div className="flex items-center justify-between">
         <p>Telefone</p>
 
-        <p>{tiketoUser?.respostas_formulario?.[0]?.resposta}</p>
+        <p>{tiketoUserPhone}</p>
       </div>
 
       <div className="flex items-center justify-between">
         <p>Data de inscrição:</p>
 
-        <p>{parseDate(data_hora_criacao, "dd/MM/yyyy 'às' hh:mm a")}</p>
+        <p>
+          {parseDate(tiketoUserSubscriptionDate, "dd/MM/yyyy 'às' hh:mm a")}
+        </p>
       </div>
 
       <div className="flex items-center justify-between">
         <p>ID da Venda</p>
 
-        <p>#{tiketoUser?.venda_id}</p>
+        <p>#{tiketoUserSaleId}</p>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <p>Usuário cadastrado</p>
+
+        <p>{!!userRegistered ? 'Sim' : 'Não'}</p>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <p>Aluno matriculado</p>
+
+        <p>{isUserEnrolled ? 'Sim' : 'Não'}</p>
       </div>
     </DivideY>
   )

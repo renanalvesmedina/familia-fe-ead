@@ -1,20 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { Play } from 'phosphor-react'
-
 import { CardCourseModel } from '@models/CardCourseModel'
+import { ArrowRight } from 'lucide-react'
 
 import { ProgressBar } from '../progress-bar'
 
-type CourseCardProps = CardCourseModel
-
-const CourseCard: React.FC<CourseCardProps> = ({
+const CourseCard: React.FC<CardCourseModel> = ({
+  totalCompletedClasses,
+  totalCourseClasses,
   courseCardUri,
   courseName,
   courseId,
-  totalCourseClasses,
-  totalCompletedClasses,
 }) => (
   <Link href={`/course/${courseId}`}>
     <div
@@ -39,9 +36,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {courseName}
         </h5>
 
-        <span className="hover:bg-gray-600/80 transition-colors py-4 px-4 bg-gray-600 rounded-lg text-white font-medium flex items-center justify-center gap-2">
-          <Play size={20} />
+        <span className="transition-colors py-4 rounded-lg text-white bg-indigo-700 hover:bg-indigo-600 font-medium flex items-center justify-center gap-2">
           Acessar curso
+          <ArrowRight size={20} />
         </span>
       </div>
 

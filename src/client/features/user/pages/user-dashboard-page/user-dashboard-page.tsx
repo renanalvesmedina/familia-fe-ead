@@ -35,21 +35,23 @@ const UserDashboardPage: React.FC = () => {
       <main className="w-full min-h-[100vh] bg-white dark:bg-zinc-900">
         <Header />
 
-        <Section>
-          <BannerCard
-            title={`Olá, ${getFirstName(user?.fullName)}`}
-            colorScheme="indigo"
-            illustration={<WebinarGirlIllustration className="h-[200px]" />}
-            description={welcomeStudentText(
-              user?.sexo as 'F' | 'M',
-              coursesError
-            )}
-          />
-        </Section>
+        {!coursesLoading ? (
+          <Section>
+            <BannerCard
+              title={`Olá, ${getFirstName(user?.fullName)}`}
+              colorScheme="indigo"
+              illustration={<WebinarGirlIllustration className="h-[200px]" />}
+              description={welcomeStudentText(
+                user?.sexo as 'F' | 'M',
+                Boolean(!courses?.length)
+              )}
+            />
+          </Section>
+        ) : null}
 
         <Container className="flex flex-col gap-16 px-6 py-16">
           <div className="space-y-20">
-            {coursesError ? null : (
+            {coursesError || !courses?.length ? null : (
               <Section title="Meus Cursos" icon={BookOpen}>
                 <div className="w-full grid gap-20 sm:grid-cols-2 lg:grid-cols-3">
                   {coursesLoading
@@ -61,7 +63,7 @@ const UserDashboardPage: React.FC = () => {
                       ))
                     : null}
 
-                  {courses && courses?.length > 0
+                  {courses && courses?.length
                     ? courses.map((card) => (
                         <CourseCard key={card.courseId} {...card} />
                       ))

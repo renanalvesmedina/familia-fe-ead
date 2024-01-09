@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useQuery } from 'react-query'
 
+import { calculateProgressPercentage } from '@utils'
 import { useUserDashboardPage } from '@features/user/pages/user-dashboard-page/user-dashboard-page.hook'
 import { CourseModel } from '@models/CourseModel'
 import { ClassModel } from '@models/ClassModel'
@@ -67,10 +68,18 @@ export const useCoursePage = (courseId?: string) => {
       commonQueriesOptions
     )
 
-  const showExamCard = React.useMemo(
-    () => Boolean(aulas?.every((aula) => !aula.isPending)),
-    [aulas]
-  )
+  const showExamCard = React.useMemo(() => {
+    const progress = calculateProgressPercentage(
+      course?.totalCompletedClasses || 0,
+      course?.totalCourseClasses || +curso?.workload! || 0
+    )
+
+    return progress >= 70
+  }, [
+    course?.totalCompletedClasses,
+    course?.totalCourseClasses,
+    curso?.workload,
+  ])
 
   const isLoading = React.useMemo(
     () => classLoading || courseLoading || lastClassAttendedLoading,

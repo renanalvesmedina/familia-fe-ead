@@ -3,7 +3,12 @@ import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import { NextSeo } from 'next-seo'
 
-import { calculateProgressPercentage, getProgressColor } from '@utils'
+import {
+  calculateProgressPercentage,
+  getProgressColor,
+  parseDate,
+} from '@utils'
+
 import { LessonCard, TakeExamCard } from '@features/course'
 import { ProgressBar } from '@components/progress-bar'
 import { BannerCard } from '@components/banner-card'
@@ -66,7 +71,7 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
                   <div className="w-full h-[10vh] bg-zinc-700/20 rounded-lg animate-pulse" />
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div
                     id="course-progress-card"
                     className="flex items-center justify-between border border-gray-200 dark:border-transparent bg-white shadow dark:shadow-none dark:bg-zinc-800 p-6 rounded-lg space-y-4 relative"
@@ -113,9 +118,8 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
                     <p className="text-gray-500 dark:text-gray-400">
                       Prova disponível até
                     </p>
-
                     <p className="text-xl font-medium text-zinc-800 dark:text-white">
-                      31 de outubro, 2023
+                      {parseDate(curso?.examDate, "dd 'de' MMMM, yyyy")}
                     </p>
                   </div>
                 </div>
@@ -145,7 +149,16 @@ const CoursePage: React.FC<CoursePageProps> = ({ courseId }) => {
               </div>
             )}
 
-            {showExamCard ? <TakeExamCard /> : null}
+            {showExamCard ? (
+              <TakeExamCard />
+            ) : (
+              <div className="bg-brand-700/20 dark:bg-brand-700/10 p-6 rounded-lg">
+                <p className="text-amber-800 dark:text-brand-700">
+                  ⚠️ Atenção: A prova é liberada somente quando for alcançado no
+                  mínimo 70% de presença nas aulas.
+                </p>
+              </div>
+            )}
           </Container>
         </div>
       </main>

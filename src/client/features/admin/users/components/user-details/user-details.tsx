@@ -6,12 +6,18 @@ import { Pencil } from 'lucide-react'
 import { format } from 'date-fns'
 import { X } from 'phosphor-react'
 
-import { calculateProgressPercentage, getProgressColor } from '@utils'
-import { useUserDetailsData } from './user-details.hook'
+import {
+  calculateProgressPercentage,
+  getProgressColor,
+  phoneMask,
+} from '@utils'
+
 import { PhoneToWhatsapp } from '@core/phone-to-whatsapp'
 import { CopyToClipboard } from '@core/copy-to-clipboard'
 import { useUserDetails } from '@contexts/user-details.context'
 import { ProgressBar } from '@components/progress-bar'
+
+import { useUserDetailsData } from './user-details.hook'
 
 const Component: React.FC = () => {
   const { push } = useRouter()
@@ -20,10 +26,11 @@ const Component: React.FC = () => {
   const {
     onCloseUserDetails,
     openUserDetails,
-    loadingHistory,
+    onUnenrollUser,
+    onEnrollUser,
     loadingUser,
     profileUri,
-    history,
+    courses,
     user,
   } = useUserDetailsData()
 
@@ -66,6 +73,7 @@ const Component: React.FC = () => {
               <X />
             </button>
           </div>
+
           <div className="flex flex-col justify-center items-center gap-4">
             <div className="h-36 w-36 rounded-full bg-zinc-700 relative">
               <img
@@ -85,6 +93,7 @@ const Component: React.FC = () => {
               </p>
             </span>
           </div>
+
           {loadingUser ? (
             <div className="space-y-4">
               <div className="w-full bg-zinc-700/50 animate-pulse h-10 rounded-lg" />
@@ -96,150 +105,150 @@ const Component: React.FC = () => {
                 Informações
               </p>
 
-              <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-6 col-start-2 col-end-6 shadow-md dark:bg-zinc-800 rounded-lg px-6 py-6 border border-zinc-700/10 dark:border-zinc-700/50">
-                <span className="flex flex-col items-start justify-center space-y-2">
+              <div className="w-full grid grid-cols-2 gap-6 shadow-md dark:bg-zinc-800 rounded-lg px-6 py-6 border border-zinc-700/10 dark:border-zinc-700/50">
+                <div className="flex flex-col items-start justify-center space-y-2">
                   <p className="text-sm text-gray-400">Telefone:</p>
-                  <p className="text-gray-500 dark:text-white font-medium">
+                  <p className="text-gray-500 dark:text-white font-medium whitespace-nowrap">
                     {user?.phone ? (
                       <PhoneToWhatsapp
-                        value={user.phone}
+                        value={phoneMask(user.phone)}
                         iconPosition="right"
                       />
                     ) : null}
                   </p>
-                </span>
+                </div>
 
-                <span className="flex flex-col items-start justify-center space-y-2">
+                <div className="flex flex-col items-start justify-center space-y-2">
                   <p className="text-sm text-gray-400">Perfil:</p>
                   <p className="text-gray-500 dark:text-white font-medium">
                     {user?.profiles?.includes('Admin')
                       ? 'Administrador'
-                      : 'Estudante'}
+                      : 'Aluno'}
                   </p>
-                </span>
+                </div>
 
-                <span className="flex flex-col items-start justify-center space-y-2">
+                <div className="flex flex-col items-start justify-center space-y-2">
                   <p className="text-sm text-gray-400">Sexo:</p>
                   <p className="text-gray-500 dark:text-white font-medium">
                     {user?.gender === 'M' ? 'Masculino' : 'Feminino'}
                   </p>
-                </span>
+                </div>
 
                 <button
                   type="button"
                   onClick={onEditClick}
-                  className="col-start-1 col-end-3 sm:col-end-4 bg-indigo-700 hover:bg-indigo-700/90 transition-colors text-white px-4 py-4 rounded-lg flex items-center justify-center gap-2 text-sm font-medium"
+                  className="col-start-1 col-end-3 bg-brand-700 hover:bg-brand-700/90 transition-colors text-zinc-800 px-4 py-4 rounded-lg flex items-center justify-center gap-2 text-sm font-medium"
                 >
-                  Editar dados <Pencil size={16} />
+                  <Pencil size={16} />
+                  Editar dados
                 </button>
               </div>
             </div>
           )}
 
-          {/* <div>
+          <div className="space-y-6">
             <p className="text-gray-500 text-sm font-medium uppercase tracking-wider">
-              Matricular em
+              Cursos matriculados
             </p>
 
-            <label className="relative inline-flex items-center cursor-pointer justify-between w-full">
-              <span className="ms-3 text-lg font-medium text-gray-900 dark:text-gray-300">
-                Comprometidos com a membresia
-              </span>
+            <div className="space-y-8">
+              {courses?.map((course) => {
+                const studentCourse = user?.courseEnrollments?.find(
+                  (courseEnrollment) =>
+                    courseEnrollment.courseId === course.courseId
+                )
 
-              <input type="checkbox" value="" className="sr-only peer" />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600"></div>
-            </label>
-          </div> */}
-          {loadingHistory ? (
-            <div className="space-y-4">
-              <div className="w-full bg-zinc-700/50 animate-pulse h-10 rounded-lg" />
-              <div className="w-full bg-zinc-700/50 animate-pulse h-40 rounded-lg" />
-            </div>
-          ) : history?.[0]?.history?.length ? (
-            <div className="space-y-6">
-              <p className="text-gray-500 text-sm font-medium uppercase tracking-wider">
-                Cursos matriculados
-              </p>
+                const isUserEnrolled = !!studentCourse
 
-              <div className="space-y-8">
-                {history?.[0]?.history?.slice(0, 1).map((his) => (
+                return (
                   <div
-                    key={his.viewDate}
+                    key={course.courseId}
                     className="flex items-center justify-between gap-10 px-6 pt-6 pb-8 relative shadow-md dark:bg-zinc-800 rounded-lg border border-zinc-700/10 dark:border-zinc-700/50"
                   >
                     <div className="flex flex-col space-y-6 w-full">
-                      {/* <p className="text-zinc-800 dark:text-white font-medium text-lg">
-                        {his.course}
-                      </p> */}
-
-                      <label className="relative inline-flex items-center cursor-pointer justify-between">
+                      <div className="flex items-center justify-between">
                         <span className="text-zinc-800 dark:text-white font-medium text-lg">
-                          {his.course}
+                          {course.courseName}
                         </span>
-                        {/* <input
-                          type="checkbox"
-                          value=""
-                          className="sr-only peer"
-                        />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600"></div> */}
-                      </label>
 
-                      <div className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <p className="text-sm text-gray-400">
-                              Matriculado em:
-                            </p>
-                            <p className="text-sm text-zinc-800 dark:text-white">
-                              {format(new Date(his.viewDate), 'dd/MM/yyyy')}
-                            </p>
-                          </div>
-
-                          <div className="space-y-2">
-                            <p className="text-sm text-gray-400">Progresso:</p>
-                            <p className="text-sm text-zinc-800 dark:text-white">
-                              8 de 8 aulas concluídas
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <p className="text-sm text-gray-400">
-                              Última aula assistida:
-                            </p>
-                            <p className="text-sm text-zinc-800 dark:text-white">
-                              {his.class}
-                            </p>
-                          </div>
-
-                          <div className="space-y-2">
-                            <p className="text-sm text-gray-400">Data:</p>
-                            <p className="text-sm text-zinc-800 dark:text-white">
-                              {format(new Date(his.viewDate), 'dd/MM/yyyy')}
-                            </p>
-                          </div>
-
-                          <span
-                            className={twMerge(
-                              'text-xs px-2 py-1 rounded-full w-fit border whitespace-nowrap',
-                              getProgressColor(
-                                calculateProgressPercentage(7, 8)
-                              )
-                            )}
-                          >
-                            {calculateProgressPercentage(7, 8) + '%'} Concluído
-                          </span>
-                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={isUserEnrolled}
+                            className="sr-only peer"
+                            onChange={() => {
+                              if (!isUserEnrolled) {
+                                onEnrollUser.mutateAsync(course.courseId)
+                              } else {
+                                onUnenrollUser.mutateAsync(course.courseId)
+                              }
+                            }}
+                          />
+                          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600"></div>
+                        </label>
                       </div>
-                    </div>
 
-                    <ProgressBar completed={7} total={8} />
+                      {isUserEnrolled ? (
+                        <>
+                          <hr className="border-zinc-700/50" />
+
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <p className="text-sm text-gray-400">
+                                  Matriculado em:
+                                </p>
+                                <p className="text-sm text-zinc-800 dark:text-white">
+                                  {format(
+                                    new Date(studentCourse.enrollmentDate),
+                                    'dd/MM/yyyy'
+                                  )}
+                                </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                <p className="text-sm text-gray-400">
+                                  Progresso:
+                                </p>
+                                <p className="text-sm text-zinc-800 dark:text-white">
+                                  {studentCourse.totalCompletedClasses} de{' '}
+                                  {studentCourse.totalCourseClasses} aulas
+                                  concluídas
+                                </p>
+                              </div>
+
+                              <span
+                                className={twMerge(
+                                  'text-xs px-2 py-1 rounded-full w-fit border whitespace-nowrap',
+                                  getProgressColor(
+                                    calculateProgressPercentage(
+                                      studentCourse.totalCompletedClasses,
+                                      studentCourse.totalCourseClasses
+                                    )
+                                  )
+                                )}
+                              >
+                                {calculateProgressPercentage(
+                                  studentCourse.totalCompletedClasses,
+                                  studentCourse.totalCourseClasses
+                                ) + '%'}{' '}
+                                Concluído
+                              </span>
+                            </div>
+                          </div>
+
+                          <ProgressBar
+                            completed={studentCourse.totalCompletedClasses}
+                            total={studentCourse.totalCourseClasses}
+                          />
+                        </>
+                      ) : null}
+                    </div>
                   </div>
-                ))}
-              </div>
+                )
+              })}
             </div>
-          ) : null}
+          </div>
         </React.Fragment>
       ) : null}
     </div>

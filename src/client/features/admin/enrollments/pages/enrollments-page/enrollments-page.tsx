@@ -9,6 +9,7 @@ import { Enrollment } from '@models/enrollment.model'
 import { Accordion } from '@core/accordion'
 
 import { EnrollmentCard } from '../../components/enrollment-card'
+import { Loader } from '@core/loader'
 
 export type EnrollmentResponse = {
   current_page: number
@@ -34,7 +35,13 @@ const EnrollmentsPage: React.FC = () => {
   const [selectedRows, setSelectedRows] = React.useState<Enrollment[]>([])
   // const { push } = useRouter()
 
-  const { data: enrollments } = useQuery<EnrollmentResponse>(
+  const {
+    data: enrollments,
+    isRefetching,
+    isFetching,
+    isLoading,
+    refetch,
+  } = useQuery<EnrollmentResponse>(
     ['enrollments'],
     () =>
       fetch(
@@ -42,7 +49,8 @@ const EnrollmentsPage: React.FC = () => {
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer 7f5d002428a6751bab1597d58eb783ed`,
+            Authorization: 'Bearer 1a6125ce97c537f26d6447a43e23163d',
+            // Authorization: `Bearer 7f5d002428a6751bab1597d58eb783ed`,
           },
         }
       ).then((response) => response.json()),
@@ -69,16 +77,17 @@ const EnrollmentsPage: React.FC = () => {
     <AdminLayout>
       <div className="flex flex-col justify-between sticky top-0 pt-10 pb-6 bg-white dark:bg-zinc-900 z-40 gap-4">
         <div className="flex items-center gap-2 justify-between">
-          <div className="space-y-2">
-            <p className="text-2xl font-medium text-zinc-800 dark:text-white">
-              Novas matrículas
-            </p>
-            {/* {isLoading || isRefetching || isFetching ? (
-            <Loader className="text-brand-600" />
-          ) : null} */}
-          </div>
-          <div>
-            <p>Comprometidos com a membresia</p>
+          <div className="flex gap-2">
+            <div>
+              <p className="text-2xl font-medium text-zinc-800 dark:text-white">
+                Comprometidos com a membresia
+              </p>
+              <p>Novas matrículas</p>
+            </div>
+
+            {isLoading || isRefetching || isFetching ? (
+              <Loader className="text-brand-600" />
+            ) : null}
           </div>
         </div>
 
@@ -106,7 +115,7 @@ const EnrollmentsPage: React.FC = () => {
 
           <div className="flex items-center gap-2">
             <button
-              // onClick={() => refetch()}
+              onClick={() => refetch()}
               className="flex justify-center gap-1 text-white bg-zinc-700 font-medium rounded-lg text-sm p-4 text-center hover:bg-zinc-700/90 active:bg-zinc-700/90 transition"
             >
               <RefreshCw size={20} />

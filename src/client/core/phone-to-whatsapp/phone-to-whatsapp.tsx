@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { WhatsappLogo } from 'phosphor-react'
 import { twMerge } from 'tailwind-merge'
+import { Check } from 'lucide-react'
 
-import { Check, Phone } from 'lucide-react'
 import { useHover } from '@hooks/use-hover'
+import { numonly } from '@utils'
 
 export interface PhoneToWhatsappProps {
   value: string
@@ -31,7 +33,7 @@ export const PhoneToWhatsapp: React.FC<PhoneToWhatsappProps> = ({
   return (
     <a
       ref={ref as never}
-      href={`https://api.whatsapp.com/send?phone=55${value}`}
+      href={`https://api.whatsapp.com/send?phone=55${numonly(value)}`}
       target="_blank"
       rel="noreferrer"
       className="relative select-none hover:text-zinc-800 dark:hover:text-white transition-colors cursor-pointer"
@@ -39,14 +41,14 @@ export const PhoneToWhatsapp: React.FC<PhoneToWhatsappProps> = ({
       {isHover ? (
         <span
           className={twMerge(
-            'absolute top-0',
-            iconPosition === 'left' ? '-left-5' : '-right-5'
+            'absolute -top-[2px]',
+            iconPosition === 'left' ? '-left-7' : '-right-7'
           )}
         >
           {copied ? (
             <Check className="text-indigo-600" size={18} />
           ) : (
-            <Phone className="text-emerald-600" size={18} />
+            <WhatsappLogo className="text-emerald-600" size={20} />
           )}
         </span>
       ) : null}

@@ -65,6 +65,7 @@ export const useEditUserPage = (userId: string) => {
       .then(() => {
         toast.dismiss(toastId)
         toast.success('Usuário atualizado com sucesso :)')
+        queryClient.invalidateQueries(['me'])
         queryClient.invalidateQueries(['user', userId])
         queryClient.invalidateQueries(['users'])
         push('/admin/users')

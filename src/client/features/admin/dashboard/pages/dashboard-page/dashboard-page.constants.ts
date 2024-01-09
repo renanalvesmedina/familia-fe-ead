@@ -1,4 +1,4 @@
-import { Users2 } from 'lucide-react'
+import { Library, Users2 } from 'lucide-react'
 
 export const options = (darkTheme: boolean) =>
   ({
@@ -56,15 +56,15 @@ export const series = [
 
 export const quikAccess = [
   { title: 'Usuários', icon: Users2, href: '/admin/users' },
+  {
+    title: 'Cursos',
+    icon: Library,
+    href: '/admin/courses',
+  },
   // {
   //   title: 'Matrículas',
   //   icon: GraduationCap,
   //   href: '/admin/enrollments',
-  // },
-  // {
-  //   title: 'Cursos',
-  //   icon: Library,
-  //   href: '/admin/courses',
   // },
 ]
 

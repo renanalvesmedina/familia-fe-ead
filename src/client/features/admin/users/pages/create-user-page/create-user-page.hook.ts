@@ -1,10 +1,10 @@
 import toast from 'react-hot-toast'
 
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
 
 import { validatePassword } from '@validators/yup'
-import { Option } from '@utils'
+import { Option, numonly } from '@utils'
 import { api } from '@services/api'
 
 import * as yup from 'yup'
@@ -51,6 +51,8 @@ export const validateSchema = yup.object().shape({
 export const useCreateUserPage = () => {
   const { push } = useRouter()
 
+  const queryClient = useQueryClient()
+
   const onSubmit = useMutation(
     async (values: CreateUserType) => {
       const toastId = toast.loading('Carregando...')
@@ -60,7 +62,7 @@ export const useCreateUserPage = () => {
           fullName: values.fullName,
           email: values.email,
           password: values.password,
-          phone: values.phone,
+          phone: numonly(values.phone),
           perfil: values.profile,
           sexo: values?.gender?.value,
         })
@@ -72,6 +74,7 @@ export const useCreateUserPage = () => {
         console.error(error)
       },
       onSuccess: () => {
+        queryClient.invalidateQueries(['users'])
         toast.success('Usuário criado com sucesso :)')
         push('/admin/users')
       },

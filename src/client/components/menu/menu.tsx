@@ -13,7 +13,7 @@ const Menu: React.FC = () => {
 
   const menuRef: React.LegacyRef<HTMLDivElement> = React.useRef(null)
 
-  const { user, userName } = useAuthContext()
+  const { user } = useAuthContext()
 
   const onClose = React.useCallback(() => setOpenMenu(false), [])
 
@@ -27,7 +27,7 @@ const Menu: React.FC = () => {
       <div className="flex items-center">
         <div className="mr-4 text-right max-lg:hidden">
           <p className="font-medium text-zinc-800 dark:text-white">
-            {userName}
+            {user?.fullName}
           </p>
           <p className="text-gray-400 text-sm">{user?.email}</p>
         </div>
@@ -45,7 +45,7 @@ const Menu: React.FC = () => {
               className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-900 text-brand-700 font-medium text-base"
               delayMs={600}
             >
-              {getAvatarLetters(userName == null ? '' : userName)}
+              {getAvatarLetters(user?.fullName == null ? '' : user.fullName)}
             </Avatar.Fallback>
           </Avatar.Root>
         </button>

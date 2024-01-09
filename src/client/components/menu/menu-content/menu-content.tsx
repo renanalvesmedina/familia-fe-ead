@@ -203,7 +203,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
                   agora mesmo:
                 </p>
                 <button
-                  onClick={() => push('/admin/enrollments')}
+                  onClick={() => push('/admin/users')}
                   className="w-full bg-brand-700 py-4 px-4 rounded-lg font-medium text-zinc-800"
                 >
                   Ir para matrículas

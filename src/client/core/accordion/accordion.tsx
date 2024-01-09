@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { ChevronDown } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
 import * as AccordionRadix from '@radix-ui/react-accordion'
@@ -36,11 +35,11 @@ const AccordionTrigger = React.forwardRef<
       {...props}
       ref={forwardedRef}
     >
-      <ChevronDown
+      {/* <ChevronDown
         className="text-brand-700 ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
         aria-hidden
         size={32}
-      />
+      /> */}
 
       {children}
     </AccordionRadix.Trigger>

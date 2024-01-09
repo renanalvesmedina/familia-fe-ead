@@ -23,7 +23,7 @@ export const useUserDashboardPage = () => {
     data: courses,
     isLoading: coursesLoading,
     isError: coursesError,
-  } = useQuery(['courses'], getCourses, commonQueriesOptions)
+  } = useQuery(['courses', 'student-list'], getCourses, commonQueriesOptions)
 
   const {
     data: tiketoEvents,

@@ -42,7 +42,7 @@ const UsersTable: React.FC<UsersTableProps> = ({ isLoading, users }) => {
     )
 
   return (
-    <div className="w-full relative overflow-y-auto h-[60vh] rounded-lg shadow-xl scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-rounded-lg scrollbar-track-gray-500/50 dark:scrollbar-track-zinc-700/50">
+    <div className="w-full relative overflow-y-auto max-h-[56vh] rounded-lg shadow-xl scrollbar-none">
       <table className="table table-auto w-full relative">
         <thead className="border-b border-zinc-700/10 dark:border-zinc-700/40 border-opacity-50 w-full">
           <tr className="w-full">

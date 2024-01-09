@@ -6,7 +6,7 @@ import {
   // Component,
   // Settings2,
   // BookOpen,
-  // Library,
+  Library,
   Users2,
 } from 'lucide-react'
 
@@ -39,11 +39,7 @@ export const navigationMenus = [
       //   route: '/admin/turmas',
       //   icon: Presentation,
       // },
-      // {
-      //   title: 'Cursos',
-      //   route: '/admin/courses',
-      //   icon: Library,
-      // },
+
       // {
       //   title: 'Treinamentos',
       //   route: '/admin/treinamentos',
@@ -53,6 +49,11 @@ export const navigationMenus = [
         title: 'Usuários',
         route: '/admin/users',
         icon: Users2,
+      },
+      {
+        title: 'Cursos',
+        route: '/admin/courses',
+        icon: Library,
       },
     ],
   },

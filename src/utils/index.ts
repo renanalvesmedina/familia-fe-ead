@@ -1,5 +1,7 @@
+import { deburr, join, memoize, toLower, words } from 'lodash'
 import { format, parseISO } from 'date-fns'
 import { LoadOptions } from 'react-select-async-paginate'
+import { UsersModel } from '@models/UsersModel'
 import { GroupBase } from 'react-select'
 import { ptBR } from 'date-fns/locale'
 
@@ -76,4 +78,42 @@ export const getProgressColor = (percentage: number) => {
 
   if (percentage > 75)
     return 'text-emerald-500 bg-emerald-500/5 border-emerald-500'
+}
+
+export const money = (s?: string | number) => {
+  let num = 0
+
+  if (typeof s === 'number') {
+    num = s
+  } else {
+    num = Number(s)
+  }
+
+  return (num || 0).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+}
+
+export const sanitizeSearchTerms = (terms: string) =>
+  join(words(toLower(deburr(terms))), ' ')
+
+export const filterUsers = memoize(
+  (searchTerms: string, searchData: UsersModel[]) =>
+    searchData.filter(({ email, fullName }) =>
+      sanitizeSearchTerms(`${fullName} ${email}`).includes(searchTerms)
+    )
+)
+
+export const filterUsersByRoles = memoize(
+  (role: 'Admin' | 'Student', searchData: UsersModel[]) =>
+    searchData.filter(({ profile }) => profile!.includes(role))
+)
+
+export const phoneMask = (value: string | number) => {
+  const stringValue = value.toString()
+  return stringValue
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{5})(\d{4})/, '$1-$2')
 }
