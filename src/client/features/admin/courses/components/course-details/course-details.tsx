@@ -51,7 +51,7 @@ const Component: React.FC = () => {
 
   const his = history?.[0]?.history?.slice(0, 1)[0]
 
-  const onEnrollUser = React.useCallback(() => {}, [])
+  // const onEnrollUser = React.useCallback(() => {}, [])
 
   return (
     <div
