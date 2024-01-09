@@ -2,11 +2,11 @@ import React from 'react'
 import toast from 'react-hot-toast'
 
 import { useQuery } from 'react-query'
-import { Edit } from 'lucide-react'
+// import { Edit } from 'lucide-react'
 
 import { AdminLayout } from '@layouts/admin-layout'
 import { CourseModel } from '@models/CourseModel'
-import { parseDate } from '@utils'
+// import { parseDate } from '@utils'
 import { Loader } from '@core/loader'
 import { api } from '@services/api'
 
